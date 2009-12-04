@@ -1,0 +1,16 @@
+<% form_for :user_session, :url => login_path do |f| %>
+  <table width="90%" id="login_form">
+    <tr>
+      <td style="width:40%;">Логин</td>
+      <td style="width:60%;"><%= f.text_field :login, :size => "17" %></td>
+    </tr>
+    <tr>
+      <td>Пароль</td>
+      <td><%= f.password_field :password, :size => "17"%></td>
+    </tr>
+    <tr>
+      <td><%= link_to "Забыли пароль?", '#', :class => :red %></td>
+      <td><%= image_submit_tag "login.png" %></td>
+    </tr>
+  </table>
+<% end %>

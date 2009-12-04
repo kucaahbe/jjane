@@ -1,0 +1,14 @@
+<% form_for @snippet, :html => { :class => 'jform' } do |f| %>
+  <%= f.error_messages %>
+  <p>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  </p>
+  <p>
+  <%= f.text_area :content, :class=>"mceEditor" %>
+  </p>
+  <p>
+  <%= f.submit %> |
+  <%= link_to_cancel snippets_path %>
+  </p>
+<% end %>

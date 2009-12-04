@@ -1,0 +1,22 @@
+<div id="admin_panel">
+  <div style="float:left; margin-right:100px;">
+    <%= pages_link %>
+    <%= users_link %>
+    <%= snippets_link %>
+    <%= filesystem_link %>
+  </div>
+  
+  <div style="float:left; border-left:1px solid black; padding:0 5px; height:95%;">
+    <%= item_name -%>
+    <%= crud_actions -%>
+  </div>
+
+  <div style="float:right">
+    <%= engine_image 'user_me.png' %>
+    <%= link_to "#{current_user.name}[#{current_user.role}]", edit_user_path(current_user)  %> |
+    <%= link_to "logout", logout_path %>
+  </div>
+
+  <div style="clear:both;">
+  </div>
+</div>

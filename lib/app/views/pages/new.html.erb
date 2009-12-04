@@ -1,0 +1,28 @@
+<%= title "New Page" %>
+
+<% form_for @page, :html => {:class=>'jform'} do |f| %>
+  <%= f.error_messages %>
+
+  <p><%= f.hidden_field :parent_id %></p>
+
+  <p>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  </p>
+  <p>
+  <%= f.label :link %>
+  <%= f.text_field :link %>
+  </p>
+  <p>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  </p>
+  <p>
+  <%= f.label :_type_ %>
+  <%= f.select :_type_, options_for_select(['static','contents','gallery']) %>
+  </p>
+  <p>
+  <%= f.submit %> |
+  <%= link_to_cancel pages_path %>
+  </p>
+<% end %>

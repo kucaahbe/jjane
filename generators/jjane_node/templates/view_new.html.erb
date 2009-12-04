@@ -1,0 +1,5 @@
+<%%= title 'New <%= node_name %>' %>
+
+<%% form_for [:page, @<%= node_name %>], :html => { :class => 'jform' } do |f| %>
+  <%%= partial 'form',{ :f => f } %>
+<%% end %>

@@ -1,0 +1,8 @@
+<% nodes.each do |node| %>
+  <%= node.updated_at.year %>/
+  <%= node.updated_at.month %>/
+  <%= node.updated_at.day %>
+  (<%= node.updated_at.hour %>:<%= node.updated_at.min %>)
+  <br />
+  <%= link_to node.title, root_url+node.url %><br />
+<% end %>

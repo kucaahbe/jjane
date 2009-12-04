@@ -1,0 +1,5 @@
+<%%= title 'Editing <%= node_name %>' %>
+
+<%% form_for @<%= node_name %>, :url => { :action => "update" }, :html => { :class => 'jform' } do |f| %>
+  <%%= partial 'form',{ :f => f } %>
+<%% end %>

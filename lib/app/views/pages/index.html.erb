@@ -1,0 +1,34 @@
+<% content_for :head do %>
+  <%= stylesheet '/jjane/stylesheets/pages' %>
+<% end %>
+
+<%= title "Pages" %>
+
+<ul class="list" id="pages">
+  <li id="li_header">
+  <div style="float:left;">Name</div>
+  <div style="float:right; margin-left:17px;">Actions</div>
+  <div style="float:right;">
+    menus[
+    <% Page.menus.each do |menu| %>
+      <%= menu %>
+    <% end %>
+    ]
+  </div>
+  <div style="clear:both;"></div>
+  </li>
+
+  <% @roots.each do |root| %>
+    <%= partial 'tree', :root => root %>
+  <% end %>
+</ul>
+
+<%= link_to_new new_page_path %>
+
+<%=
+    sortable_element_reporting_target "pages", "moved_page_id",
+    :tree => true,
+    :url => sort_pages_path,
+    :method => :put,
+    :only => :page
+    %>

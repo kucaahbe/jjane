@@ -1,0 +1,16 @@
+<% content_tag :li do %>
+
+  <%= link_to(page.name, root_url+page.url) if page.visible_in_menu?(name) %>
+
+  <% if page.some_child_visible_in_menu?(name) && !roots_only %>
+    <% content_tag :ul do %>
+      <% page.children.each do |child| %>
+	<%= partial 'shared/contents_menu',
+	  :page => child,
+	  :name => name,
+	  :roots_only => roots_only %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+<% end if page.some_child_visible_in_menu?(name) || page.visible_in_menu?(name) %>

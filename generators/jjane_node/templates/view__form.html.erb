@@ -1,0 +1,17 @@
+<%%= f.error_messages %>
+
+<p>
+<%%= f.hidden_field :user_id %>
+<%%= f.hidden_field :page_id %>
+</p>
+<p>
+<%%= f.label :title %>
+<%%= f.text_field :title, :class => 'title' %>
+</p>
+<p>
+<%%= f.text_area :content, :class => 'mceEditor' %>
+</p>
+<p>
+<%%= f.submit %> |
+<%%= link_to_cancel root_url %>
+</p>

@@ -1,0 +1,19 @@
+<% content_for :head do %>
+  <%= stylesheet '/engine/stylesheets/default' %>
+  <%= stylesheet '/engine/stylesheets/form_notices' %>
+<% end %>
+<div style="text-align:center;">
+  <% form_for :user_session, :url => login_path, :html => { :class => 'jform' } do |f| %>
+
+    <p><%= f.label :login %></p>
+    <p><%= f.text_field :login, :size => "17" %></p>
+
+    <p><%= f.label :password %></p>
+    <p><%= f.password_field :password, :size => "17"%></p>
+
+    <p>
+    <%= f.submit "login" %> or
+    <%= link_to 'back to site', root_url %>
+    </p>
+  <% end %>
+</div>

@@ -1,0 +1,23 @@
+<%= title "Snippets" %>
+
+<table class="list">
+  <tr>
+    <th style="width:30%">Name</th>
+    <th style="width:65%">Content</th>
+    <th style="width:5%">Actions</th>
+  </tr>
+  <% @snippets.each do |snippet| %>
+    <tr>
+      <td>
+	<%= engine_image 'snippets.png' %>
+	<%= link_to_edit snippet.name, edit_snippet_path(snippet) %>
+      </td>
+      <td><%= snippet.content %></td>
+      <td>
+	<%= link_to_destroy snippet %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to_new new_snippet_path %>
