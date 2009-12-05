@@ -11,3 +11,5 @@ module JJane
     include JJane::Helpers::UserSessionHelper
   end
 end
+
+ActionView::Base.send :include, JJane::Helpers

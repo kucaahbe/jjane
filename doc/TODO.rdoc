@@ -4,6 +4,7 @@
  роуты и конфигурацию в плагин
  миграция
  файлы картинок и цссок что б бутались по крутому
+ tiny_mce initializer add and config file
 
  страницам: вид списка и тип статей(модель,типа page.node_name)
  nodes: show.html.erb в app/views/nodes/node_name
