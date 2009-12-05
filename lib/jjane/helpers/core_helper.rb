@@ -1,9 +1,6 @@
 module JJane
   module Helpers
     module CoreHelper
-      include JJane::Helpers::NavHelper
-      include JJane::Helpers::AdminPanelHelper
-      include JJane::Helpers::UserSessionHelper
 
       def title(text)
 	content_tag :h1, text

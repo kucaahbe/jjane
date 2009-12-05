@@ -40,7 +40,7 @@ end
 
 namespace :jjane do
   desc 'Install JJane for the current RAILS_ENV'
-  task :install => :environment do
+  task :installl => :environment do
     require 'highline/import'
 
     answer = agree('This will be destroy any data in database,are you agree?(yes/no):')

@@ -1,24 +1,25 @@
 require 'jjane/helpers'
 require 'jjane/action_controller_extensions'
 
+# adding JJane's controllers, helpers, models and...
 %w{ controllers helpers models }.each do |dir|
   path = File.join(File.dirname(__FILE__), 'app', dir)
   $LOAD_PATH << path
   ActiveSupport::Dependencies.load_paths << path
   ActiveSupport::Dependencies.load_once_paths.delete(path)
 end
-ActionController::Base.append_view_path File.join(File.dirname(__FILE__), 'app/views')
+# ...and views
+ActionController::Base.append_view_path File.join(File.dirname(__FILE__), 'app', 'views')
 
-ActionView::Base.send :include, JJane::Helpers::CoreHelper
+# including helpers
+ActionView::Base.send :include, JJane::Helpers
 
-# install nessesary files
-unless File.exists?(File.join(RAILS_ROOT,'public/jjane'))
-  puts '=> installing JJane public files...'
-  dest = File.join RAILS_ROOT, 'public', 'jjane'
-  FileUtils.mkdir dest
-
-  %w[ images javascripts stylesheets ].each do |dir|
-    source = File.join File.dirname(__FILE__), '..', 'public'
-    FileUtils.cp_r File.join(source, dir), dest
-  end
-end
+# adding needed gems
+Rails.configuration.gem 'authlogic'
+Rails.configuration.gem 'mislav-will_paginate',
+                        :version => '~> 2.3.11',
+                        :lib => 'will_paginate',
+                        :source => 'http://gems.github.com'
+Rails.configuration.gem "robinsp-sortable_element_for_nested_set",
+                        :lib    => "sortable_element_for_nested_set",
+                        :source => "http://gems.github.com"
