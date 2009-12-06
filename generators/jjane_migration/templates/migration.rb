@@ -16,7 +16,6 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
 #      t.timestamps
 #    end
 -%>
-
     create_table :pages do |t|
       t.string :name
       t.string :title
@@ -30,6 +29,7 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
       t.integer :parent_id
       t.integer :lft
       t.integer :rgt
+      t.boolean :nav_main
 
       t.timestamps
     end
