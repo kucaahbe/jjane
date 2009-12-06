@@ -1,6 +1,9 @@
 0.0.2
  миграция
  файл менежер в плагин без генератора
+ перенести тест(он там там юнит и только для page)
+
+ не Helpers а ViewHelpers
 
  страницам: вид списка и тип статей(модель,типа page.node_name)
  nodes: show.html.erb в app/views/nodes/node_name

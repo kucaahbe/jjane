@@ -19,7 +19,7 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.title    = 'JJane'
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('README')
-  rdoc.rdoc_files.include('doc/TODO.rdoc')
-  rdoc.rdoc_files.include('doc/BUGS.rdoc')
+  rdoc.rdoc_files.include('TODO')
+  rdoc.rdoc_files.include('BUGS')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
