@@ -1,6 +1,7 @@
 module JJane#:nodoc:
   module Routing #:nodoc:
-    # JJane adds routing [number here] extensions
+    # Adds routing extensions
+    #
     # sample config/routes.rb file:
     #  ActionController::Routing::Routes.draw do |map|
     #    map.connect ':controller/:action/:id'
