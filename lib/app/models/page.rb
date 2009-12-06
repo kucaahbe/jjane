@@ -1,4 +1,4 @@
-class Page < ActiveRecord::Base
+class Page < ActiveRecord::Base#:nodoc:
   has_many :nodes
 
   acts_as_nested_set
@@ -12,7 +12,7 @@ class Page < ActiveRecord::Base
 
   before_save :calculate_url
 
-  def self.home_page #:nodoc:
+  def self.home_page
     self.root
   end
 
