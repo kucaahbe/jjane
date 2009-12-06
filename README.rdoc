@@ -1,0 +1,21 @@
+= JJane
+
+Another Rails CMF plugin
+
+== Install
+
+* create and configure your rails app
+* ./script/plugin install git://github.com/kucaahbe/jjane.git
+* sudo rake gems:install
+* ./script/generate jjane_base 
+* ./script/generate jjane_user UserName [field:type, field:type]
+* ./script/generate jjane_node NodeName
+* rake jjane:setup
+* add to end of config/routes.rb lines
+    map.jjane_admin
+    map.jjane_root
+    map.jjane_connect
+* go to http://localhost:3000/admin and enter your login and password
+* don't forget to remove or rename public/index.html
+
+Copyright (c) 2009 kuca, released under the MIT license

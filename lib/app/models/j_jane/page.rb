@@ -1,5 +1,5 @@
-class Page < ActiveRecord::Base#:nodoc:
-  has_many :nodes
+class JJane::Page < ActiveRecord::Base
+#  has_many :nodes
 
   acts_as_nested_set
 

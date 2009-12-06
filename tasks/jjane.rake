@@ -44,7 +44,6 @@ namespace :jjane do
 		 :password_confirmation => password_confirmation,
 		 :email => email,
 		 :role => 'root')
-    #add page migration
 
     puts "\nsetup finished"
 

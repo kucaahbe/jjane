@@ -15,10 +15,10 @@ end
 
 desc 'Generate documentation for the JJane plugin.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
+  rdoc.rdoc_dir = 'doc'
   rdoc.title    = 'JJane'
   rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README')
+  rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('TODO')
   rdoc.rdoc_files.include('BUGS')
   rdoc.rdoc_files.include('lib/**/*.rb')
