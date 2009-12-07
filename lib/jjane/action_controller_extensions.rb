@@ -1,5 +1,5 @@
 module ActionController#:nodoc:
-  class Base#:doc:
+  class Base
 
     filter_parameter_logging :password, :content
 
@@ -7,13 +7,23 @@ module ActionController#:nodoc:
 
     private
     
-    include JJane::Helpers::UserSessionHelper
+    include JJane::ViewHelpers::UserSession
 
-    def check_access
+    # if you want restrict access to some actions in controller just do:
+    #   before_filter :check_access ,:only => [:action]
+    def check_access#:doc:
       error_404 unless logged_in?('root') 
     end
 
     # shows ERROR 404
+    #   def show 
+    #     @article = Article.find(params[:id])
+    #     if @article
+    #       render somewhere
+    #     else
+    #       error_404
+    #     end
+    #   end
     def error_404 #:doc:
       flash[:notice] = "The requested URL #{request.request_uri} was not found on this server."; flash.discard
       render '/site/error_404', :status => 404, :layout => 'application'
@@ -24,20 +34,18 @@ module ActionController#:nodoc:
     #--
     #        DRY methods
     #++
-    def get_model_name
-      self.class.to_s.gsub(/Controller/,'').singularize
+    # notice User, :created => flash[:notice] = "User was successfully created"
+    def notice(model,word)#:doc:
+      flash[:notice] = "#{model} was successfully #{word}."
     end
 
-    def notice(word)
-      flash[:notice] = "#{get_model_name} was successfully #{word}."
+    def notice_error(model,word)#:doc:
+      flash[:error] = "#{model} was NOT #{word}."
     end
 
-    def partial(view, params = nil)
+    #   render :partial => view, :locals => params
+    def partial(view, params = {})#:doc:
       render :partial => view, :locals => params
-    end
-
-    def find_model
-      get_model_name.constantize.find(params[:id])
     end
 
     #--

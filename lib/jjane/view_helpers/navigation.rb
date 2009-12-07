@@ -1,6 +1,6 @@
 module JJane
-  module Helpers
-    module NavHelper
+  module ViewHelpers
+    module Navigation
 
       # :range - откуда до куда начинать
       # :recursive => true рекурсивно

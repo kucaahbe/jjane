@@ -1,4 +1,4 @@
-class PagesController < AdminController #:nodoc:
+class PagesController < JJane::Controllers::Admin
   handles_sorting_of_nested_set
 
   uses_tiny_mce :options => TinyMCEconfig.load, :only => [:new,:edit,:create,:update]
@@ -46,7 +46,7 @@ class PagesController < AdminController #:nodoc:
     @page = Page.new(params[:page])
 
     if @page.save
-      notice :created
+      notice Page, :created
       redirect_to pages_path
     else
       render :action => "new"
@@ -55,9 +55,10 @@ class PagesController < AdminController #:nodoc:
 
   def update
     if @page.update_attributes(params[:page])
-      notice :updated
-      redirect_to @page.uri
+      notice Page, :updated
+      redirect_to :action => :edit
     else
+      notice_error Page, :updated
       render :action => "edit"
     end
   end
@@ -71,7 +72,7 @@ class PagesController < AdminController #:nodoc:
   private
 
   def find_page
-    @page = find_model
+    @page = Page.find(params[:id])
   end
 
 end

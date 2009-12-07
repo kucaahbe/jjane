@@ -1,6 +1,6 @@
 module JJane
-  module Helpers
-    module AdminPanelHelper
+  module ViewHelpers
+    module AdminPanel
 
       def pages_link
 	link_to engine_image('pages.png'),

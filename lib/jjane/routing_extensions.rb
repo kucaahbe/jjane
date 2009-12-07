@@ -21,7 +21,7 @@ module JJane#:nodoc:
 
       #   map.welcome 'path_to_admin_login', :controller => :admin, :action => :welcome
       def jjane_admin(path_to_admin_login='admin')
-	welcome path_to_admin_login, :controller => :admin, :action => :welcome
+	welcome path_to_admin_login, :controller => :login, :action => :welcome
       end
 
       # it is the same as 
@@ -40,9 +40,9 @@ module JJane#:nodoc:
 
 	resources :users
 
-	login '__login__', { :controller => :admin, :action => :login }
+	login '__login__', { :controller => :login, :action => :login }
 
-	logout '__logout__', { :controller => :admin, :action => :logout }
+	logout '__logout__', { :controller => :login, :action => :logout }
 
 	connect '*uri/:year/:month/:day', {
 	  :controller => 'site',

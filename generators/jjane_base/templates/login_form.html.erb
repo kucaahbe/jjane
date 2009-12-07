@@ -2,6 +2,7 @@
   <%= stylesheet '/engine/stylesheets/default' %>
   <%= stylesheet '/engine/stylesheets/form_notices' %>
 <% end %>
+
 <div style="text-align:center;">
   <% form_for :user_session, :url => login_path, :html => { :class => 'jform' } do |f| %>
 
@@ -13,7 +14,7 @@
 
     <p>
     <%= f.submit "login" %> or
-    <%= link_to 'back to site', root_url %>
+    <%= link_to 'Main page', root_url %>
     </p>
   <% end %>
 </div>

@@ -1,8 +1,11 @@
 0.0.2
+ jjane_base
+  страницы - миграцию
+  снипеты - 
+ login_controller генерить
+ pages_controller
+
  файл менежер в плагин без генератора
-
- не Helpers а ViewHelpers
-
  страницам: вид списка и тип статей(модель,типа page.node_name)
  nodes: show.html.erb в app/views/nodes/node_name
 
@@ -28,7 +31,7 @@
 
 сделать скафолд для user,node
 
-
+stylesheet и javascript алиасы поделать
 
 
 

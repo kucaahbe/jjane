@@ -1,0 +1,33 @@
+<%%= title "Users" %>
+
+<table class="list">
+  <tr>
+    <th style="width:40%">Login</th>
+    <th style="width:40%">Email</th>
+    <th style="width:15%">Role</th>
+    <% for attribute in attributes -%>
+    <th><%= attribute.column.human_name %></th>
+    <% end -%>
+
+    <th style="width:5%">Actions</th>
+  </tr>
+
+  <%% @users.each do |user| %>
+    <tr>
+      <td>
+	<%%= engine_image 'user.png' %>
+	<%%= link_to_edit user.login, edit_user_path(user) %>
+      </td>
+      <td><%%=h user.email %></td>
+      <td><%%=h user.role %></td>
+      <% for attribute in attributes -%>
+      <td><%%=h <%= singular_name %>.<%= attribute.name %> %></td>
+      <% end -%>
+      <td>
+	<%%= link_to_destroy user %>
+      </td>
+    </tr>
+  <%% end %>
+</table>
+
+<%%= link_to_new new_user_path %>

@@ -1,6 +1,6 @@
 namespace :jjane do
   desc 'install JJane'
-  task :install do
+  task :copy_files do
     plugin_path = File.join File.dirname(__FILE__), '..'
 
     puts '=> installing JJane public files...'
@@ -26,8 +26,6 @@ namespace :jjane do
   task :setup => :environment do
     require 'highline/import'
 
-    Rake::Task['db:migrate'].invoke
-
     print "Enter data for root user:\n"
     email = ask('E-mail adress:') do |q|
       q.validate = Authlogic::Regex.email
@@ -38,14 +36,24 @@ namespace :jjane do
     password = ask('Password:') {|q| q.echo = false }
     password_confirmation = ask('Confirm password:') {|q| q.echo = false }
 
-    User.create!(:name => name,
-		 :login => login,
-		 :password => password,
-		 :password_confirmation => password_confirmation,
-		 :email => email,
-		 :role => 'root')
+    User.create!(
+      :name => name,
+      :login => login,
+      :password => password,
+      :password_confirmation => password_confirmation,
+      :email => email,
+      :role => 'root'
+    )
+    Page.create!(
+      :id => 1,
+      :name => 'home',
+      :title => 'home page',
+      :link => 'home',
+      :_type_ => 'static',
+      :nav_main => true
+      )
 
-    puts "\nsetup finished"
+      puts "\nsetup finished"
 
   end
 end

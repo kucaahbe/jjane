@@ -1,6 +1,6 @@
 module JJane
-  module Helpers
-    module CoreHelper
+  module ViewHelpers
+    module Core
 
       def title(text)
 	content_tag :h1, text

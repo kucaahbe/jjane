@@ -1,0 +1,39 @@
+<%% form_for @user, :html => { :class => 'jform' } do |f| %>
+  <%%= f.error_messages %>
+  <p>
+  <%%= f.label :name %>
+  <%%= f.text_field :name %>
+  </p>
+  <p>
+  <%%= f.label :login %>
+  <%%= f.text_field :login %>
+  </p>
+  <p>
+  <%%= f.label :email %>
+  <%%= f.text_field :email %>
+  </p>
+  <p>
+  <%%= f.label :password %>
+  <%%= f.password_field :password %>
+  </p>
+  <p>
+  <%%= f.label :password_confirmation %>
+  <%%= f.password_field :password_confirmation %>
+  </p>
+  <p>
+  <%%= f.label :role %>
+  [<%%= f.radio_button :role, "user" %>user]
+  [<%%= f.radio_button :role, "manager" %>manager]
+  [<%%= f.radio_button :role, "root" %>root]
+  </p>
+  <% for attribute in attributes -%>
+  <p>
+  <%%= f.label :<%= attribute.name %> %><br />
+  <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
+  </p>
+  <% end -%>
+  <p>
+  <%%= f.submit 'Save' %> |
+  <%%= link_to_cancel users_path %>
+  </p>
+<%% end %>

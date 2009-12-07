@@ -6,10 +6,12 @@ Another Rails CMF plugin
 
 * create and configure your rails app
 * ./script/plugin install git://github.com/kucaahbe/jjane.git
+* rake jjane:copy_files
 * sudo rake gems:install
 * ./script/generate jjane_base 
-* ./script/generate jjane_user UserName [field:type, field:type]
-* ./script/generate jjane_node NodeName
+* ./script/generate jjane_user [field:type, field:type]
+* ./script/generate jjane_node NodeName NOT DONE!!!
+* rake db:migrate
 * rake jjane:setup
 * add to end of config/routes.rb lines
     map.jjane_admin
