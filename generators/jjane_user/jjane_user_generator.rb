@@ -4,7 +4,6 @@ class JjaneUserGenerator < ScaffoldGenerator
     runtime_args=runtime_args.insert(0, 'User')
     @default_fields = [
       "name:string",
-      "login:string",
       "email:string",
       "role:string",
       "crypted_password:string",

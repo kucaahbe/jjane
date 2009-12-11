@@ -56,7 +56,7 @@ class PagesController < JJane::Controllers::Admin
   def update
     if @page.update_attributes(params[:page])
       notice Page, :updated
-      redirect_to :action => :edit
+      redirect_to edit_page_path(@page)
     else
       notice_error Page, :updated
       render :action => "edit"

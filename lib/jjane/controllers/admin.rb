@@ -10,9 +10,9 @@ module JJane
 	if $?.exitstatus==0 then
 	  flash[:notice]="Web server succsessfully restarted"
 	else
-	  flash[:error]="ERROR::File #{RAILS_ROOT}/tmp/restart.txt must be writable by web server\'s user"
+	  flash[:error]="File #{RAILS_ROOT}/tmp/restart.txt must be writable by web server\'s user"
 	end
-	redirect_to :action => :welcome
+	redirect_to welcome_path
       end
     end
   end

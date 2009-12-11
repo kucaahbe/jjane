@@ -6,16 +6,24 @@ module JJane
     #   end
     class Crud < JJane::Controllers::Admin
 
+      def initialize
+	super
+	logger.info 'new class'
+      end
       def self.set_model(model_class_name)
 	@@model = model_class_name
 	@@inst_variable_pluralized = model_class_name.to_s.tableize
 	@@inst_variable_singularized = model_class_name.to_s.tableize.singularize
+	logger.info 'set_model'
       end
 
       before_filter :find_model, :only => [:show, :edit, :update, :destroy]
 
       def index
 	instance_variable_set :"@#{@@inst_variable_pluralized}", @@model.all
+	logger.info self.class
+	logger.info self.class.instance_variables.inspect
+	logger.info self.class.class_variables.inspect
       end
 
       def show

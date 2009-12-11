@@ -2,7 +2,7 @@
 
 <table class="list">
   <tr>
-    <th style="width:40%">Login</th>
+    <th style="width:40%">Name</th>
     <th style="width:40%">Email</th>
     <th style="width:15%">Role</th>
     <% for attribute in attributes -%>
@@ -16,7 +16,7 @@
     <tr>
       <td>
 	<%%= engine_image 'user.png' %>
-	<%%= link_to_edit user.login, edit_user_path(user) %>
+	<%%= link_to_edit user.name, edit_user_path(user) %>
       </td>
       <td><%%=h user.email %></td>
       <td><%%=h user.role %></td>

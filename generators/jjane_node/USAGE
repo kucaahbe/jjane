@@ -1,5 +1,5 @@
 Description:
-    Generates JJane node woth given Name
+    Generates JJane node with given Name
 
 Example:
     ./script/generate jjane_node Name

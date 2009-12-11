@@ -31,14 +31,12 @@ namespace :jjane do
       q.validate = Authlogic::Regex.email
       q.responses[:not_valid]='e-mail should look like e-mail address'
     end
-    login = ask('Administrator login:') { |q| q.default='root' }
     name = ask('Administrator name:')
     password = ask('Password:') {|q| q.echo = false }
     password_confirmation = ask('Confirm password:') {|q| q.echo = false }
 
     User.create!(
       :name => name,
-      :login => login,
       :password => password,
       :password_confirmation => password_confirmation,
       :email => email,

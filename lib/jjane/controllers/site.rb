@@ -13,7 +13,7 @@ module JJane
 
       def page
 	@title = @page.title
-	@nodes = @page.nodes
+	#@nodes = @page.nodes
 	render "/pages/#{@page._type_}/show", :layout => @page._layout_
       end
 
