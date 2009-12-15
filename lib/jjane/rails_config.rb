@@ -14,7 +14,6 @@ Rails.configuration.gem 'kete-tiny_mce',
 # adding JJane's controllers, helpers, models and views
 #++
 app_path = File.dirname(__FILE__)
-
 %w{ controllers helpers models }.each do |dir|
   path = File.join(app_path, dir)
   $LOAD_PATH << path

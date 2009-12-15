@@ -18,18 +18,18 @@ class JJaneCrudController < JJaneAdminController
   before_filter :find_model, :only => [:show, :edit, :update, :destroy]
 
   def index
-    instance_variable_set :"@#{@thing}", @model.all
+    instance_variable_set "@#{@thing}".to_sym, @model.all
   end
 
   def show
   end
 
   def new
-    instance_variable_set :"@#{@things}", @model.new
+    instance_variable_set "@#{@things}".to_sym, @model.new
   end
 
-  def create(redirect_place = :"#{@thing}_url")
-    instance_variable_set :"@#{@things}", @model.new(params[:"#{@things}"])
+  def create(redirect_place = "#{@thing}_url".to_sym)
+    instance_variable_set "@#{@things}".to_sym, @model.new(params["#{@things}".to_sym])
     if instance_variable_get("@#{@things}").save
       notice @model, :created
       redirect_to method(redirect_place).call
@@ -41,8 +41,8 @@ class JJaneCrudController < JJaneAdminController
   def edit
   end
 
-  def update(redirect_place = :"#{@thing}_url")
-    if instance_variable_get("@#{@things}").update_attributes(params[:"#{@things}"])
+  def update(redirect_place = "#{@thing}_url".to_sym)
+    if instance_variable_get("@#{@things}").update_attributes(params["#{@things}".to_sym])
       notice @model, :updated
       redirect_to method(redirect_place).call
     else
@@ -50,7 +50,7 @@ class JJaneCrudController < JJaneAdminController
     end
   end
 
-  def destroy(redirect_place = :"#{@thing}_url")
+  def destroy(redirect_place = "#{@thing}_url".to_sym)
     instance_variable_get("@#{@things}").destroy
 
     redirect_to method(redirect_place).call
@@ -59,6 +59,6 @@ class JJaneCrudController < JJaneAdminController
   private
 
   def find_model
-    instance_variable_set :"@#{@things}", @model.find(params[:id])
+    instance_variable_set "@#{@things}".to_sym, @model.find(params[:id])
   end
 end

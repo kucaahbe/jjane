@@ -1,5 +1,4 @@
-class JJanePage < ActiveRecord::Base
-  set_table_name :pages
+class Page < ActiveRecord::Base
 
   acts_as_nested_set
 
@@ -7,13 +6,13 @@ class JJanePage < ActiveRecord::Base
   validates_format_of :link,
     :with=>/^[a-zA-Z][\w_]+$/,
     :message=>%q(должен состоять из латиницы цифр или знака '_',и начинаться с латинской буквы)
-    validates_numericality_of :pagination, :greater_than => 0
+  validates_numericality_of :pagination, :greater_than => 0
   validates_presence_of :name, :link, :title
 
   before_save :calculate_url
 
   def self.home_page
-    self.root
+    root
   end
 
   def uri
@@ -21,12 +20,12 @@ class JJanePage < ActiveRecord::Base
   end
 
   def visible_in_menu?(name)
-    self.send :"nav_#{name}"
+    self.send "nav_#{name}".to_sym
   end
 
   def some_child_visible_in_menu?(name)
     if self.have_children?
-      self.leaves.exists?(:"nav_#{name}" => true)
+      self.leaves.exists?("nav_#{name}".to_sym => true)
     else
       false
     end

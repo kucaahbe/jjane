@@ -4,8 +4,6 @@ module JJane#:nodoc:
     #
     # sample config/routes.rb file:
     #  ActionController::Routing::Routes.draw do |map|
-    #    map.connect ':controller/:action/:id'
-    #    map.connect ':controller/:action/:id.:format'
     #
     #    map.jjane_admin 'administration'
     #    map.jjane_root
@@ -35,15 +33,10 @@ module JJane#:nodoc:
 	  page.resources :child, :controller => :pages, :only => [:new]
 	  #  page.resources :nodes,:except => [:index, :show]
 	end
-
 	resources :snippets, :except => [:show]
-
 	resources :users
-
 	login '__login__', { :controller => :login, :action => :login }
-
 	logout '__logout__', { :controller => :login, :action => :logout }
-
 	connect '*uri/:year/:month/:day', {
 	  :controller => 'site',
 	  :action     => 'find_by_day',
@@ -51,13 +44,11 @@ module JJane#:nodoc:
 	  :month      => /\d{1,2}/,
 	  :day        => /\d{1,2}/
 	}
-
 	connect '*uri/:id', {
 	  :controller => :site,
 	  :action => :node,
 	  :requirements => { :id => /\d+/ }
 	}
-
 	connect '*uri', {
 	  :controller => :site,
 	  :action => :page

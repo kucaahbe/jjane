@@ -26,7 +26,7 @@ module ActionController#:nodoc:
     #   end
     def error_404 #:doc:
       flash[:notice] = "The requested URL #{request.request_uri} was not found on this server."; flash.discard
-      render '/site/error_404', :status => 404, :layout => 'application'
+      render '/pages/errors/404', :status => 404, :layout => 'application'
     rescue
       render_optional_error_file(404)
     end

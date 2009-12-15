@@ -16,7 +16,7 @@
     <div style="float:right;">
       <% remote_form_for root, :html => { :style => 'margin:0;'} do |f| %>
 	<% @menus_columns.each do |column| %>
-	  <%= f.check_box column.to_s, :id => column+'_'+root.id.to_s, :onclick => "this.form.onsubmit();" %>
+	  <%= f.check_box column.to_sym, :id => column+'_'+root.id.to_s, :onclick => "this.form.onsubmit();" %>
 	<% end %>
       <% end %>
     </div>
@@ -24,7 +24,7 @@
     <div style="clear:both"></div>
   <% end %>
 
-  <% unless root.children.empty? %>
+  <% if root.have_children? %>
     <% content_tag :ul do %>
       <% root.children.each do |child| %>
 	<%= partial 'tree', :root => child %>
