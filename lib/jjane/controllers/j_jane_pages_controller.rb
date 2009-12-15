@@ -1,4 +1,4 @@
-class PagesController < JJaneAdminController
+class JJanePagesController < JJaneAdminController
   handles_sorting_of_nested_set
 
   uses_tiny_mce :options => TinyMCEconfig.load, :only => [:new,:edit,:create,:update]
@@ -6,12 +6,12 @@ class PagesController < JJaneAdminController
   before_filter :find_page, :only => [:edit, :update, :destroy]
 
   def index
-    @roots = JJanePage.roots
-    @menus_columns = JJanePage.menus_columns
+    @roots = Page.roots
+    @menus_columns = Page.menus_columns
   end
 
   def sort
-    @page = JJanePage.find(params[:moved_page_id])
+    @page = Page.find(params[:moved_page_id])
     new_position = position_of(:moved_page_id).in_tree(:pages)
 
     if new_position[:parent]
@@ -33,9 +33,9 @@ class PagesController < JJaneAdminController
 
   def new
     if params[:page_id]
-      @page = JJanePage.new(:parent_id => params[:page_id])
+      @page = Page.new(:parent_id => params[:page_id])
     else
-      @page = JJanePage.new
+      @page = Page.new
     end
   end
 
@@ -43,10 +43,10 @@ class PagesController < JJaneAdminController
   end
 
   def create
-    @page = JJanePage.new(params[:page])
+    @page = Page.new(params[:page])
 
     if @page.save
-      notice JJanePage, :created
+      notice Page, :created
       redirect_to pages_path
     else
       render :action => "new"
@@ -55,10 +55,10 @@ class PagesController < JJaneAdminController
 
   def update
     if @page.update_attributes(params[:page])
-      notice JJanePage, :updated
+      notice Page, :updated
       redirect_to edit_page_path(@page)
     else
-      notice_error JJanePage, :updated
+      notice_error Page, :updated
       render :action => "edit"
     end
   end
@@ -72,7 +72,7 @@ class PagesController < JJaneAdminController
   private
 
   def find_page
-    @page = JJanePage.find(params[:id])
+    @page = Page.find(params[:id])
   end
 
 end

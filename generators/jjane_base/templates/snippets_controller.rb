@@ -1,0 +1,2 @@
+class SnippetsController < JJaneSnippetsController
+end

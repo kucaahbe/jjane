@@ -19,8 +19,12 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
       m.file 'static_show.html.erb', File.join('app','views','pages','static','show.html.erb')
 
       # files for login controller
-      m.file 'login_controller.rb', File.join('app','controllers','login_controller.rb')
-      m.file 'user_session_model.rb', File.join('app','models','user_session.rb')
+      for controller in controllers do
+	m.file "#{controller}_controller.rb", File.join('app','controllers',"#{controller}_controller.rb")
+      end
+      for model in models do
+	m.file "#{model}_model.rb", File.join('app','models',"#{model}.rb")
+      end
       m.file 'login_form.html.erb', File.join('app','views','login','welcome.html.erb')
 
       #TODO file for site controller
@@ -28,5 +32,15 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
       # base migration
       m.migration_template 'migration.rb', 'db/migrate'
     end
+  end
+
+  private
+
+  def controllers
+    %w[ login site snippets pages ]
+  end
+
+  def models
+    %w[ user_session page snippet ]
   end
 end

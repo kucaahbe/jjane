@@ -7,7 +7,7 @@ module ActionController#:nodoc:
 
     private
     
-    include JJane::ViewHelpers::UserSession
+    include JJane::Helpers::UserSession
 
     # if you want restrict access to some actions in controller just do:
     #   before_filter :check_access ,:only => [:action]

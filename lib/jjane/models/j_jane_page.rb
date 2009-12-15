@@ -1,4 +1,6 @@
 class JJanePage < ActiveRecord::Base
+  set_table_name :pages
+
   acts_as_nested_set
 
   validates_uniqueness_of :link, :scope => :parent_id
