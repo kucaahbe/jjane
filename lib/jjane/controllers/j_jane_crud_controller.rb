@@ -1,40 +1,37 @@
 # Usage:
 #   class ArticlesController < JJaneCrudController
-#     set_model Articles
+#     set_model Article
 #   end
 class JJaneCrudController < JJaneAdminController
 
-  def initialize
-    super
-    logger.info 'new class'
-  end
   def self.set_model(model_class_name)
-    @@model = model_class_name
-    @@inst_variable_pluralized = model_class_name.to_s.tableize
-    @@inst_variable_singularized = model_class_name.to_s.tableize.singularize
-    logger.info 'set_model'
+    class_eval <<-"end_eval"
+    def initialize
+      super
+      @model = #{model_class_name}
+      @thing = @model.to_s.tableize
+      @things = @model.to_s.tableize.singularize
+    end
+    end_eval
   end
 
   before_filter :find_model, :only => [:show, :edit, :update, :destroy]
 
   def index
-    instance_variable_set :"@#{@@inst_variable_pluralized}", @@model.all
-    logger.info self.class
-    logger.info self.class.instance_variables.inspect
-    logger.info self.class.class_variables.inspect
+    instance_variable_set :"@#{@thing}", @model.all
   end
 
   def show
   end
 
   def new
-    instance_variable_set :"@#{@@inst_variable_singularized}", @@model.new
+    instance_variable_set :"@#{@things}", @model.new
   end
 
-  def create(redirect_place = :"#{@@inst_variable_pluralized}_url")
-    instance_variable_set :"@#{@@inst_variable_singularized}", @@model.new(params[:"#{@@inst_variable_singularized}"])
-    if instance_variable_get("@#{@@inst_variable_singularized}").save
-      notice @@model, :created
+  def create(redirect_place = :"#{@thing}_url")
+    instance_variable_set :"@#{@things}", @model.new(params[:"#{@things}"])
+    if instance_variable_get("@#{@things}").save
+      notice @model, :created
       redirect_to method(redirect_place).call
     else
       render :action => 'new'
@@ -44,17 +41,17 @@ class JJaneCrudController < JJaneAdminController
   def edit
   end
 
-  def update(redirect_place = :"#{@@inst_variable_pluralized}_url")
-    if instance_variable_get("@#{@@inst_variable_singularized}").update_attributes(params[:"#{@@inst_variable_singularized}"])
-      notice @@model, :updated
+  def update(redirect_place = :"#{@thing}_url")
+    if instance_variable_get("@#{@things}").update_attributes(params[:"#{@things}"])
+      notice @model, :updated
       redirect_to method(redirect_place).call
     else
       render :action => 'edit'
     end
   end
 
-  def destroy(redirect_place = :"#{@@inst_variable_pluralized}_url")
-    instance_variable_get("@#{@@inst_variable_singularized}").destroy
+  def destroy(redirect_place = :"#{@thing}_url")
+    instance_variable_get("@#{@things}").destroy
 
     redirect_to method(redirect_place).call
   end
@@ -62,6 +59,6 @@ class JJaneCrudController < JJaneAdminController
   private
 
   def find_model
-    instance_variable_set :"@#{@@inst_variable_singularized}", @@model.find(params[:id])
+    instance_variable_set :"@#{@things}", @model.find(params[:id])
   end
 end

@@ -17,6 +17,7 @@ Another Rails CMF plugin
     map.jjane_admin
     map.jjane_root
     map.jjane_connect
+* ./script/server
 * go to http://localhost:3000/admin and enter your login and password
 * don't forget to remove or rename public/index.html
 
