@@ -10,6 +10,7 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
       m.directory File.join('app','views','pages','static')
       m.directory File.join('app','views','login')
 
+      # css and main layout
       m.file 'notices.css', File.join('public','stylesheets','notices.css')
       m.file 'application.html.erb', File.join('app','views','layouts','application.html.erb')
 

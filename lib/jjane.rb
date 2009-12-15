@@ -1,7 +1,4 @@
 require 'jjane/rails_config'
-require 'jjane/view_helpers'
-require 'jjane/models'
-require 'jjane/controllers'
+require 'jjane/helpers'
 require 'jjane/action_controller_extensions'
 require 'jjane/routing_extensions'
-require 'jjane/mvcs'

@@ -1,2 +1,2 @@
-class UserSession < JJane::Models::UserSession
+class UserSession < Authlogic::Session::Base
 end

@@ -9,3 +9,18 @@ Rails.configuration.gem "robinsp-sortable_element_for_nested_set",
 Rails.configuration.gem 'kete-tiny_mce',
                         :lib => 'tiny_mce',
 			:source => 'http://gems.github.com'
+
+#--
+# adding JJane's controllers, helpers, models and views
+#++
+app_path = File.dirname(__FILE__)
+
+%w{ controllers helpers models }.each do |dir|
+  path = File.join(app_path, dir)
+  puts path
+  $LOAD_PATH << path
+  ActiveSupport::Dependencies.load_paths << path
+  ActiveSupport::Dependencies.load_once_paths.delete(path)
+end
+ActionController::Base.append_view_path File.join(app_path, 'views')
+puts File.join(app_path,'views')

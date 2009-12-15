@@ -1,5 +1,5 @@
 module JJane
-  module ViewHelpers
+  module Helpers
     module UserSession
 
       def current_user_session

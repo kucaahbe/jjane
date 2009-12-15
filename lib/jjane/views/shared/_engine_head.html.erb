@@ -1,5 +1,4 @@
 <%= stylesheet_link_tag :all %>
 <%= stylesheet('/jjane/stylesheets/default', '/jjane/stylesheets/form_notices') if logged_in? %>
 <%= javascript :defaults %>
-<%# TinyMCE::Helpers.include_tiny_mce_if_needed %>
-<%# include_tiny_mce_if_needed %>
+<%= include_tiny_mce_if_needed %>

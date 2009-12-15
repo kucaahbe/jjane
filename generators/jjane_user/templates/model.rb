@@ -1,2 +1,2 @@
-class User < JJane::Models::User
+class User < JJaneUser
 end

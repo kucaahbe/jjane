@@ -1,2 +1,2 @@
-class LoginController < JJane::Controllers::Login
+class LoginController < JJaneLoginController
 end

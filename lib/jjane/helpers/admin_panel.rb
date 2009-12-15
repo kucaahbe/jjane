@@ -1,5 +1,5 @@
 module JJane
-  module ViewHelpers
+  module Helpers
     module AdminPanel
 
       def pages_link

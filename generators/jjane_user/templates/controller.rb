@@ -1,3 +1,3 @@
-class UsersController < JJane::Controllers::Crud
+class UsersController < JJaneCrudController
   set_model User
 end

@@ -1,5 +1,5 @@
 module JJane
-  module ViewHelpers
+  module Helpers
     module Navigation
 
       # :range - откуда до куда начинать

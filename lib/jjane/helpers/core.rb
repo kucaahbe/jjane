@@ -1,5 +1,5 @@
 module JJane
-  module ViewHelpers
+  module Helpers
     module Core
 
       def title(text)
