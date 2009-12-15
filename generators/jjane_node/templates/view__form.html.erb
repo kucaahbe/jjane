@@ -11,6 +11,12 @@
 <p>
 <%%= f.text_area :content, :class => 'mceEditor' %>
 </p>
+<% for attribute in attributes -%>
+<p>
+<%%= f.label :<%= attribute.name %> %><br />
+<%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
+</p>
+<% end -%>
 <p>
 <%%= f.submit %> |
 <%%= link_to_cancel root_url %>

@@ -12,7 +12,7 @@
 	<%= engine_image 'snippets.png' %>
 	<%= link_to_edit snippet.name, edit_snippet_path(snippet) %>
       </td>
-      <td><%= snippet.content %></td>
+      <td><%=h snippet.content %></td>
       <td>
 	<%= link_to_destroy snippet %>
       </td>

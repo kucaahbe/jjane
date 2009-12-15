@@ -4,13 +4,14 @@
 #   end
 class JJaneCrudController < JJaneAdminController
 
-  def self.set_model(model_class_name)
+  def self.set_model(model_class_name,instance_variable=nil)
+    instance_variable = model_class_name.to_s unless instance_variable
     class_eval <<-"end_eval"
     def initialize
       super
       @model = #{model_class_name}
-      @thing = @model.to_s.tableize
-      @things = @model.to_s.tableize.singularize
+      @thing = "#{instance_variable}".tableize
+      @things = "#{instance_variable}".tableize.singularize
     end
     end_eval
   end
