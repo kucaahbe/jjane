@@ -5,7 +5,7 @@
   <% if page.some_child_visible_in_menu?(name) && !roots_only %>
     <% content_tag :ul do %>
       <% page.children.each do |child| %>
-	<%= partial 'shared/contents_menu',
+	<%= partial 'shared/ul_li_menu',
 	  :page => child,
 	  :name => name,
 	  :roots_only => roots_only %>

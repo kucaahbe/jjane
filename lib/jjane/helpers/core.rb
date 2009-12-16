@@ -6,6 +6,10 @@ module JJane
 	content_tag :h1, text
       end
 
+      def site_title
+	@page.title if controller_name=='site'
+      end
+
       def link_to_new(path)
 	link_to engine_image('add.png'), path
       end

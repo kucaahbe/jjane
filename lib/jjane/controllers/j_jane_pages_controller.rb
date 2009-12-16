@@ -4,10 +4,11 @@ class JJanePagesController < JJaneAdminController
   uses_tiny_mce :options => TinyMCEconfig.load, :only => [:new,:edit,:create,:update]
 
   before_filter :find_page, :only => [:edit, :update, :destroy]
+  before_filter :define_page_types, :only => [:new, :create]
 
   def index
     @roots = Page.roots
-    @menus_columns = Page.menus_columns
+    @menus_columns = Page.menus_columns.sort
   end
 
   def sort
@@ -73,6 +74,19 @@ class JJanePagesController < JJaneAdminController
 
   def find_page
     @page = Page.find(params[:id])
+  end
+
+  def define_page_types
+    pages_dir=File.join(RAILS_ROOT,'app','views','pages','**')
+    static_page_types = []
+    Dir.glob(pages_dir) { |fname| static_page_types << File.basename(fname) }
+    nodes_dir=File.join(RAILS_ROOT,'app','views','nodes','**')
+    article_types = []
+    Dir.glob(nodes_dir) { |fname| article_types << File.basename(fname) }
+    @page_types = { 
+    'статические страницы' => static_page_types,
+    'статьи' => article_types
+    }
   end
 
 end

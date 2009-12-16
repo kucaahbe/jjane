@@ -1,0 +1,8 @@
+<% @nodes.each do |node| %>
+  <% link_to node_path(@page.url,node) do %>
+    <h2><%=h node.title %></h2>
+  <% end %>
+
+  <%= node.content %><br />
+
+<% end %>

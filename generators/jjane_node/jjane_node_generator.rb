@@ -14,8 +14,6 @@ class JjaneNodeGenerator < ScaffoldGenerator
     super
     @node_name = @singular_name
     @node_table_name = @plural_name
-    logger.info runtime_args.inspect
-    logger.info runtime_options.inspect
   end
 
   def manifest
@@ -28,6 +26,10 @@ class JjaneNodeGenerator < ScaffoldGenerator
       m.directory(File.join('app/models', class_path))
       m.directory(File.join('app/controllers', controller_class_path))
       m.directory(File.join('app/views', controller_class_path, controller_file_name))
+      m.directory(File.join('app/views/pages', node_name.pluralize))
+
+      m.file 'page_edit.html.erb', File.join('app/views/pages/',node_name.pluralize,'_edit.html.erb')
+      m.file 'page_show.html.erb', File.join('app/views/pages/',node_name.pluralize,'show.html.erb')
 
       for view in node_views
 	m.template(
@@ -40,7 +42,7 @@ class JjaneNodeGenerator < ScaffoldGenerator
 	'controller.rb', File.join('app/controllers', controller_class_path, "#{controller_file_name}_controller.rb")
       )
 
-      #      m.route_resources controller_file_name
+      #TODO      m.route_resources controller_file_name
       m.dependency 'model', [node_name] + @default_fields + @args, :collision => :skip, :skip_fixture => true
       m.template 'model.rb', File.join('app/models',class_path,"#{node_name}.rb"), :collision => :force
 

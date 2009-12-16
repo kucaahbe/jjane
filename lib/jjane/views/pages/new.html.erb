@@ -19,7 +19,7 @@
   </p>
   <p>
   <%= f.label :_type_ %>
-  <%= f.select :_type_, options_for_select(['static','contents','gallery']) %>
+  <%= f.select :_type_, grouped_options_for_select(@page_types) %>
   </p>
   <p>
   <%= f.submit %> |
