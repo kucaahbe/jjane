@@ -43,12 +43,11 @@ namespace :jjane do
       :role => 'root'
     )
     Page.create!(
-      :id => 1,
       :title => 'Home page for your site',
       :link => 'home',
       :_type_ => 'static',
       :nav => {:main => true}
-      )
+      ) unless Page.exists?
 
       puts "\nsetup finished"
 

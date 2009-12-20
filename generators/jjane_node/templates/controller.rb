@@ -16,7 +16,7 @@ class <%= controller_class_name %>Controller < JJaneAdminController
     @<%= node_name %> = <%= class_name %>.new(params[:<%= node_name %>])
     if @<%= node_name %>.save
       notice <%= class_name %>, :created
-      redirect_to node_path(@page.url,@<%= node_name %>)
+      redirect_to show_node_path(@page.url,@<%= node_name %>)
     else
       render :action => 'new'
     end
@@ -39,7 +39,7 @@ class <%= controller_class_name %>Controller < JJaneAdminController
   def destroy
     @<%= node_name%>.destroy
 
-    redirect_to page_url(@page.url)
+    redirect_to show_page_url(@page.url)
   end
 
   private
