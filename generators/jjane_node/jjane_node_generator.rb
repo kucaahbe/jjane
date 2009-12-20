@@ -4,13 +4,6 @@ class JjaneNodeGenerator < ScaffoldGenerator
               :node_table_name
 
   def initialize(runtime_args, runtime_options = {})
-    runtime_args[0] = "nodes/#{runtime_args[0]}"
-    @default_fields = [
-       'title:string',
-       'content:text',
-       'page_id:integer',
-       'user_id:integer'
-    ]
     super
     @node_name = @singular_name
     @node_table_name = @plural_name
@@ -42,8 +35,6 @@ class JjaneNodeGenerator < ScaffoldGenerator
 	'controller.rb', File.join('app/controllers', controller_class_path, "#{controller_file_name}_controller.rb")
       )
 
-      #TODO      m.route_resources controller_file_name
-      m.dependency 'model', [node_name] + @default_fields + @args, :collision => :skip, :skip_fixture => true
       m.template 'model.rb', File.join('app/models',class_path,"#{node_name}.rb"), :collision => :force
 
     end
@@ -52,6 +43,6 @@ class JjaneNodeGenerator < ScaffoldGenerator
   protected
 
   def node_views
-    %w[ new _form edit ]
+    %w[ new _form edit show ]
   end
 end

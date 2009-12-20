@@ -2,4 +2,9 @@
 
 <%% form_for @<%= node_name %>, :url => { :action => "update" }, :html => { :class => 'jform' } do |f| %>
   <%%= partial 'form',{ :f => f } %>
+  <p>
+  <%%= f.submit %> |
+  <%%= link_to 'Посмотреть материал', show_node_path(@page.url,@<%= node_name %>) %> |
+  <%%= link_to_cancel root_url %>
+  </p>
 <%% end %>

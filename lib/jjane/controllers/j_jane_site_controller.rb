@@ -6,19 +6,19 @@ class JJaneSiteController < ApplicationController
   def home_page
     @page = Page.home_page
     @title = @page.title
-    #@nodes = @page.nodes #TODO after finishing nodes
+    @nodes = @page.nodes
     render "/pages/#{@page._type_}/show", :layout => @page._layout_
   end
 
   def page
     @title = @page.title
-    #@nodes = @page.nodes
+    @nodes = @page.nodes
     render "/pages/#{@page._type_}/show", :layout => @page._layout_
   end
 
   def node
     @title = @node.title
-    render 'node', :layout => @page._layout_
+    render "/#{@page._type_}/show", :layout => @page._layout_
   end
 
   def find_by_day
@@ -44,7 +44,8 @@ class JJaneSiteController < ApplicationController
   end
 
   def check_node#:doc:
-    @node = Node.find(params[:id])
-    error_404 unless @node.page===@page
+    @node = @page.nodes.find(params[:id])
+  rescue
+    error_404
   end
 end

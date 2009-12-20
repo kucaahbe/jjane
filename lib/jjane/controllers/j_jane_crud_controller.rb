@@ -9,24 +9,27 @@ class JJaneCrudController < JJaneAdminController
     class_eval <<-"end_eval"
     def initialize
       super
-      @model = #{model_class_name}
-      @thing = "#{instance_variable}".tableize
-      @things = "#{instance_variable}".tableize.singularize
+      @model    =  #{model_class_name}
+      @thing    = "#{instance_variable}".tableize
+      @things   = "#{instance_variable}".tableize.singularize
     end
     end_eval
   end
 
   before_filter :find_model, :only => [:show, :edit, :update, :destroy]
 
-  def index
+  def index(render_command = nil)
     instance_variable_set "@#{@thing}".to_sym, @model.all
+    render render_command if render_command
   end
 
-  def show
+  def show(render_command = nil)
+    render render_command if render_command
   end
 
-  def new
+  def new(render_command = nil)
     instance_variable_set "@#{@things}".to_sym, @model.new
+    render render_command if render_command
   end
 
   def create(redirect_place = "#{@thing}_url".to_sym)

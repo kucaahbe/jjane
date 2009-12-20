@@ -27,8 +27,6 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
       end
       m.file 'login_form.html.erb', File.join('app','views','login','welcome.html.erb')
 
-      #TODO file for site controller
-      #
       # base migration
       m.migration_template 'migration.rb', 'db/migrate'
     end

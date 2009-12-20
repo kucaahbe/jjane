@@ -3,7 +3,7 @@
   <% content_tag :div, :style => "padding-left:#{10 * root.level}px;", :class => :list_item, :onmouseover =>"$('show_#{root.id}').show()", :onmouseout => "$('show_#{root.id}').hide()" do %>
     <div style="float:left">
       <%= published_img(root) %>
-      <%= link_to root.name, edit_page_path(root) %>
+      <%= link_to root.link, edit_page_path(root) %>
       &nbsp; &nbsp;
       <%= link_to '(show)', root_url+root.url, :style => 'display:none; color:black;', :id => "show_#{root.id}" %>
     </div>

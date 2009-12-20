@@ -1,4 +1,4 @@
-<%= title "Edit page" %>
+<%= title "Редактирование страницы" %>
 
 <% form_for @page, :html => { :class => 'jform' } do |f| %>
   <%= f.error_messages %>
@@ -6,23 +6,19 @@
   <p><%= f.hidden_field :parent_id %></p>
 
   <p>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
   </p>
   <p>
   <%= f.label :link %>
   <%= f.text_field :link, :disabled => true %>
   </p>
-  <p>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  </p>
 
   <%= partial "pages/#{@page._type_}/edit", :f => f %>
 
   <p>
-  <%= f.submit 'Update' %> |
-  <%= link_to 'view page', root_url+@page.url %> |
+  <%= f.submit 'Обновить' %> |
+  <%= link_to 'посмотреть страницу', root_url+@page.url %> |
   <%= link_to_cancel pages_path %>
   </p>
 <% end %>

@@ -10,15 +10,8 @@ module JJane#:nodoc:
     #    map.jjane_connect
     #  end
     module MapperExtensions
-      # RESTfull routes for nodes
-      def jjane_resources(node_name)#-- #FIXME don't work #++
-	namespace :pages do |pages|
-	  pages.resources node_name
-	end
-      end
-
       #   map.welcome 'path_to_admin_login', :controller => :admin, :action => :welcome
-      def jjane_admin(path_to_admin_login='admin')
+      def jjane_admin(path_to_admin_login = 'admin')
 	welcome path_to_admin_login, :controller => :login, :action => :welcome
       end
 
@@ -29,9 +22,20 @@ module JJane#:nodoc:
       end
 
       def jjane_connect
+	connect        'pages/:page_id/:controller',          :action => :create,  :conditions => { :method => :post }
+	new_page_node  'pages/:page_id/:controller/new',      :action => :new,     :conditions => { :method => :get }
+	edit_page_node 'pages/:page_id/:controller/:id/edit', :action => :edit,    :conditions => { :method => :get }
+	page_node      'pages/:page_id/:controller/:id',      :action => :update,  :conditions => { :method => :put }
+	connect        'pages/:page_id/:controller/:id',      :action => :destroy, :conditions => { :method => :delete }
+
 	resources :pages, :except => [:show], :collection => { :sort => :put } do |page|
 	  page.resources :child, :controller => :pages, :only => [:new]
-	  #  page.resources :nodes,:except => [:index, :show]
+	  #page_nodes     POST   /pages/:page_id/nodes(.:format)          {:controller=>"nodes", :action=>"create"}
+	  #new_page_node  GET    /pages/:page_id/nodes/new(.:format)      {:controller=>"nodes", :action=>"new"}
+	  #edit_page_node GET    /pages/:page_id/nodes/:id/edit(.:format) {:controller=>"nodes", :action=>"edit"}
+	  #page_node      PUT    /pages/:page_id/nodes/:id(.:format)      {:controller=>"nodes", :action=>"update"}
+	  #               DELETE /pages/:page_id/nodes/:id(.:format)      {:controller=>"nodes", :action=>"destroy"}
+	  #page.resources :nodes,:except => [:index, :show]
 	end
 	resources :snippets, :except => [:show]
 	resources :users
@@ -44,12 +48,12 @@ module JJane#:nodoc:
 	  :month      => /\d{1,2}/,
 	  :day        => /\d{1,2}/
 	}
-	connect '*uri/:id', {
+	show_node '*uri/:id', {
 	  :controller => :site,
 	  :action => :node,
 	  :requirements => { :id => /\d+/ }
 	}
-	connect '*uri', {
+	show_page '*uri', {
 	  :controller => :site,
 	  :action => :page
 	}

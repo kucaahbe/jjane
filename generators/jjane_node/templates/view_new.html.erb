@@ -1,5 +1,9 @@
 <%%= title 'New <%= node_name %>' %>
 
-<%% form_for [:page, @<%= node_name %>], :html => { :class => 'jform' } do |f| %>
+<%% form_for :<%= node_name %>, :url => { :action => :create }, :html => { :class => 'jform' } do |f| %>
   <%%= partial 'form',{ :f => f } %>
+  <p>
+  <%%= f.submit %> |
+  <%%= link_to_cancel root_url %>
+  </p>
 <%% end %>

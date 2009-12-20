@@ -57,7 +57,7 @@ module JJane
       def new_node_link
 	if @page._type_!='static'
 	  link_to engine_image('add.png'),
-	  new_page_node_path(@page),
+	  new_page_node_path(@page.id,@page._type_),
 	  :title => 'Добавить материал'
 	else
       ''
@@ -66,12 +66,14 @@ module JJane
 
       def edit_node_link
 	link_to engine_image('pencil.png'),
-	  edit_page_node_path(@page,params[:id]),
+	  edit_page_node_path(@page.id,@page._type_,@node),
 	  :title => 'Редактировать материал'
       end
 
       def destroy_node_link
-	link_to engine_image('delete.png'), [:page,@node], :confirm => "Are you sure?", :method => :delete,
+	logger.info @page.inspect
+	logger.info @node.inspect
+	link_to engine_image('delete.png'), page_node_path(@page,@page._type_,@node), :confirm => "Are you sure?", :method => :delete,
 	  :title => 'Удалить материал'
       end
 

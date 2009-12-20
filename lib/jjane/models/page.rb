@@ -1,13 +1,20 @@
 class Page < ActiveRecord::Base
 
+  has_many :nodes, :class_name => 'JJaneNode'
+
+  serialize :nav, Hash
+
   acts_as_nested_set
 
+  validates_presence_of :link, :title
+
   validates_uniqueness_of :link, :scope => :parent_id
-  validates_format_of :link,
-    :with=>/^[a-zA-Z][\w_]+$/,
-    :message=>%q(должен состоять из латиницы цифр или знака '_',и начинаться с латинской буквы)
+
   validates_numericality_of :pagination, :greater_than => 0
-  validates_presence_of :name, :link, :title
+
+  validates_format_of :link,
+    :with => /^[a-zA-Z][\w_]+$/,
+    :message => %q(должен состоять из латиницы цифр или знака '_',и начинаться с латинской буквы)
 
   before_save :calculate_url
 

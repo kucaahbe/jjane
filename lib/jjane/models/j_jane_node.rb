@@ -1,4 +1,6 @@
 class JJaneNode < ActiveRecord::Base
+  set_table_name :nodes
+
   belongs_to :user
   belongs_to :page
 #  belongs_to :attached_file, :foreign_key => :file_id

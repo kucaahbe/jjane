@@ -44,11 +44,10 @@ namespace :jjane do
     )
     Page.create!(
       :id => 1,
-      :name => 'home',
-      :title => 'home page',
+      :title => 'Home page for your site',
       :link => 'home',
       :_type_ => 'static',
-      :nav_main => true
+      :nav => {:main => true}
       )
 
       puts "\nsetup finished"
