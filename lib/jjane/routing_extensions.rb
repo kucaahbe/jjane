@@ -30,12 +30,6 @@ module JJane#:nodoc:
 
 	resources :pages, :except => [:show], :collection => { :sort => :put } do |page|
 	  page.resources :child, :controller => :pages, :only => [:new]
-	  #page_nodes     POST   /pages/:page_id/nodes(.:format)          {:controller=>"nodes", :action=>"create"}
-	  #new_page_node  GET    /pages/:page_id/nodes/new(.:format)      {:controller=>"nodes", :action=>"new"}
-	  #edit_page_node GET    /pages/:page_id/nodes/:id/edit(.:format) {:controller=>"nodes", :action=>"edit"}
-	  #page_node      PUT    /pages/:page_id/nodes/:id(.:format)      {:controller=>"nodes", :action=>"update"}
-	  #               DELETE /pages/:page_id/nodes/:id(.:format)      {:controller=>"nodes", :action=>"destroy"}
-	  #page.resources :nodes,:except => [:index, :show]
 	end
 	resources :snippets, :except => [:show]
 	resources :users
