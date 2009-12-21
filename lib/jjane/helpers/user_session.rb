@@ -1,6 +1,6 @@
 module JJane
   module Helpers
-    module UserSession
+    module User_Session
 
       def current_user_session
 	return @current_user_session if defined?(@current_user_session)

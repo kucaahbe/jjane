@@ -9,7 +9,7 @@ module JJane
     include Core
     include Navigation
     include AdminPanel
-    include UserSession
+    include User_Session
   end
 end
 
