@@ -45,6 +45,7 @@ namespace :jjane do
     Page.create!(
       :title => 'Home page for your site',
       :link => 'home',
+      :menu => 'home',
       :_type_ => 'static',
       :nav_main => true
       ) unless Page.exists?
