@@ -2,24 +2,30 @@ module JJane
   module Helpers
     module Navigation
 
-      # :range - откуда до куда начинать
-      # :recursive => true рекурсивно
-      #
-      def navigation()
-      end
+      # рисует менюхи список страниц в том порядке в котором они есть
+      def ul_li_menu(name='main',args={})
+	default_options = {
+	  :roots_only => false
+	}
+	default_html_options = {
+	  :id => 'nav',
+	  :class =>'',
+	  :dir_class => 'dir'
+	}
+	args[:html] = default_html_options.merge(args[:html])
+	args = default_options.merge(args)
 
-      #TODO добавить options[:html]
-      def ul_li_menu(name='main',opts={:id => 'nav', :roots_only => false})
-	#log opts[:roots_only] #FIXME задавать опции по умолчанию подсмотреть в awesome_nested_ser
 	view = ''
 	Page.roots.each do |root|
 	  view += partial(
 	  'shared/ul_li_menu',
 	  :page => root,
-	  :name => name,
-	  :roots_only => opts[:roots_only])
+	  :menu_name => name,
+	  :roots_only => args[:roots_only],
+	  :dir_class => args[:html][:dir_class]
+	  )
 	end
-	content_tag :ul, view, :id => opts[:id], :class => opts[:class]
+	content_tag :ul, view, :id => args[:html][:id], :class => args[:html][:class]
       end
 
     end
