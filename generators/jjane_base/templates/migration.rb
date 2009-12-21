@@ -12,7 +12,7 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
       t.integer  :parent_id
       t.integer  :lft
       t.integer  :rgt
-      t.string   :nav
+      t.boolean  :nav_main
 
       t.timestamps
     end
@@ -34,7 +34,7 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
        t.integer :user_id
     end
 
-    create_table :config, :id => false do |t|
+    create_table :config do |t|
       t.string   :name
       t.string   :value
     end

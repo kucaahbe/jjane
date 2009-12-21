@@ -46,10 +46,10 @@ namespace :jjane do
       :title => 'Home page for your site',
       :link => 'home',
       :_type_ => 'static',
-      :nav => {:main => true}
+      :nav_main => true
       ) unless Page.exists?
 
-      puts "\nsetup finished"
+    puts "\nsetup finished"
 
   end
 end

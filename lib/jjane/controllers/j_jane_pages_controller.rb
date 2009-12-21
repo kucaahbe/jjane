@@ -8,7 +8,7 @@ class JJanePagesController < JJaneAdminController
 
   def index
     @roots = Page.roots
-    @menus_columns = Page.menus_columns.sort
+    @menus_columns = Page.menus_columns
   end
 
   def sort

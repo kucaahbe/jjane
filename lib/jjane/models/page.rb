@@ -63,7 +63,7 @@ class Page < ActiveRecord::Base
   def self.menus_columns
     columns = []
     self.columns.each { |column| columns << column.name if column.name =~ /^nav_/ }
-    return columns
+    return columns.sort
   end
 
   def self.menus
