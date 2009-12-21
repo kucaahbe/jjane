@@ -15,4 +15,7 @@ end
 
 JJane::Helpers.included_modules.each do |mmodule|
   ActionView::Base.send :include, mmodule
+  #ActionController::Base.send(:helper,JJane::Helpers)
+  #TODO выкупить шо оно такое
 end
+
