@@ -71,8 +71,6 @@ module JJane
       end
 
       def destroy_node_link
-	logger.info @page.inspect
-	logger.info @node.inspect
 	link_to engine_image('delete.png'), page_node_path(@page,@page._type_,@node), :confirm => "Are you sure?", :method => :delete,
 	  :title => 'Удалить материал'
       end

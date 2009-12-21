@@ -1,5 +1,5 @@
 <% @nodes.each do |node| %>
-  <h3><%= link_to node.title, show_node_path(@page.url,node) %></h3>
+  <h3><%= link_to node.title, root_url+node.url %></h3>
 
   <%= node.content %><br />
 

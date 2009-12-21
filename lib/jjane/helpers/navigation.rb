@@ -8,7 +8,8 @@ module JJane
 	  :include_self => true,
 	  :before => '',
 	  :after => '',
-	  :separator => '&nbsp;&raquo;&nbsp;'
+	  :separator => '&nbsp;&raquo;&nbsp;',
+	  :include_node => false
 	}
 	args = default_options.merge(args)
 
@@ -16,7 +17,11 @@ module JJane
 	@page.ancestors.each do |page|
 	  line += link_to(page.menu, root_url+page.url) + args[:separator]
 	end
-	line += link_to(@page.menu,root_url+@page.url) + args[:after] if args[:include_self]
+	line += link_to(@page.menu,root_url+@page.url) if args[:include_self]
+
+	line += args[:separator] + link_to(@node.title,root_url+@node.url)  if defined?(@node) && args[:include_node]
+
+	line += args[:after]
 
 	return line
       rescue

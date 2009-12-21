@@ -18,9 +18,6 @@ class Page < ActiveRecord::Base
 
   before_save :calculate_url
 
-  def self.home_page
-    root
-  end
 
   def uri
     '/'+self.url
@@ -46,19 +43,11 @@ class Page < ActiveRecord::Base
     true
   end
 
-=begin
-  def self.tree
-    self.find :all, :order => :lft
-  end
+  #-- public class methods #++
 
-  def self.tree_with_level
-    tree = []
-    self.roots.each do |root|
-      self.each_with_level(root.self_and_descendants) { |o,level| tree << {:self => o, :level => level} }
-    end
-    return tree
+  def self.home_page
+    root
   end
-=end
 
   def self.menus_columns
     columns = []
