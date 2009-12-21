@@ -18,7 +18,7 @@ class JJaneSiteController < ApplicationController
 
   def node
     @title = @node.title
-    render "/#{@page._type_}/show", :layout => @page._layout_
+    render "/nodes/#{@page._type_}/show", :layout => @page._layout_
   end
 
   def find_by_day

@@ -18,7 +18,7 @@ class <%= controller_class_name %>Controller < JJaneAdminController
       notice <%= class_name %>, :created
       redirect_to show_node_path(@page.url,@<%= node_name %>)
     else
-      render :action => 'new'
+      render '/nodes/<%= node_table_name %>/new', :layout => @page._layout_
     end
    
   end
@@ -32,7 +32,7 @@ class <%= controller_class_name %>Controller < JJaneAdminController
       notice <%= class_name %>, :updated
       redirect_to edit_page_node_path(@page,@page._type_,@<%= node_name %>)
     else
-      render :action => 'edit'
+      render '/nodes/<%= node_table_name %>/edit', :layout => @page._layout_
     end
   end
 
