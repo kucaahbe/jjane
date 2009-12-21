@@ -3,7 +3,7 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
     create_table :pages do |t|
       t.string   :link
       t.string   :title
-      t.string   :desc
+      t.string   :menu
       t.string   :url
       t.string   :_type_,      :null => false
       t.string   :_layout_,    :null => false, :default => 'application'

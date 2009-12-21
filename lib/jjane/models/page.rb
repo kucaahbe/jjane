@@ -6,7 +6,7 @@ class Page < ActiveRecord::Base
 
   acts_as_nested_set
 
-  validates_presence_of :link, :title
+  validates_presence_of :link, :title, :menu
 
   validates_uniqueness_of :link, :scope => :parent_id
 
