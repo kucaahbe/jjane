@@ -9,7 +9,7 @@ class <%= controller_class_name %>Controller < JJaneAdminController
     @<%= node_name %> = <%= class_name %>.new
     @<%= node_name %>.page = @page
     @<%= node_name %>.user = current_user
-    render '<%= node_table_name %>/new', :layout => @page._layout_
+    render '/nodes/<%= node_table_name %>/new', :layout => @page._layout_
   end
 
   def create
@@ -24,7 +24,7 @@ class <%= controller_class_name %>Controller < JJaneAdminController
   end
 
   def edit
-    render '<%= node_table_name %>/edit', :layout => @page._layout_
+    render '/nodes/<%= node_table_name %>/edit', :layout => @page._layout_
   end
 
   def update

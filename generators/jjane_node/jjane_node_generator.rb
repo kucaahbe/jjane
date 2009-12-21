@@ -18,7 +18,7 @@ class JjaneNodeGenerator < ScaffoldGenerator
       # Controller, helper, views, test and stylesheets directories.
       m.directory(File.join('app/models', class_path))
       m.directory(File.join('app/controllers', controller_class_path))
-      m.directory(File.join('app/views', controller_class_path, controller_file_name))
+      m.directory(File.join('app/views/nodes', controller_class_path, controller_file_name))
       m.directory(File.join('app/views/pages', node_name.pluralize))
 
       m.file 'page_edit.html.erb', File.join('app/views/pages/',node_name.pluralize,'_edit.html.erb')
@@ -27,7 +27,7 @@ class JjaneNodeGenerator < ScaffoldGenerator
       for view in node_views
 	m.template(
 	  "view_#{view}.html.erb",
-	  File.join('app/views', controller_class_path, controller_file_name, "#{view}.html.erb")
+	  File.join('app/views/nodes', controller_class_path, controller_file_name, "#{view}.html.erb")
 	)
       end
 

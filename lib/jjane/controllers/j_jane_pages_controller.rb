@@ -80,12 +80,15 @@ class JJanePagesController < JJaneAdminController
     pages_dir=File.join(RAILS_ROOT,'app','views','pages','**')
     static_page_types = []
     Dir.glob(pages_dir) { |fname| static_page_types << File.basename(fname) }
+
     nodes_dir=File.join(RAILS_ROOT,'app','views','nodes','**')
-    article_types = []
-    Dir.glob(nodes_dir) { |fname| article_types << File.basename(fname) }
+    nodes_types = []
+    Dir.glob(nodes_dir) { |fname| nodes_types << File.basename(fname) }
+
+    static_page_types = static_page_types - nodes_types
     @page_types = { 
     'статические страницы' => static_page_types,
-    'статьи' => article_types
+    'статьи' => nodes_types
     }
   end
 
