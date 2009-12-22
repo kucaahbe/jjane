@@ -27,7 +27,7 @@ form.jform p { margin:5px 0; }
 
 #preview_node { overflow: hidden; padding:5px; }
 #preview_node legend { text-decoration:none; color:#661bff; font-weight:bold; }
-#preview_node legend:hover { text-decoration:underline; }
+#preview_node legend:hover { text-decoration:underline; cursor:pointer; }
 fieldset.collapsed { height:10px; border:1px solid transparent; border-top:1px solid black; }
 fieldset.expanded { border:1px solid black; }
 
