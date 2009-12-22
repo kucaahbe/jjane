@@ -74,6 +74,12 @@ module JJane
       rescue
     %Q(no such page '#{page.to_s}')
       end
+
+      def snippet(name)
+	Snippet.find_by_name(name).content
+      rescue
+	%(<p style='color:red;'>snippet not found</p>)
+      end
     end
   end
 end
