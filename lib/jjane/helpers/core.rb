@@ -75,8 +75,13 @@ module JJane
     %Q(no such page '#{page.to_s}')
       end
 
-      def snippet(name)
-	Snippet.find_by_name(name).content
+      # Рисует снипет
+      def snippet(name='',args={})
+	defaults = { :compile => false }
+	args = defaults.merge(args)
+	content = Snippet.find_by_name(name).content
+	content = render(:inline => content) if args[:compile]
+	return content
       rescue
 	%(<p style='color:red;'>snippet not found</p>)
       end
