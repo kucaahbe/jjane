@@ -1,3 +1,7 @@
+<%% content_for :head do %>
+  <%%= javascript_include_tag '/jjane/javascripts/jjane'%>
+<%% end %>
+
 <%%= f.error_messages %>
 
 <p>
@@ -8,6 +12,10 @@
 <%%= f.label :title %>
 <%%= f.text_field :title, :class => 'title' %>
 </p>
+<%% field_set_tag nil, :id => 'preview_node', :class => 'collapsed' do %>
+  <%%= content_tag :legend, 'Preview', :onclick => 'PreviewNodeShowHide();' %>
+  <%%= f.text_area :preview, :style => 'width:100%; height:70px;' %>
+<%% end %>
 <p>
 <%%= f.text_area :content, :class => 'mceEditor' %>
 </p>

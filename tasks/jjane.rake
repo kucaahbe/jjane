@@ -5,7 +5,7 @@ namespace :jjane do
 
     puts '=> installing JJane public files...'
     FileUtils.mkdir_p File.join(RAILS_ROOT, 'public', 'jjane')
-    %w[ images stylesheets ].each do |dir|
+    %w[ images stylesheets javascripts ].each do |dir|
       FileUtils.cp_r File.join(plugin_path, 'public', dir),
 	File.join(RAILS_ROOT, 'public', 'jjane')
     end

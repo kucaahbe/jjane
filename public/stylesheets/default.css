@@ -6,10 +6,7 @@
   border-top:3px solid #cfcccc;
   border-bottom:1px solid #cfcccc;
 }
-
-#admin_panel a {
-  color:#6d6969;
-}
+#admin_panel a { color:#6d6969; }
 
 form.jform {
   margin:5px;
@@ -17,18 +14,22 @@ form.jform {
   background-color:#edfff4;
   border:2px double #aac8b5;
 }
-
 form.jform label {
   margin:5px 0;
   font-weight:bold;
   display:inline-block;
   width:100px;
 }
-form.jform p {
-  margin:5px 0;
-}
+form.jform p { margin:5px 0; }
+
 .mceEditor  { width:99%; height:500px; }
 .title { width:80%; height:25px; font-weight:bold; font-size:large; }
+
+#preview_node { overflow: hidden; padding:5px; }
+#preview_node legend { text-decoration:none; color:#661bff; font-weight:bold; }
+#preview_node legend:hover { text-decoration:underline; }
+fieldset.collapsed { height:10px; border:1px solid transparent; border-top:1px solid black; }
+fieldset.expanded { border:1px solid black; }
 
 table.list {
   width:100%;
