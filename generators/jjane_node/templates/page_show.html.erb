@@ -1,8 +1,8 @@
 <% @nodes.each do |node| %>
   <h3><%= link_to node.title, root_url+node.url %></h3>
   
-<pre>
+<p>
 <%= node.preview %>
-</pre>
+</p>
 
 <% end %>
