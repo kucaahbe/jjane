@@ -4,8 +4,16 @@
 
 <div id="tabs">
   <ul>
-    <li id="tabHeaderActive"><a href="javascript:void(0)" onclick="toggleTab(1,2,null,false)" class="tablink"><span>Content</span></a></li>
-    <li id="tabHeader2"><a href="javascript:void(0)" onclick="toggleTab(2,2,null,false)" class="tablink"><span>Meta info</span></a></li>
+    <li id="tabHeaderActive">
+    <a href="javascript:void(0)" onclick="toggleTab(1,2,null,false)" class="tablink">
+      <span><%%=t :content %></span>
+    </a>
+    </li>
+    <li id="tabHeader2">
+    <a href="javascript:void(0)" onclick="toggleTab(2,2,null,false)" class="tablink">
+    <span><%%=t :meta_info %></span>
+    </a>
+    </li>
   </ul>
 
   <div id="tabscontent">
@@ -17,11 +25,11 @@
       <%%= f.hidden_field :page_id %>
       </p>
       <p>
-      <%%= f.label :title %>
+      <%%= f.label t(:title) %>
       <%%= f.text_field :title, :class => 'title' %>
       </p>
       <%% field_set_tag nil, :id => 'preview_node', :class => 'collapsed' do %>
-	<%%= content_tag :legend, 'Preview', :onclick => 'PreviewNodeShowHide();' %>
+	<%%= content_tag :legend, t(:preview_node), :onclick => 'PreviewNodeShowHide();' %>
 	<%%= f.text_area :preview, :style => 'width:100%; height:70px; display:none;' %>
       <%% end %>
       <p>
@@ -29,7 +37,7 @@
       </p>
       <% for attribute in attributes -%>
       <p>
-      <%%= f.label :<%= attribute.name %> %><br />
+      <%%= f.label t(:<%= attribute.name %>) %><br />
       <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
       </p>
       <% end -%>

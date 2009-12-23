@@ -11,14 +11,14 @@
 form.jform {
   margin:5px;
   padding:5px;
-  background-color:#edfff4;
-  border:2px double #aac8b5;
+  background-color:transparent;
+  border:none;
 }
 form.jform label {
   margin:5px 0;
   font-weight:bold;
-  display:inline-block;
-  width:100px;
+  display:block;
+  /*  width:100px;*/
 }
 form.jform p { margin:5px 0; }
 

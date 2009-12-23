@@ -3,7 +3,7 @@
 <%% form_for :<%= node_name %>, :url => { :action => :create }, :html => { :class => 'jform' } do |f| %>
   <%%= partial '/nodes/<%= node_table_name %>/form',{ :f => f } %>
   <p>
-  <%%= f.submit %> |
+  <%%= f.submit t(:new) %> |
   <%%= link_to_cancel root_url %>
   </p>
 <%% end %>

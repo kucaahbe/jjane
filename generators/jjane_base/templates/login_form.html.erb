@@ -6,15 +6,15 @@
 <div style="text-align:center;">
   <% form_for :user_session, :url => login_path, :html => { :class => 'jform' } do |f| %>
 
-    <p><%= f.label :login %></p>
+    <p><%= f.label t(:login) %></p>
     <p><%= f.text_field :email, :size => "17" %></p>
 
-    <p><%= f.label :password %></p>
+    <p><%= f.label t(:password) %></p>
     <p><%= f.password_field :password, :size => "17"%></p>
 
     <p>
-    <%= f.submit "login" %> or
-    <%= link_to 'Main page', root_url %>
+    <%= f.submit t(:login) %> or
+    <%= link_to t(:home_page), root_url %>
     </p>
   <% end %>
 </div>

@@ -10,6 +10,8 @@ Rails.configuration.gem 'kete-tiny_mce',
                         :lib => 'tiny_mce',
 			:source => 'http://gems.github.com'
 
+I18n.load_path << Dir[File.join(File.dirname(__FILE__), '..', '..', 'locales', '*.{rb,yml}')]
+
 #--
 # adding JJane's controllers, helpers, models and views
 #++
