@@ -1,23 +1,23 @@
 <%% form_for @user, :html => { :class => 'jform' } do |f| %>
   <%%= f.error_messages %>
   <p>
-  <%%= f.label :name %>
+  <%%= f.label :name %><br />
   <%%= f.text_field :name %>
   </p>
   <p>
-  <%%= f.label :email %>
+  <%%= f.label :email %><br />
   <%%= f.text_field :email %>
   </p>
   <p>
-  <%%= f.label :password %>
+  <%%= f.label :password %><br />
   <%%= f.password_field :password %>
   </p>
   <p>
-  <%%= f.label :password_confirmation %>
+  <%%= f.label :password_confirmation %><br />
   <%%= f.password_field :password_confirmation %>
   </p>
   <p>
-  <%%= f.label :role %>
+  <%%= f.label :role %><br />
   [<%%= f.radio_button :role, "user" %>user]
   [<%%= f.radio_button :role, "manager" %>manager]
   [<%%= f.radio_button :role, "root" %>root]

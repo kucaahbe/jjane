@@ -19,12 +19,10 @@
 #admin_panel a { color:#6d6969; }
 
 form.jform {
-  margin:5px;
-  padding:0px;
-  background-color:transparent;
-  border:none;
-  height:100%;
-  width:100%;
+  margin:0px;
+  padding:5px;
+  background-color:#d8e6fd;
+  border:1px solid #97b9f2;
 }
 form.jform p {
   width:100%;
@@ -37,7 +35,6 @@ form.jform input,fieldset,textarea {
 form.jform label {
   margin:5px 0;
   font-weight:bold;
-  display:block;
 }
 form.jform input[type="submit"] { height:30px; padding:5px; font-weight:bold; font-size:16px; }
 form.jform p { margin:5px 0; }
@@ -65,18 +62,18 @@ table.list a { text-decoration:none; color:#661bff; }
 table.list a:hover { text-decoration:underline; }
 
 #tabs{
-/*  margin-left: 4px;*/
+  margin:0 -5px 0 -5px;
   padding: 0;
   background: transparent;
   voice-family: "\"}\"";
   voice-family: inherit;
-/*  padding-left: 5px;*/
 }
 #tabs ul{
   font: bold 11px Arial, Verdana, sans-serif;
   margin:0;
   padding:0;
   list-style:none;
+  margin-left: 10px;
 }
 #tabs li{
   display:inline;
@@ -103,8 +100,8 @@ table.list a:hover { text-decoration:underline; }
 #tabHeaderActive span, #tabHeaderActive a.tablink { background-color: #42577B; color:#fff;}
 div.tabContent {
   clear:both;
-  border:1px solid black;
-  padding:10px;
+  border-top:1px solid black;
+  padding:5px;
   margin:0px;
 }
 /* for pages */
