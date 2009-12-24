@@ -2,14 +2,14 @@
 
 <table class="list">
   <tr>
-    <th style="width:40%">Name</th>
-    <th style="width:40%">Email</th>
-    <th style="width:15%">Role</th>
+    <th style="width:40%"><%%=t :name %></th>
+    <th style="width:40%"><%%=t :email %></th>
+    <th style="width:15%"><%%=t :role %></th>
     <% for attribute in attributes -%>
-    <th><%= attribute.column.human_name %></th>
+    <th><%%=t :<%= attribute.column %> %></th>
     <% end -%>
 
-    <th style="width:5%">Actions</th>
+    <th style="width:5%"><%%=t :actions %></th>
   </tr>
 
   <%% @users.each do |user| %>

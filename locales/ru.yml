@@ -1,26 +1,40 @@
 ru:
 
-# -- admin panel actions
-  edit_pages: "Страницы"
-  edit_users: "Пользователи"
-  edit_snippets: "Кусочки(snippets)"
-  edit_profile: "Редактировать свои данные или как-то так"
-  logout: "Выход"
+# --общие--
+  name:                    "Имя"
+  actions:                 "Действия"
+  email:                   "Ел. почта"
+  role:                    "Роль"
+  content:                 "Содержимое"
+  menu:                    "Меню"
 
-# -- forms
-  # * tabs
-  content_tab: "Содержимое"
-  meta_tab: "Meta теги"
-  # * input labels
-  title: "Заголовок"
-  preview_node: "Предпросмотр"
-  # * forms buttons
-  create_button: "Создать"
-  update_button: "Обновить"
-  cancel: "Отмена"
-  look_node: "Посмотреть материал"
+# --админ панель--
+  new_page:                "Новая страница"
+  edit_pages:              "Страницы"
+  edit_page:               "Редактировать страницу"
+  destroy_page:            "Удалить страницу"
+  new_node:                "Добавить материал"
+  edit_node:               "Редактировать материал"
+  destroy_node:            "Удалить материал"
+  edit_users:              "Пользователи"
+  edit_snippets:           "Кусочки(snippets)"
+  edit_profile:            "Редактировать свои данные или как-то так"
+  logout:                  "Выход"
 
-# -- login form
-  login: "Логин"
-  password: "Пароль"
-  home_page: "На главную"
+# --формы--
+  # **табы**
+  content_tab:             "Содержимое"
+  meta_tab:                "Meta теги"
+  # **labels**
+  title:                   "Заголовок"
+  preview_node:            "Предпросмотр"
+  # **кнопки форм**
+  create_button:           "Создать"
+  save_button:             "Сохранить"
+  cancel:                  "Отмена"
+  look_node:               "Посмотреть материал"
+
+# --форма логина--
+  login:                   "Логин"
+  password:                "Пароль"
+  home_page:               "На главную"

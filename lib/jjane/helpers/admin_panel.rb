@@ -51,7 +51,7 @@ module JJane
 
       def destroy_page_link
 	link_to engine_image('delete.png'), @page, :confirm => "Are you sure?", :method => :delete,
-	  :title => t(:delete_page)
+	  :title => t(:destroy_page)
       end
 
       def new_node_link

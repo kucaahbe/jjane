@@ -2,10 +2,10 @@
 
 <ul class="list" id="pages">
   <li id="pages_list_header">
-  <div style="float:left;">Name</div>
-  <div style="float:right; margin-left:17px;">Actions</div>
+  <div style="float:left;"><%=t :name %></div>
+  <div style="float:right; margin-left:17px;"><%=t :actions %></div>
   <div style="float:right;">
-    menus[
+    <%=t :menu %>[
     <% Page.menus.each do |menu| %>
       <%= menu %>
     <% end %>
