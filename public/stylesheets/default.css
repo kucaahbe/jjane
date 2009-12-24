@@ -60,7 +60,7 @@ table.list {
 }
 table.list th,td { padding:2px; vertical-align:middle; }
 table.list td { height:30px; border-bottom:1px dashed #e0e0e0; }
-table.list th { background-color: #e2e5e9; }
+table.list th,#pages_list_header { background-color: #e2e5e9; padding:1px; font-weight:bold; }
 table.list tr:hover { background:#c1d9f9; border-bottom:1px dashed red; }
 table.list a { text-decoration:none; color:#661bff; }
 table.list a:hover { text-decoration:underline; }
@@ -107,4 +107,19 @@ div.tabContent {
   border:1px solid black;
   padding:10px;
   margin:0px;
+}
+/* for pages */
+ul.list {
+  padding:0;
+  margin:0;
+  list-style:none;
+}
+ul.list .list_item { border-bottom:1px dashed #e0e0e0; padding:7px; }
+ul.list .list_item:hover { background:#c1d9f9; }
+ul.list a { text-decoration:none; color:#661bff; margin:10px 0; }
+ul.list a:hover { text-decoration:underline; }
+ul.list li > ul {
+  list-style:none;
+  margin:0;
+  padding:0;
 }
