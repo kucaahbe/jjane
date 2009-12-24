@@ -1,5 +1,6 @@
 module JJane
   module Helpers
+    # Methods of this helper can be used in views and controllers
     module User_Session
 
       def current_user_session
