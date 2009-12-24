@@ -1,6 +1,26 @@
 ru:
-  update: "Обновить"
+
+# -- admin panel actions
+  edit_pages: "Страницы"
+  edit_users: "Пользователи"
+  edit_snippets: "Кусочки(snippets)"
+  edit_profile: "Редактировать свои данные или как-то так"
+  logout: "Выход"
+
+# -- forms
+  # * tabs
+  content_tab: "Содержимое"
+  meta_tab: "Meta теги"
+  # * input labels
+  title: "Заголовок"
+  preview_node: "Предпросмотр"
+  # * forms buttons
+  create_button: "Создать"
+  update_button: "Обновить"
+  cancel: "Отмена"
   look_node: "Посмотреть материал"
+
+# -- login form
   login: "Логин"
   password: "Пароль"
   home_page: "На главную"

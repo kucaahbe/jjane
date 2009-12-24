@@ -5,25 +5,25 @@ module JJane
       def pages_link
 	link_to engine_image('pages.png'),
 	  pages_path,
-	  :title => 'Редактировать страницы'
+	  :title => t(:edit_pages)
       end
 
       def users_link
 	link_to engine_image('users.png'),
 	  users_path,
-	  :title => 'Редактировать пользователей'
+	  :title => t(:edit_users)
       end
 
       def snippets_link
 	link_to engine_image('snippets.png'),
 	  snippets_path,
-	  :title => 'Редактировать кусочки'
+	  :title => t(:edit_snippets)
       end
 
       def filesystem_link
 	#link_to engine_image('filesystem.png'),
 	#  attached_files_path,
-	#  :title => 'Файловая система'
+	#  :title => t(:filemanager)
       end
 
       def item_name
@@ -46,19 +46,19 @@ module JJane
       def edit_page_link
 	link_to engine_image('pencil.png'),
 	  edit_page_path(@page),
-	  :title => 'Редактировать страницу'
+	  :title => t(:edit_page)
       end
 
       def destroy_page_link
 	link_to engine_image('delete.png'), @page, :confirm => "Are you sure?", :method => :delete,
-	  :title => 'Удалить страницу'
+	  :title => t(:delete_page)
       end
 
       def new_node_link
 	if @page._type_!='static'
 	  link_to engine_image('add.png'),
 	  new_page_node_path(@page.id,@page._type_),
-	  :title => 'Добавить материал'
+	  :title => t(:new_node)
 	else
       ''
 	end
@@ -67,12 +67,12 @@ module JJane
       def edit_node_link
 	link_to engine_image('pencil.png'),
 	  edit_page_node_path(@page.id,@page._type_,@node),
-	  :title => 'Редактировать материал'
+	  :title => t(:edit_node)
       end
 
       def destroy_node_link
 	link_to engine_image('delete.png'), page_node_path(@page,@page._type_,@node), :confirm => "Are you sure?", :method => :delete,
-	  :title => 'Удалить материал'
+	  :title => t(:destroy_node)
       end
 
     end

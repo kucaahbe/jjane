@@ -19,11 +19,11 @@ module JJane
       end
 
       def link_to_cancel(path)#TODO путь назад должен быть предыдущим урл(мабуть)
-	link_to 'cancel '+engine_image('cancel.png'), path
+	link_to t(:cancel)+engine_image('cancel.png'), path
       end
 
       def link_to_destroy(something)
-	link_to engine_image('delete.png'), something, :confirm => "Are you sure?", :method => :delete
+	link_to engine_image('delete.png'), something, :confirm => t("Are you sure?"), :method => :delete
       end
 
       def partial(view, params = nil)
@@ -72,7 +72,7 @@ module JJane
 	nodes = Page.find_by_link(page.to_s).nodes.find(:all, :limit => count, :order => "created_at DESC")
 	partial 'shared/news', :nodes => nodes
       rescue
-    %Q(no such page '#{page.to_s}')
+        %Q(no such page '#{page.to_s}')
       end
 
       # Рисует снипет
