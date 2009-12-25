@@ -25,11 +25,6 @@
 
 	<%= partial "pages/#{@page._type_}/edit", :f => f %>
 
-	<p>
-	<%= f.submit 'Обновить' %> |
-	<%= link_to 'посмотреть страницу', root_url+@page.url %> |
-	<%= link_to_cancel pages_path %>
-	</p>
       </div>
       <div id="tabContent2" class="tabContent" style="display:none;">
 	<% f.fields_for :meta do |meta_f| %>
@@ -43,4 +38,10 @@
       </div>
     </div>
   </div>
+
+  <p>
+  <%= f.submit 'Обновить' %> |
+  <%= link_to 'посмотреть страницу', root_url+@page.url %> |
+  <%= link_to_cancel pages_path %>
+  </p>
 <% end %>
