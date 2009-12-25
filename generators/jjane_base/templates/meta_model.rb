@@ -1,2 +1,0 @@
-class Meta < JJaneMeta
-end

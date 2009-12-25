@@ -39,6 +39,6 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
   end
 
   def models
-    %w[ user_session snippet meta ]
+    %w[ user_session snippet ]
   end
 end

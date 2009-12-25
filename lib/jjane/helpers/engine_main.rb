@@ -27,6 +27,25 @@ module JJane
       def engine_image(source,options={})
 	image_tag "/jjane/images/#{source}", options.merge(:style => 'vertical-align:middle; border:none;')
       end
+
+      # tabs
+      def tab_header(*tabnames)
+	tabnames = tabnames.to_a
+	def wrap(text,n,l,active=false)
+	  return "\n"+content_tag( :li,
+              				  link_to("<span>#{text}</span>", 'javascript:void(0)',
+					  :onclick => "toggleTab(#{n},#{l},null,false)",
+                                	  :class => :tablink),
+ 				   :id => active ? "tabHeaderActive":"tabHeader#{n}" )
+	end
+	list = wrap(tabnames[0],1,tabnames.length,true )
+	tabnames[1..tabnames.length].each_index do |n|
+	  list += wrap(tabnames[n+1],n+2,tabnames.length)
+	end
+	content_tag :ul do
+	  list
+	end
+      end
     end
   end
 end
