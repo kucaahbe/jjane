@@ -1,29 +1,46 @@
-<%= title "Редактирование страницы" %>
+<%= title "Edit Page" %>
 
 <% form_for @page, :html => { :class => 'jform' } do |f| %>
   <%= f.error_messages %>
 
   <p><%= f.hidden_field :parent_id %></p>
 
-  <p>
-  <%= f.label :title %><br />
-  <%= f.text_field :title, :class => 'title' %>
-  </p>
-  <p>
-  <%= f.label :menu %><br />
-  <%= f.text_field :menu %>
-  </p>
+  <div id="tabs">
+    <%= tab_header t(:content_tab), t(:meta_tab) %>
+    <div id="tabscontent">
+      <div id="tabContent1" class="tabContent" style="display:yes;">
+	<p>
+	<%= f.label :title %><br />
+	<%= f.text_field :title, :class => 'title' %>
+	</p>
+	<p>
+	<%= f.label :menu %><br />
+	<%= f.text_field :menu %>
+	</p>
 
-  <p>
-  <%= f.label :link %><br />
-  <%= f.text_field :link, :disabled => true %>
-  </p>
+	<p>
+	<%= f.label :link %><br />
+	<%= f.text_field :link, :disabled => true %>
+	</p>
 
-  <%= partial "pages/#{@page._type_}/edit", :f => f %>
+	<%= partial "pages/#{@page._type_}/edit", :f => f %>
 
-  <p>
-  <%= f.submit 'Обновить' %> |
-  <%= link_to 'посмотреть страницу', root_url+@page.url %> |
-  <%= link_to_cancel pages_path %>
-  </p>
+	<p>
+	<%= f.submit 'Обновить' %> |
+	<%= link_to 'посмотреть страницу', root_url+@page.url %> |
+	<%= link_to_cancel pages_path %>
+	</p>
+      </div>
+      <div id="tabContent2" class="tabContent" style="display:none;">
+	<% f.fields_for :meta do |meta_f| %>
+	  <% JJaneMeta.tags.each do |meta_tag| %>
+	    <p>
+	    <%= meta_f.label meta_tag %><br />
+	    <%= meta_f.text_field meta_tag.to_sym %>
+	    </p>
+	  <% end %>
+	<% end %>
+      </div>
+    </div>
+  </div>
 <% end %>

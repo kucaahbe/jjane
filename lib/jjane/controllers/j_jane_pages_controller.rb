@@ -47,6 +47,7 @@ class JJanePagesController < JJaneAdminController
     @page = Page.new(params[:page])
 
     if @page.save
+      @page.create_meta
       notice Page, :created
       redirect_to pages_path
     else

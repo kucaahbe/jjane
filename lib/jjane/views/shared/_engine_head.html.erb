@@ -1,4 +1,8 @@
+<% JJaneMeta.tags.each do |name| -%>
+  <meta name="<%= name %>" content="<%# (@node).meta %>" />
+<% end if controller_name=='site' -%>
 <%= stylesheet :notices %>
 <%= stylesheet('/jjane/stylesheets/default', '/jjane/stylesheets/form_notices') if logged_in? %>
 <%= javascript :defaults %>
+<%= javascript_include_tag '/jjane/javascripts/application' %>
 <%= include_tiny_mce_if_needed %>

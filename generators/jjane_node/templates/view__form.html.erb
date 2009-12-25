@@ -1,14 +1,7 @@
-<%% content_for :head do %>
-  <%%= javascript_include_tag '/jjane/javascripts/application'%>
-<%% end %>
-
 <div id="tabs">
-
   <%%= tab_header t(:content_tab), t(:meta_tab) %>
-
   <div id="tabscontent">
     <div id="tabContent1" class="tabContent" style="display:yes;">
-
       <%%= f.error_messages %>
       <p>
       <%%= f.hidden_field :user_id %>
@@ -31,12 +24,8 @@
       <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
       </p>
       <% end -%>
-
     </div>
-
     <div id="tabContent2" class="tabContent" style="display:none;">
-      <%% log :object %>
-      <%% log f.object %>
       <%% f.fields_for action_name=='new' ? :meta_attributes : :meta do |meta_f| %>
 	<%% JJaneMeta.tags.each do |meta_tag| %>
 	  <p>
@@ -46,6 +35,5 @@
 	<%% end %>
       <%% end %>
     </div>
-
   </div>
 </div>

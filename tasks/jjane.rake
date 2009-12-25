@@ -48,7 +48,7 @@ namespace :jjane do
       :menu => 'home',
       :_type_ => 'static',
       :nav_main => true
-      ) unless Page.exists?
+      ).create_meta unless Page.exists?
 
     puts "\nsetup finished"
 

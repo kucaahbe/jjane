@@ -42,7 +42,7 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
     end
 
     create_table :meta_info do |t|
-      t.integer  :node_id
+      t.integer  :owner_id
       t.string   :author
       t.string   :keywords
       t.string   :description

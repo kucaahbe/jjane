@@ -7,7 +7,7 @@ class JJaneNode < ActiveRecord::Base
 
   has_one    :meta,
     :class_name => 'JJaneMeta',
-    :foreign_key => :node_id,
+    :foreign_key => :owner_id,
     :dependent => :destroy
   accepts_nested_attributes_for :meta
 

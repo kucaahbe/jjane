@@ -1,8 +1,21 @@
 class Page < ActiveRecord::Base
 
   has_many :nodes, :class_name => 'JJaneNode'
+  has_one :meta,
+  :class_name => 'JJaneMeta',
+  :foreign_key => :owner_id,
+  :dependent => :destroy
+  accepts_nested_attributes_for :meta
+  attr_accessible :title,
+    :link,
+    :menu,
+    :_type_,
+    :_layout_,
+    :pagination,
+    :content,
+    :meta_attributes
 
-  serialize :nav, Hash
+  serialize :nav, Hash#TODO or TODEL
 
   acts_as_nested_set
 
@@ -54,6 +67,7 @@ class Page < ActiveRecord::Base
     self.columns.each { |column| columns << column.name if column.name =~ /^nav_/ }
     return columns.sort
   end
+  menus_columns.each { |m| attr_accessible m.to_sym }
 
   def self.menus
     menus = []

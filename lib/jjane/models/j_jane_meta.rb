@@ -3,6 +3,6 @@ class JJaneMeta < ActiveRecord::Base
   set_table_name 'meta_info'
 
   def self.tags
-    column_names - ['id','node_id']
+    column_names - ['id','owner_id']
   end
 end
