@@ -32,16 +32,30 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
        t.string  :type
        t.integer :page_id
        t.integer :user_id
+
+       t.timestamps
     end
 
     create_table :config do |t|
       t.string   :name
       t.string   :value
     end
+
+    create_table :meta_info do |t|
+      t.integer  :node_id
+      t.string   :author
+      t.string   :keywords
+      t.string   :description
+      t.string   :copyright
+      t.string   :robots
+    end
   end
 
   def self.down
     drop_table   :pages
     drop_table   :snippets
+    drop_table   :nodes
+    drop_table   :config
+    drop_table   :meta_info
   end
 end

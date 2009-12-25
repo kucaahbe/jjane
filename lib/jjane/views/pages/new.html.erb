@@ -6,23 +6,23 @@
   <p><%= f.hidden_field :parent_id %></p>
 
   <p>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+  <%= f.label :title %><br />
+  <%= f.text_field :title, :class => 'title' %>
   </p>
   <p>
-  <%= f.label :menu %>
+  <%= f.label :menu %><br />
   <%= f.text_field :menu %>
   </p>
   <p>
-  <%= f.label :link %>
+  <%= f.label :link %><br />
   <%= f.text_field :link %>
   </p>
   <p>
-  <%= f.label :_type_ %>
+  <%= f.label :type %><br />
   <%= f.select :_type_, grouped_options_for_select(@page_types) %>
   </p>
   <p>
-  <%= f.submit %> |
+  <%= f.submit t(:create_button) %> |
   <%= link_to_cancel pages_path %>
   </p>
 <% end %>

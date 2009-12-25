@@ -7,9 +7,7 @@ class <%= controller_class_name %>Controller < JJaneAdminController
   before_filter :find_<%= node_name %>, :except => [:new, :create]
 
   def new
-    @<%= node_name %> = <%= class_name %>.new
-    @<%= node_name %>.page = @page
-    @<%= node_name %>.user = current_user
+    @<%= node_name %> = <%= class_name %>.new(:page_id => params[:page_id], :user_id => current_user.id)
     render '/nodes/<%= node_table_name %>/new', :layout => @page._layout_
   end
 
