@@ -47,7 +47,7 @@
     <div id="tabContent2" class="tabContent" style="display:none;">
       <%% log :object %>
       <%% log f.object %>
-      <%% f.fields_for :meta do |meta_f| %>
+      <%% f.fields_for (action_name=='new' ? :meta_attributes : :meta ) do |meta_f| %>
 	<%% JJaneMeta.tags.each do |meta_tag| %>
 	  <p>
 	  <%%= meta_f.label meta_tag %><br />
