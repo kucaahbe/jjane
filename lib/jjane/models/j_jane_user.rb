@@ -4,5 +4,11 @@ class JJaneUser < ActiveRecord::Base
 
   acts_as_authentic
 
-  validates_presence_of :name, :role
+  validates_presence_of :name, :group_id
+
+  belongs_to :group, :class_name => 'JJaneGroup'
+
+  def role
+    self.group.name
+  end
 end

@@ -22,10 +22,10 @@ namespace :jjane do
     end
   end
 
-  desc 'setup JJane for the current RAILS_ENV'
-  task :setup => :environment do
-    require 'highline/import'
+  require 'highline/import'
 
+  desc 'Add JJane root user for the current RAILS_ENV'
+  task :addroot => :environment do
     print "Enter data for root user:\n"
     email = ask('E-mail adress:') do |q|
       q.validate = Authlogic::Regex.email
@@ -36,21 +36,32 @@ namespace :jjane do
     password_confirmation = ask('Confirm password:') {|q| q.echo = false }
 
     User.create!(
-      :name => name,
-      :password => password,
+      :name                  => name,
+      :password              => password,
       :password_confirmation => password_confirmation,
-      :email => email,
-      :role => 'root'
+      :email                 => email,
+      :group_id              => JJaneGroup.find_by_name('roots').id
     )
-    Page.create!(
-      :title => 'Home page for your site',
-      :link => 'home',
-      :menu => 'home',
-      :_type_ => 'static',
-      :nav_main => true
-      ).create_meta unless Page.exists?
+    puts "\ndone."
+  end
 
-    puts "\nsetup finished"
+  desc 'Load JJane seeds for the current RAILS_ENV'
+  task :seeds => :environment do
+    unless JJaneGroup.exists?
+      JJaneGroup.create!(:name => 'roots')
+    end
 
+    Rake::Task['jjane:addroot'].invoke unless User.exists?
+
+    unless Page.exists?
+      Page.create!(
+	:link                  => 'home',
+	:menu                  => 'home',
+	:page_type             => 'static',
+	:user_id               =>  JJaneGroup.find_by_name('roots').users.first.id,
+	:nav_main              =>  true
+      )
+    end
+    puts "\ndone."
   end
 end

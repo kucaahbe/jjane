@@ -5,7 +5,7 @@ class JJaneSiteController < ApplicationController
 
   def home_page
     @page = Page.home_page
-    @title = @page.title
+#    @title = @page.title
     @nodes = @page.nodes
     render "/pages/#{@page._type_}/show", :layout => @page._layout_
   end

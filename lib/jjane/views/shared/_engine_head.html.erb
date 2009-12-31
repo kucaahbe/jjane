@@ -1,5 +1,5 @@
 <% JJaneMeta.tags.each do |name| -%>
-  <meta name="<%= name %>" content="<%= (@node || @page).meta.method(name.to_sym).call %>" />
+  <meta name="<%= name %>" content="<%= (@node || @page).meta.content(name) %>" />
 <% end if controller_name=='site' -%>
 <%= stylesheet :notices %>
 <%= stylesheet('/jjane/stylesheets/default', '/jjane/stylesheets/form_notices') if logged_in? %>

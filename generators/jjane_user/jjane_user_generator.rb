@@ -5,7 +5,7 @@ class JjaneUserGenerator < ScaffoldGenerator
     @default_fields = [
       "name:string",
       "email:string",
-      "role:string",
+      "group_id:integer",
       "crypted_password:string",
       "password_salt:string",
       "persistence_token:string"

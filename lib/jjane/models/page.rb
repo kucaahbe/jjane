@@ -1,36 +1,56 @@
 class Page < ActiveRecord::Base
-
-  has_many :nodes, :class_name => 'JJaneNode'
-  has_one :meta,
-  :class_name => 'JJaneMeta',
-  :foreign_key => :owner_id,
-  :dependent => :destroy
-  accepts_nested_attributes_for :meta
-  attr_accessible :title,
-    :link,
-    :menu,
-    :_type_,
-    :_layout_,
-    :pagination,
-    :content,
-    :meta_attributes
-
-  serialize :nav, Hash#TODO or TODEL
+  attr_protected :url,:parent_id,:lft,:rgt
 
   acts_as_nested_set
 
-  validates_presence_of :link, :title, :menu
+  STATIC_TYPES = ['static','compiled']
 
+  has_many :nodes, :class_name => 'JJaneNode'
+  belongs_to :node, :class_name => 'JJaneNode'
+  belongs_to :user
+
+
+  #serialize :nav, Hash#TODO or TODEL
+
+  validates_presence_of :link, :menu, :page_type, :user_id
   validates_uniqueness_of :link, :scope => :parent_id
-
-  validates_numericality_of :pagination, :greater_than => 0
-
+  validates_numericality_of :pagination, :allow_nil => true, :only_integer => true, :greater_than => 0
   validates_format_of :link,
     :with => /^[a-zA-Z][\w_]+$/,
     :message => %q(должен состоять из латиницы цифр или знака '_',и начинаться с латинской буквы)
 
+  # callbacks
+  after_create :node_set
   before_save :calculate_url
 
+#  def initialize(attributes = nil)
+#    super
+#  end
+  #---TEMP---
+  def _type_
+    self.page_type
+  end
+
+  def _layout_
+    self.layout
+  end
+
+  def title
+    self.node.title
+  rescue
+    ''
+  end
+
+  def content
+    self.node.content
+  rescue
+    ''
+  end
+
+  def meta
+    self.node.meta
+  end
+  #---TEMP---
 
   def uri
     '/'+self.url
@@ -67,7 +87,6 @@ class Page < ActiveRecord::Base
     self.columns.each { |column| columns << column.name if column.name =~ /^nav_/ }
     return columns.sort
   end
-  menus_columns.each { |m| attr_accessible m.to_sym }
 
   def self.menus
     menus = []
@@ -81,6 +100,15 @@ class Page < ActiveRecord::Base
 
   private
 
+  def node_set
+#    puts self.page_type
+    node = self.create_node(:title => 'update me', :user_id => self.user.id) if self.class::STATIC_TYPES.include?(self.page_type)
+#    puts node.inspect
+    self.update_attribute(:node_id, node.id)
+#    puts self.inspect
+#    n.save!
+  end
+
   def calculate_url
     url = self.link
     if parent_id
@@ -90,5 +118,4 @@ class Page < ActiveRecord::Base
     self.url = url
     logger.info self.url
   end
-
 end

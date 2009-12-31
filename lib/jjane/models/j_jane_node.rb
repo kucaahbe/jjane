@@ -3,37 +3,30 @@ class JJaneNode < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :page
-#  belongs_to :attached_file, :foreign_key => :file_id
-
-  has_one    :meta,
+  #belongs_to :attached_file, :foreign_key => :file_id
+  belongs_to :meta,
     :class_name => 'JJaneMeta',
-    :foreign_key => :owner_id,
+    :foreign_key => :meta_id,
     :dependent => :destroy
-  accepts_nested_attributes_for :meta
 
+  # attributes
+  accepts_nested_attributes_for :meta
   attr_accessible :title, :content, :preview, :page_id, :user_id, :meta_attributes
 
-  validates_presence_of :title, :page_id, :user_id
+  # validations
+  validates_presence_of :title, :user_id
+
+  # callbacks
+  before_save :add_meta
 
   def url
     self.page.url+'/'+self.id.to_s
   end
 
-  # @article.author
-  #def author
-  #  self.user.name
-  #end
+  private
 
-  # сколько слов должно рисоваться в предпросмотре статьи
-  #(article.preview(20) - 20 слов)
-  def content(words=nil)
-    if words
-      s=StringScanner.new(self.content)
-      words.times { s.scan_until(/ /) }
-      s.pre_match
-    else
-      super
-    end
+  def add_meta
+    self.create_meta unless self.meta
   end
 
 end

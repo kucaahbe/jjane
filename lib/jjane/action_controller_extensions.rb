@@ -12,7 +12,7 @@ module ActionController#:nodoc:
     # if you want restrict access to some actions in controller just do:
     #   before_filter :check_access ,:only => [:action]
     def check_access#:doc:
-      error_404 unless logged_in?('root') 
+      error_404 unless logged_in?('roots') 
     end
 
     # shows ERROR 404

@@ -1,14 +1,10 @@
-<%= title "Новая страница" %>
+<%= title t(:new_page) %>
 
 <% form_for @page, :html => {:class=>'jform'} do |f| %>
   <%= f.error_messages %>
 
   <p><%= f.hidden_field :parent_id %></p>
 
-  <p>
-  <%= f.label :title %><br />
-  <%= f.text_field :title, :class => 'title' %>
-  </p>
   <p>
   <%= f.label :menu %><br />
   <%= f.text_field :menu %>
@@ -19,7 +15,7 @@
   </p>
   <p>
   <%= f.label :type %><br />
-  <%= f.select :_type_, grouped_options_for_select(@page_types) %>
+  <%= f.select :page_type, grouped_options_for_select(@page_types) %>
   </p>
   <p>
   <%= f.submit t(:create_button) %> |

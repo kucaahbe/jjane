@@ -1,14 +1,20 @@
 class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
   def self.up
+    create_table :groups do |t|
+      t.string   :name
+    end
+
     create_table :pages do |t|
       t.string   :link
-      t.string   :title
       t.string   :menu
       t.string   :url
-      t.string   :_type_,      :null => false
-      t.string   :_layout_,    :null => false, :default => 'application'
-      t.text     :content,     :null => true 
-      t.integer  :pagination,                  :default => 5
+      t.string   :page_type
+      t.string   :layout,         :null => false, :default => 'application'
+      t.integer  :pagination,     :null => true
+      t.integer  :node_id
+      t.integer  :user_id
+      t.integer  :view_group_id
+      t.integer  :edit_group_id
       t.integer  :parent_id
       t.integer  :lft
       t.integer  :rgt
@@ -30,8 +36,9 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
        t.text    :content
        t.string  :preview
        t.string  :type
-       t.integer :page_id
        t.integer :user_id
+       t.integer :page_id
+       t.integer :meta_id
 
        t.timestamps
     end
@@ -41,8 +48,7 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
       t.string   :value
     end
 
-    create_table :meta_info do |t|
-      t.integer  :owner_id
+    create_table :meta do |t|
       t.string   :author
       t.string   :keywords
       t.string   :description
@@ -52,10 +58,11 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
   end
 
   def self.down
+    drop_table   :groups
     drop_table   :pages
     drop_table   :snippets
     drop_table   :nodes
     drop_table   :config
-    drop_table   :meta_info
+    drop_table   :meta
   end
 end
