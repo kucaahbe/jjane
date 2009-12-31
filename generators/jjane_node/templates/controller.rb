@@ -8,7 +8,7 @@ class <%= controller_class_name %>Controller < JJaneAdminController
 
   def new
     @<%= node_name %> = <%= class_name %>.new(:page_id => params[:page_id], :user_id => current_user.id)
-    render '/nodes/<%= node_table_name %>/new', :layout => @page._layout_
+    render '/nodes/<%= node_table_name %>/new', :layout => @page.layout
   end
 
   def create
@@ -17,21 +17,21 @@ class <%= controller_class_name %>Controller < JJaneAdminController
       notice <%= class_name %>, :created
       redirect_to show_node_path(@page.url,@<%= node_name %>)
     else
-      render '/nodes/<%= node_table_name %>/new', :layout => @page._layout_
+      render '/nodes/<%= node_table_name %>/new', :layout => @page.layout
     end
    
   end
 
   def edit
-    render '/nodes/<%= node_table_name %>/edit', :layout => @page._layout_
+    render '/nodes/<%= node_table_name %>/edit', :layout => @page.layout
   end
 
   def update
     if @<%= node_name %>.update_attributes(params[:<%= node_name %>])
       notice <%= class_name %>, :updated
-      redirect_to edit_page_node_path(@page,@page._type_,@<%= node_name %>)
+      redirect_to edit_page_node_path(@page,@page.page_type,@<%= node_name %>)
     else
-      render '/nodes/<%= node_table_name %>/edit', :layout => @page._layout_
+      render '/nodes/<%= node_table_name %>/edit', :layout => @page.layout
     end
   end
 

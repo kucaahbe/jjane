@@ -55,23 +55,23 @@ module JJane
       end
 
       def new_node_link
-	if @page._type_!='static'
+	unless Page::STATIC_PAGE_TYPES.include?(@page.page_type)
 	  link_to engine_image('add.png'),
-	  new_page_node_path(@page.id,@page._type_),
-	  :title => t(:new_node)
+	    new_page_node_path(@page.id,@page.page_type),
+	    :title => t(:new_node)
 	else
-      ''
+          ''
 	end
       end
 
       def edit_node_link
 	link_to engine_image('pencil.png'),
-	  edit_page_node_path(@page.id,@page._type_,@node),
+	  edit_page_node_path(@page.id,@page.page_type,@node),
 	  :title => t(:edit_node)
       end
 
       def destroy_node_link
-	link_to engine_image('delete.png'), page_node_path(@page,@page._type_,@node), :confirm => "Are you sure?", :method => :delete,
+	link_to engine_image('delete.png'), page_node_path(@page,@page.page_type,@node), :confirm => "Are you sure?", :method => :delete,
 	  :title => t(:destroy_node)
       end
 

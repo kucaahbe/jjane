@@ -15,7 +15,7 @@ module JJane
 
       def logged_in?(*roles)
 	if current_user_session
-	  roles.empty? ? true : roles.include?(current_user.role)
+	  roles.empty? ? true : roles.include?(current_user.group.name)
 	else
 	  false
 	end

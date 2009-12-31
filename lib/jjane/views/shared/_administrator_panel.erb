@@ -16,7 +16,7 @@
   <div style="float:right">
     <%= engine_image 'user_me.png' %>
     <span>
-      <%= link_to "#{current_user.name}[#{current_user.role}]", edit_user_path(current_user), :title => t(:edit_profile)  %> |
+      <%= link_to "#{current_user.name}[#{current_user.group.name.singularize}]", edit_user_path(current_user), :title => t(:edit_profile)  %> |
       <%= link_to t(:logout), logout_path %>
     </span>
   </div>

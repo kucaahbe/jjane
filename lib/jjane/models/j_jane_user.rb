@@ -7,8 +7,4 @@ class JJaneUser < ActiveRecord::Base
   validates_presence_of :name, :group_id
 
   belongs_to :group, :class_name => 'JJaneGroup'
-
-  def role
-    self.group.name
-  end
 end

@@ -42,26 +42,35 @@ namespace :jjane do
       :email                 => email,
       :group_id              => JJaneGroup.find_by_name('roots').id
     )
-    puts "\ndone."
+    puts "\nUser succesfully added."
   end
 
-  desc 'Load JJane seeds for the current RAILS_ENV'
-  task :seeds => :environment do
+  desc 'Load JJane defaults for the current RAILS_ENV'
+  task :setup => :environment do
     unless JJaneGroup.exists?
+      puts 'Creating groups...'
       JJaneGroup.create!(:name => 'roots')
     end
-
-    Rake::Task['jjane:addroot'].invoke unless User.exists?
+    
+    unless User.exists?
+      puts 'Creating root user...'
+      Rake::Task['jjane:addroot'].invoke 
+    end
 
     unless Page.exists?
-      Page.create!(
+      puts 'Creating home page...'
+      page = Page.create!(
 	:link                  => 'home',
 	:menu                  => 'home',
 	:page_type             => 'static',
 	:user_id               =>  JJaneGroup.find_by_name('roots').users.first.id,
 	:nav_main              =>  true
       )
+      puts page.inspect
+      page.create_node(:title => 'hello world!', :user_id => page.user_id)
+      page.save!
+      puts page.inspect
     end
-    puts "\ndone."
+    puts "\nsetup finished."
   end
 end

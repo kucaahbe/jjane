@@ -9,21 +9,17 @@
     <%= tab_header t(:content_tab), t(:meta_tab) %>
     <div id="tabscontent">
       <div id="tabContent1" class="tabContent" style="display:yes;">
-	<p>
-	<%= f.label :title %><br />
-	<%= f.text_field :title, :class => 'title' %>
-	</p>
+
 	<p>
 	<%= f.label :menu %><br />
 	<%= f.text_field :menu %>
 	</p>
-
 	<p>
 	<%= f.label :link %><br />
 	<%= f.text_field :link, :disabled => true %>
 	</p>
 
-	<%= partial "pages/#{@page._type_}/edit", :f => f %>
+	<%= partial "pages/#{@page.page_type}/edit", :f => f %>
 
       </div>
       <div id="tabContent2" class="tabContent" style="display:none;">

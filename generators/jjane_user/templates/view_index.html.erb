@@ -4,7 +4,7 @@
   <tr>
     <th style="width:40%"><%%=t :name %></th>
     <th style="width:40%"><%%=t :email %></th>
-    <th style="width:15%"><%%=t :role %></th>
+    <th style="width:15%"><%%=t :group %></th>
     <% for attribute in attributes -%>
     <th><%%=t :<%= attribute.column %> %></th>
     <% end -%>
@@ -19,7 +19,7 @@
 	<%%= link_to_edit user.name, edit_user_path(user) %>
       </td>
       <td><%%=h user.email %></td>
-      <td><%%=h user.role %></td>
+      <td><%%=h user.group.name %></td>
       <% for attribute in attributes -%>
       <td><%%=h <%= singular_name %>.<%= attribute.name %> %></td>
       <% end -%>

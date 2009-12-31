@@ -38,6 +38,7 @@ class JJanePagesController < JJaneAdminController
     else
       @page = Page.new
     end
+    @page.user = current_user
   end
 
   def edit
@@ -47,7 +48,6 @@ class JJanePagesController < JJaneAdminController
     @page = Page.new(params[:page])
 
     if @page.save
-      @page.create_meta
       notice Page, :created
       redirect_to pages_path
     else

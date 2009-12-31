@@ -1,10 +1,11 @@
 class Page < ActiveRecord::Base
-  attr_protected :url,:parent_id,:lft,:rgt
+  attr_protected :url,:lft,:rgt
 
   acts_as_nested_set
 
-  STATIC_TYPES = ['static','compiled']
+  STATIC_PAGE_TYPES = ['static','compiled']
 
+  # associations
   has_many :nodes, :class_name => 'JJaneNode'
   belongs_to :node, :class_name => 'JJaneNode'
   belongs_to :user
@@ -12,6 +13,7 @@ class Page < ActiveRecord::Base
 
   #serialize :nav, Hash#TODO or TODEL
 
+  # validations
   validates_presence_of :link, :menu, :page_type, :user_id
   validates_uniqueness_of :link, :scope => :parent_id
   validates_numericality_of :pagination, :allow_nil => true, :only_integer => true, :greater_than => 0
@@ -20,20 +22,7 @@ class Page < ActiveRecord::Base
     :message => %q(должен состоять из латиницы цифр или знака '_',и начинаться с латинской буквы)
 
   # callbacks
-  after_create :node_set
   before_save :calculate_url
-
-#  def initialize(attributes = nil)
-#    super
-#  end
-  #---TEMP---
-  def _type_
-    self.page_type
-  end
-
-  def _layout_
-    self.layout
-  end
 
   def title
     self.node.title
@@ -99,15 +88,6 @@ class Page < ActiveRecord::Base
   end
 
   private
-
-  def node_set
-#    puts self.page_type
-    node = self.create_node(:title => 'update me', :user_id => self.user.id) if self.class::STATIC_TYPES.include?(self.page_type)
-#    puts node.inspect
-    self.update_attribute(:node_id, node.id)
-#    puts self.inspect
-#    n.save!
-  end
 
   def calculate_url
     url = self.link
