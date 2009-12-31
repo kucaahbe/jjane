@@ -1,4 +1,4 @@
-class JJaneSnippetsController < JJaneCrudController
+class SnippetsController < CrudController
 
   uses_tiny_mce :config => TinyMCEconfig.load, :only => [:new, :edit, :create, :update]
 

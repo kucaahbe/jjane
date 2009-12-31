@@ -1,4 +1,4 @@
-class <%= controller_class_name %>Controller < JJaneAdminController
+class <%= controller_class_name %>Controller < AdminController
 
   #TODO prepend_view_path method adds view path,сделать такой же crud контроллер
   uses_tiny_mce :options => TinyMCEconfig.load, :only => [:new,:edit,:create,:update]

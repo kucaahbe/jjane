@@ -1,6 +1,7 @@
 module ActionController#:nodoc:
   class Base
 
+    #TODO Module Extensions
     filter_parameter_logging :password, :content
 
     helper_method :log

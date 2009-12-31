@@ -18,7 +18,7 @@
   </p>
   <p>
   <%%= f.label :group %><br />
-  <%%= f.select :group_id,  options_from_collection_for_select(JJaneGroup.all, 'id', 'name') %>
+  <%%= f.select :group_id,  options_from_collection_for_select(Group.all, 'id', 'name') %>
   </p>
   <% for attribute in attributes -%>
   <p>

@@ -1,4 +1,4 @@
-<% JJaneMeta.tags.each do |name| -%>
+<% Meta.tags.each do |name| -%>
   <meta name="<%= name %>" content="<%= (@node || @page).meta.content(name) %>" />
 <% end if controller_name=='site' -%>
 <%= stylesheet :notices %>

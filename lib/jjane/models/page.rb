@@ -6,8 +6,8 @@ class Page < ActiveRecord::Base
   STATIC_PAGE_TYPES = ['static','compiled']
 
   # associations
-  has_many :nodes, :class_name => 'JJaneNode'
-  belongs_to :node, :class_name => 'JJaneNode'
+  has_many :nodes
+  belongs_to :node
   belongs_to :user
 
 

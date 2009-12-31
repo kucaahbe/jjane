@@ -35,10 +35,10 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
   private
 
   def controllers
-    %w[ login site snippets pages ]
+    %w[ admin crud login pages site snippets  ]
   end
 
   def models
-    %w[ user_session snippet ]
+    %w[ user_session ]
   end
 end

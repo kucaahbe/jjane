@@ -1,4 +1,4 @@
-class JJaneSiteController < ApplicationController
+class SiteController < ApplicationController
 
   before_filter :check_uri, :except => [:home_page]
   before_filter :check_node, :only => [:node]

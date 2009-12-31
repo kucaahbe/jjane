@@ -1,13 +1,10 @@
-class JJaneNode < ActiveRecord::Base
-  set_table_name :nodes
+class Node < ActiveRecord::Base
 
+  # associations
   belongs_to :user
   belongs_to :page
   #belongs_to :attached_file, :foreign_key => :file_id
-  belongs_to :meta,
-    :class_name => 'JJaneMeta',
-    :foreign_key => :meta_id,
-    :dependent => :destroy
+  belongs_to :meta, :dependent => :destroy
 
   # attributes
   accepts_nested_attributes_for :meta

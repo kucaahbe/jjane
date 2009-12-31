@@ -27,7 +27,7 @@
     </div>
     <div id="tabContent2" class="tabContent" style="display:none;">
       <%% f.fields_for action_name=='new' ? :meta_attributes : :meta do |meta_f| %>
-	<%% JJaneMeta.tags.each do |meta_tag| %>
+	<%% Meta.tags.each do |meta_tag| %>
 	  <p>
 	  <%%= meta_f.label meta_tag %><br />
 	  <%%= meta_f.text_field meta_tag.to_sym %>

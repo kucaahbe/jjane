@@ -1,8 +1,8 @@
 # Usage:
-#   class ArticlesController < JJaneCrudController
+#   class ArticlesController < CrudController
 #     set_model Article
 #   end
-class JJaneCrudController < JJaneAdminController
+class CrudController < AdminController
 
   def self.set_model(model_class_name,instance_variable=nil)
     instance_variable = model_class_name.to_s unless instance_variable

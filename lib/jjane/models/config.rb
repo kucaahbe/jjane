@@ -3,14 +3,14 @@ class JJaneConfig < ActiveRecord::Base
   serialize :value
   validates_uniqueness_of :name
 
-  #   JJaneConfig['param_name'] returns value of param_name
+  #   Config['param_name'] returns value of param_name
   def self.[](name)
     find_by_name(name).value
   rescue
     nil
   end
 
-  #   JJaneconfig['param_name']=something sets parameter
+  #   Config['param_name']=something sets parameter
   def self.[]=(name,value)
     record = self.find_by_name(name)
     record.update_attribute(:value,value)

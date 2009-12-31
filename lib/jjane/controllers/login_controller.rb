@@ -1,4 +1,4 @@
-class JJaneLoginController < ApplicationController
+class LoginController < ApplicationController
 
   before_filter :check_session, :only => [:login]
 

@@ -1,4 +1,4 @@
-class JJanePagesController < JJaneAdminController
+class PagesController < AdminController
   handles_sorting_of_nested_set
 
   uses_tiny_mce :options => TinyMCEconfig.load, :only => [:new,:edit,:create,:update]

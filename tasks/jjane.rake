@@ -40,16 +40,16 @@ namespace :jjane do
       :password              => password,
       :password_confirmation => password_confirmation,
       :email                 => email,
-      :group_id              => JJaneGroup.find_by_name('roots').id
+      :group_id              => Group.find_by_name('roots').id
     )
     puts "\nUser succesfully added."
   end
 
   desc 'Load JJane defaults for the current RAILS_ENV'
   task :setup => :environment do
-    unless JJaneGroup.exists?
+    unless Group.exists?
       puts 'Creating groups...'
-      JJaneGroup.create!(:name => 'roots')
+      Group.create!(:name => 'roots')
     end
     
     unless User.exists?
@@ -63,7 +63,7 @@ namespace :jjane do
 	:link                  => 'home',
 	:menu                  => 'home',
 	:page_type             => 'static',
-	:user_id               =>  JJaneGroup.find_by_name('roots').users.first.id,
+	:user_id               =>  Group.find_by_name('roots').users.first.id,
 	:nav_main              =>  true
       )
       puts page.inspect

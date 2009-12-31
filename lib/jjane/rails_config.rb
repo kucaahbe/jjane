@@ -16,7 +16,9 @@ I18n.load_path << Dir[File.join(File.dirname(__FILE__), '..', '..', 'locales', '
 # adding JJane's controllers, helpers, models and views
 #++
 app_path = File.dirname(__FILE__)
-%w{ controllers helpers models }.each do |dir|
+#%w{ controllers helpers models }.each do |dir|
+#TODO delete this and simple require PageHelper
+%w{ helpers }.each do |dir|
   path = File.join(app_path, dir)
   $LOAD_PATH << path
   ActiveSupport::Dependencies.load_paths << path

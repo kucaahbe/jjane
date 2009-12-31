@@ -1,5 +1,5 @@
 # Model for meta tags(table meta_info)
-class JJaneMeta < ActiveRecord::Base
+class Meta < ActiveRecord::Base
   set_table_name 'meta'
 
   # return all defined meta tags for site,to define meta tag just add column with

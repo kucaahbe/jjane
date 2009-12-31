@@ -1,2 +1,2 @@
-class <%= class_name %> < JJaneNode
+class <%= class_name %> < Node
 end
