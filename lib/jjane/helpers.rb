@@ -5,7 +5,7 @@ require 'jjane/helpers/engine_main.rb'
 require 'jjane/helpers/layout.rb'
 
 module JJane
-  # This module extends ActionView::Base with own methods for using in layout
+  # This module adds helper methods for using in your layout
   module Helpers
     include Layout
     include EngineMain
@@ -15,9 +15,4 @@ module JJane
   end
 end
 
-JJane::Helpers.included_modules.each do |mmodule|
-  ActionView::Base.send :include, mmodule
-  #ActionController::Base.send(:helper,JJane::Helpers)
-  #TODO выкупить шо оно такое
-end
-
+ActionController::Base.send(:helper,JJane::Helpers)
