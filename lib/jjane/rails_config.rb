@@ -12,16 +12,4 @@ Rails.configuration.gem 'kete-tiny_mce',
 
 I18n.load_path << Dir[File.join(File.dirname(__FILE__), '..', '..', 'locales', '*.{rb,yml}')]
 
-#--
-# adding JJane's controllers, helpers, models and views
-#++
-app_path = File.dirname(__FILE__)
-#%w{ controllers helpers models }.each do |dir|
-#TODO delete this and simple require PageHelper
-%w{ helpers }.each do |dir|
-  path = File.join(app_path, dir)
-  $LOAD_PATH << path
-  ActiveSupport::Dependencies.load_paths << path
-  ActiveSupport::Dependencies.load_once_paths.delete(path)
-end
-ActionController::Base.append_view_path File.join(app_path, 'views')
+ActionController::Base.append_view_path File.join(File.dirname(__FILE__), 'views')
