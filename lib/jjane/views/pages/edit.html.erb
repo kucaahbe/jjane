@@ -1,4 +1,4 @@
-<%= title "Edit Page" %>
+<%= title t(:title_edit_page) %>
 
 <% form_for @page, :html => { :class => 'jform' } do |f| %>
   <%= f.error_messages %>
@@ -11,12 +11,12 @@
       <div id="tabContent1" class="tabContent" style="display:yes;">
 
 	<p>
-	<%= f.label :menu %><br />
+	<%= f.label t(:label_menu) %><br />
 	<%= f.text_field :menu %>
 	</p>
 	<p>
-	<%= f.label :link %><br />
-	<%= f.text_field :link, :disabled => true %>
+	<%= f.label t(:label_link) %><br />
+	<%= f.text_field :url, :disabled => true %>
 	</p>
 
 	<%= partial "pages/#{@page.page_type}/edit", :f => f %>

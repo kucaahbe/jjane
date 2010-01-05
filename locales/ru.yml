@@ -8,6 +8,7 @@ ru:
   title_edit_snippet: 'Редактирование кусочка'
   title_new_user:     'Новый пользователь'
   title_edit_user:    'Редактирование профиля'
+  title_edit_page:    'Редактирование страницы'
 
   page_link:         'url'
   page_menu:         'меню'
@@ -39,6 +40,9 @@ ru:
   label_name:                  'Имя'
   label_email:                 'Электронная почта'
   label_group:                 'Группа'
+  label_menu:                  'Пункт меню'
+  label_link:                  'url'
+  label_type:                  'тип'
 
   link_title_pages_path:    'Настройка страниц'
   link_title_users_path:    'Настройка пользователей'
