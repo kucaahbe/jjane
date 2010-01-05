@@ -1,10 +1,10 @@
-<%%= title 'Editing <%= node_name %>' %>
+<%%= title "#{t(:title_edit_node)}(<%= node_name %>)" %>
 
 <%% form_for @<%= node_name %>, :url => { :action => "update" }, :html => { :class => 'jform' } do |f| %>
   <%%= partial '/nodes/<%= node_table_name %>/form',{ :f => f } %>
   <p>
-  <%%= f.submit t(:save_button) %> |
-  <%%= link_to t(:look_node), show_node_path(@page.url,@<%= node_name %>) %> |
+  <%%= f.submit t(:button_save) %> |
+  <%%= link_to t(:link_to_node), show_node_path(@page.url,@<%= node_name %>) %> |
   <%%= link_to_cancel root_url %>
   </p>
 <%% end %>

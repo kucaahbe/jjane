@@ -9,12 +9,16 @@ ru:
   title_new_user:     'Новый пользователь'
   title_edit_user:    'Редактирование профиля'
   title_edit_page:    'Редактирование страницы'
+  title_new_node:     'Добавить материал'
+  title_edit_node:    'Редактировать материал'
 
   page_link:         'url'
   page_menu:         'меню'
   page_show:         'Перейти'
   static_pages:      'Статические страницы'
   nodes:             'Материал'
+
+  preview:           'предпросмотр'
 
   actions:           'Действия'
   name:              'Имя'
@@ -28,6 +32,7 @@ ru:
   link_show_node:    'Просмотреть страницу'
   link_show_page:    'Просмотреть материал'
   link_home_page:    'Вернуться на домашнюю'
+  link_to_node:      'Просмотреть материал'
 
   button_update:     'Обновить'
   button_create:     'Создать'

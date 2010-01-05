@@ -1,5 +1,5 @@
 <div id="tabs">
-  <%%= tab_header t(:content_tab), t(:meta_tab) %>
+  <%%= tab_header t(:tab_content), t(:tab_meta) %>
   <div id="tabscontent">
     <div id="tabContent1" class="tabContent" style="display:yes;">
       <%%= f.error_messages %>
@@ -8,11 +8,11 @@
       <%%= f.hidden_field :page_id %>
       </p>
       <p>
-      <%%= f.label t(:title) %>
+      <%%= f.label t(:label_title) %>
       <%%= f.text_field :title, :class => 'title' %>
       </p>
       <%% field_set_tag nil, :id => 'preview_node', :class => 'collapsed' do %>
-	<%%= content_tag :legend, t(:preview_node), :onclick => 'PreviewNodeShowHide();' %>
+	<%%= content_tag :legend, t(:preview), :onclick => 'PreviewNodeShowHide();' %>
 	<%%= f.text_area :preview, :style => 'width:100%; height:70px; display:none;' %>
       <%% end %>
       <p>
@@ -20,7 +20,7 @@
       </p>
       <% for attribute in attributes -%>
       <p>
-      <%%= f.label t(:<%= attribute.name %>) %><br />
+      <%%= f.label t(:label_<%= attribute.name %>) %><br />
       <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
       </p>
       <% end -%>
