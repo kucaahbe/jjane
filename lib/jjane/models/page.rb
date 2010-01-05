@@ -21,7 +21,7 @@ class Page < ActiveRecord::Base
 
   # callbacks
   before_save :calculate_url
-  before_create :add_node
+  before_create :add_node, :set_pagination
 
   def title
     self.node.title
@@ -117,5 +117,9 @@ class Page < ActiveRecord::Base
 
   def add_node
     self.create_node(:title => 'new page', :user_id => self.user_id )
+  end
+
+  def set_pagination
+    self.pagination=5 if self.class.nodes_types.include?(self.page_type)
   end
 end

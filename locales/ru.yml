@@ -44,6 +44,7 @@ ru:
   label_link:                  'url'
   label_type:                  'тип'
   label_title:                 'Титулка'
+  label_pagination:            'Количество статей на страницу'
 
   link_title_pages_path:    'Настройка страниц'
   link_title_users_path:    'Настройка пользователей'
