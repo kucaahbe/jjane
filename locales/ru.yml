@@ -1,40 +1,37 @@
 ru:
 
-# --общие--
-  name:                    "Имя"
-  actions:                 "Действия"
-  email:                   "Ел. почта"
-  role:                    "Роль"
-  content:                 "Содержимое"
-  menu:                    "Меню"
+  title_pages:       'Страницы'
+  title_new_page:    'Новая страница'
+  title_users:       'Пользователи'
+  title_snippets:    'Кусочки'
 
-# --админ панель--
-  new_page:                "Новая страница"
-  edit_pages:              "Страницы"
-  edit_page:               "Редактировать страницу"
-  destroy_page:            "Удалить страницу"
-  new_node:                "Добавить материал"
-  edit_node:               "Редактировать материал"
-  destroy_node:            "Удалить материал"
-  edit_users:              "Пользователи"
-  edit_snippets:           "Кусочки(snippets)"
-  edit_profile:            "Редактировать свои данные или как-то так"
-  logout:                  "Выход"
+  page_link:         'url'
+  page_menu:         'меню'
+  page_show:         'Перейти'
 
-# --формы--
-  # **табы**
-  content_tab:             "Содержимое"
-  meta_tab:                "Meta теги"
-  # **labels**
-  title:                   "Заголовок"
-  preview_node:            "Предпросмотр"
-  # **кнопки форм**
-  create_button:           "Создать"
-  save_button:             "Сохранить"
-  cancel:                  "Отмена"
-  look_node:               "Посмотреть материал"
+  actions:           'Действия'
+  name:              'Имя'
+  email:             'Ел. почта'
+  group:             'Группа'
+  content:           'Содержимое'
 
-# --форма логина--
-  login:                   "Логин"
-  password:                "Пароль"
-  home_page:               "На главную"
+  link_login:        'Войти'
+  link_logout:       'Выйти'
+  link_cancel:       'Отменить'
+  link_show_node:    'Просмотреть страницу'
+  link_show_page:    'Просмотреть материал'
+
+  button_update:     'Обновить'
+  button_create:     'Создать'
+
+  link_title_pages_path:    'Настройка страниц'
+  link_title_users_path:    'Настройка пользователей'
+  link_title_snippets_path: 'Настройка кусочков'
+  link_title_edit_page:     'редактировать страницу'
+  link_title_destroy_page:  'удалить страницу'
+  link_title_edit_profile:  'редактировать профиль'
+
+  question_are_you_shure:   'Вы уверены?'
+
+  tab_content: 'содержимое'
+  tab_meta:    'мета'

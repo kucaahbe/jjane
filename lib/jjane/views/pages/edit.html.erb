@@ -6,7 +6,7 @@
   <p><%= f.hidden_field :parent_id %></p>
 
   <div id="tabs">
-    <%= tab_header t(:content_tab), t(:meta_tab) %>
+    <%= tab_header t(:tab_content), t(:tab_meta) %>
     <div id="tabscontent">
       <div id="tabContent1" class="tabContent" style="display:yes;">
 
@@ -36,8 +36,8 @@
   </div>
 
   <p>
-  <%= f.submit 'Обновить' %> |
-  <%= link_to 'посмотреть страницу', root_url+@page.url %> |
+  <%= f.submit t(:button_update) %> |
+  <%= link_to t(:link_show_page), root_url+@page.url %> |
   <%= link_to_cancel pages_path %>
   </p>
 <% end %>

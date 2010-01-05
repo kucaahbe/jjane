@@ -5,7 +5,7 @@
       <%= published_img(page) %>
       <%= link_to page.link, edit_page_path(page) %>
       &nbsp; &nbsp;
-      <%= link_to '(show)', root_url+page.url, :style => 'display:none; color:black;', :id => "show_#{page.id}" %>
+      <%= link_to "(#{t(:page_show)})", root_url+page.url, :style => 'display:none; color:black;', :id => "show_#{page.id}" %>
     </div>
 
     <div style="float:right; margin-left:20px;">
