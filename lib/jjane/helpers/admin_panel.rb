@@ -55,7 +55,7 @@ module JJane
       end
 
       def new_node_link
-	unless Page::STATIC_PAGE_TYPES.include?(@page.page_type)
+	unless Page.static_page_types.include?(@page.page_type)
 	  link_to engine_image('add.png'),
 	    new_page_node_path(@page.id,@page.page_type),
 	    :title => t(:link_title_new_node)

@@ -4,7 +4,6 @@ class PagesController < AdminController
   uses_tiny_mce :options => TinyMCEconfig.load, :only => [:new,:edit,:create,:update]
 
   before_filter :find_page, :only => [:edit, :update, :destroy]
-  before_filter :define_page_types, :only => [:new, :create]
 
   def index
     @roots = Page.roots
@@ -33,6 +32,7 @@ class PagesController < AdminController
   end
 
   def new
+    @page_types = { t(:static_pages) => Page.static_page_types, t(:nodes) => Page.nodes_types }
     if params[:page_id]
       @page = Page.new(:parent_id => params[:page_id])
     else
@@ -45,6 +45,7 @@ class PagesController < AdminController
   end
 
   def create
+    @page_types = { t(:static_pages) => Page.static_page_types, t(:nodes) => Page.nodes_types }
     @page = Page.new(params[:page])
 
     if @page.save
@@ -77,20 +78,5 @@ class PagesController < AdminController
     @page = Page.find(params[:id])
   end
 
-  def define_page_types
-    pages_dir=File.join(RAILS_ROOT,'app','views','pages','**')
-    static_page_types = []
-    Dir.glob(pages_dir) { |fname| static_page_types << File.basename(fname) }
-
-    nodes_dir=File.join(RAILS_ROOT,'app','views','nodes','**')
-    nodes_types = []
-    Dir.glob(nodes_dir) { |fname| nodes_types << File.basename(fname) }
-
-    static_page_types = static_page_types - nodes_types
-    @page_types = { 
-    'статические страницы' => static_page_types,
-    'статьи' => nodes_types
-    }
-  end
 
 end

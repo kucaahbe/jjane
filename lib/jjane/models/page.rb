@@ -3,11 +3,9 @@ class Page < ActiveRecord::Base
 
   acts_as_nested_set
 
-  STATIC_PAGE_TYPES = ['static','compiled']
-
   # associations
   has_many :nodes
-  belongs_to :node
+  belongs_to :node, :dependent => :destroy
   belongs_to :user
 
 
@@ -23,6 +21,7 @@ class Page < ActiveRecord::Base
 
   # callbacks
   before_save :calculate_url
+  before_create :add_node
 
   def title
     self.node.title
@@ -65,7 +64,9 @@ class Page < ActiveRecord::Base
     true
   end
 
-  #-- public class methods #++
+  #-- 
+  #PUBLIC CLASS METHODS
+  #++
 
   def self.home_page
     root
@@ -87,6 +88,21 @@ class Page < ActiveRecord::Base
     self.menus.include?(name) ? true : false
   end
 
+  def self.static_page_types
+    pages_dir=File.join(RAILS_ROOT,'app','views','pages','**')
+    static_page_types = []
+    Dir.glob(pages_dir) { |fname| static_page_types << File.basename(fname) }
+
+    static_page_types = static_page_types - self.nodes_types
+  end
+
+  def self.nodes_types
+    nodes_dir=File.join(RAILS_ROOT,'app','views','nodes','**')
+    nodes_types = []
+    Dir.glob(nodes_dir) { |fname| nodes_types << File.basename(fname) }
+    nodes_types
+  end
+
   private
 
   def calculate_url
@@ -97,5 +113,9 @@ class Page < ActiveRecord::Base
     end
     self.url = url
     logger.info self.url
+  end
+
+  def add_node
+    self.create_node(:title => 'new page', :user_id => self.user_id )
   end
 end

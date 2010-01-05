@@ -4,7 +4,7 @@ class Node < ActiveRecord::Base
   belongs_to :user
   belongs_to :page
   #belongs_to :attached_file, :foreign_key => :file_id
-  belongs_to :meta, :dependent => :destroy
+  belongs_to :meta, :dependent => :destroy, :autosave => true
 
   # attributes
   accepts_nested_attributes_for :meta
@@ -14,7 +14,7 @@ class Node < ActiveRecord::Base
   validates_presence_of :title, :user_id
 
   # callbacks
-  before_save :add_meta
+  before_create :add_meta
 
   def url
     self.page.url+'/'+self.id.to_s
@@ -23,7 +23,7 @@ class Node < ActiveRecord::Base
   private
 
   def add_meta
-    self.create_meta unless self.meta
+    self.create_meta
   end
 
 end

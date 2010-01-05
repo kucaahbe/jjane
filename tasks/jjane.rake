@@ -66,10 +66,6 @@ namespace :jjane do
 	:user_id               =>  Group.find_by_name('roots').users.first.id,
 	:nav_main              =>  true
       )
-      puts page.inspect
-      page.create_node(:title => 'hello world!', :user_id => page.user_id)
-      page.save!
-      puts page.inspect
     end
     puts "\nsetup finished."
   end

@@ -1,33 +1,33 @@
 <%% form_for @user, :html => { :class => 'jform' } do |f| %>
   <%%= f.error_messages %>
   <p>
-  <%%= f.label :name %><br />
+  <%%= f.label t(:label_name) %><br />
   <%%= f.text_field :name %>
   </p>
   <p>
-  <%%= f.label :email %><br />
+  <%%= f.label t(:label_email) %><br />
   <%%= f.text_field :email %>
   </p>
   <p>
-  <%%= f.label :password %><br />
+  <%%= f.label t(:label_password) %><br />
   <%%= f.password_field :password %>
   </p>
   <p>
-  <%%= f.label :password_confirmation %><br />
+  <%%= f.label t(:label_password_confirmation) %><br />
   <%%= f.password_field :password_confirmation %>
   </p>
   <p>
-  <%%= f.label :group %><br />
+  <%%= f.label t(:label_group) %><br />
   <%%= f.select :group_id,  options_from_collection_for_select(Group.all, 'id', 'name') %>
   </p>
   <% for attribute in attributes -%>
   <p>
-  <%%= f.label :<%= attribute.name %> %><br />
+  <%%= f.label t(:label_<%= attribute.name %>) %><br />
   <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
   </p>
   <% end -%>
   <p>
-  <%%= f.submit 'Save' %> |
+  <%%= f.submit t(:button_save) %> |
   <%%= link_to_cancel users_path %>
   </p>
 <%% end %>

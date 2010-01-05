@@ -1,13 +1,19 @@
 ru:
 
-  title_pages:       'Страницы'
-  title_new_page:    'Новая страница'
-  title_users:       'Пользователи'
-  title_snippets:    'Кусочки'
+  title_pages:        'Страницы'
+  title_new_page:     'Новая страница'
+  title_users:        'Пользователи'
+  title_snippets:     'Кусочки'
+  title_new_snippet:  'Новый кусочек'
+  title_edit_snippet: 'Редактирование кусочка'
+  title_new_user:     'Новый пользователь'
+  title_edit_user:    'Редактирование профиля'
 
   page_link:         'url'
   page_menu:         'меню'
   page_show:         'Перейти'
+  static_pages:      'Статические страницы'
+  nodes:             'Материал'
 
   actions:           'Действия'
   name:              'Имя'
@@ -17,12 +23,22 @@ ru:
 
   link_login:        'Войти'
   link_logout:       'Выйти'
-  link_cancel:       'Отменить'
+  link_cancel:       'Отмена'
   link_show_node:    'Просмотреть страницу'
   link_show_page:    'Просмотреть материал'
+  link_home_page:    'Вернуться на домашнюю'
 
   button_update:     'Обновить'
   button_create:     'Создать'
+  button_save:       'Сохранить'
+  button_login:      'Войти'
+
+  label_login:                 'Логин'
+  label_password:              'Пароль'
+  label_password_confirmation: 'Подтверждение пароля'
+  label_name:                  'Имя'
+  label_email:                 'Электронная почта'
+  label_group:                 'Группа'
 
   link_title_pages_path:    'Настройка страниц'
   link_title_users_path:    'Настройка пользователей'
