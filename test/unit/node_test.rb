@@ -17,4 +17,10 @@ class NodeTest < ActiveSupport::TestCase
     node.save!
     assert node.meta
   end
+
+  test 'don\'t create meta if no validation' do
+    node = Node.new
+    node.save
+    assert (not node.meta)
+  end
 end

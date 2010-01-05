@@ -43,6 +43,7 @@ ru:
   label_menu:                  'Пункт меню'
   label_link:                  'url'
   label_type:                  'тип'
+  label_title:                 'Титулка'
 
   link_title_pages_path:    'Настройка страниц'
   link_title_users_path:    'Настройка пользователей'
