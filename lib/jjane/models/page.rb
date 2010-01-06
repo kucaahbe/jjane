@@ -4,7 +4,7 @@ class Page < ActiveRecord::Base
   acts_as_nested_set
 
   # associations
-  has_many :nodes
+  has_many :nodes, :dependent => :destroy
   belongs_to :node, :dependent => :destroy
   belongs_to :user
 
@@ -37,11 +37,6 @@ class Page < ActiveRecord::Base
 
   def meta
     self.node.meta
-  end
-  #---TEMP---
-
-  def uri
-    '/'+self.url
   end
 
   def visible_in_menu?(name)

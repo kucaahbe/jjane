@@ -1,6 +1,7 @@
 class <%= controller_class_name %>Controller < AdminController
 
-  #TODO prepend_view_path method adds view path,сделать такой же crud контроллер
+  prepend_view_path 'app/views/nodes'
+
   uses_tiny_mce :options => TinyMCEconfig.load, :only => [:new,:edit,:create,:update]
 
   before_filter :find_page
@@ -8,7 +9,7 @@ class <%= controller_class_name %>Controller < AdminController
 
   def new
     @<%= node_name %> = <%= class_name %>.new(:page_id => params[:page_id], :user_id => current_user.id)
-    render '/nodes/<%= node_table_name %>/new', :layout => @page.layout
+    @<%= node_name %>.build_meta
   end
 
   def create
@@ -17,13 +18,12 @@ class <%= controller_class_name %>Controller < AdminController
       notice <%= class_name %>, :created
       redirect_to show_node_path(@page.url,@<%= node_name %>)
     else
-      render '/nodes/<%= node_table_name %>/new', :layout => @page.layout
+      render :action => :new
     end
-   
+
   end
 
   def edit
-    render '/nodes/<%= node_table_name %>/edit', :layout => @page.layout
   end
 
   def update
@@ -31,7 +31,7 @@ class <%= controller_class_name %>Controller < AdminController
       notice <%= class_name %>, :updated
       redirect_to edit_page_node_path(@page,@page.page_type,@<%= node_name %>)
     else
-      render '/nodes/<%= node_table_name %>/edit', :layout => @page.layout
+      render :action => :edit
     end
   end
 

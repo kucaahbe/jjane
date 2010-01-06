@@ -9,6 +9,13 @@ class PageTest < ActiveSupport::TestCase
     :user_id => 1
   )
 
+  home_page = Page.create!(
+    :link => 'home',
+    :menu => 'bbbbbbbbbbb',
+    :page_type => 'static',
+    :user_id => 1
+  )
+
   test 'creating node for static page' do
     page = static_page
     page.save!
@@ -17,7 +24,7 @@ class PageTest < ActiveSupport::TestCase
   end
 
   test "check update of url for child page" do
-    page = Page.first.children.new(
+    page = Page.root.children.new(
       :menu => 'lolo',
       :link => 'lala',
       :page_type => 'static',

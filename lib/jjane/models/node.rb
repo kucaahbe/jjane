@@ -4,7 +4,7 @@ class Node < ActiveRecord::Base
   belongs_to :user
   belongs_to :page
   #belongs_to :attached_file, :foreign_key => :file_id
-  belongs_to :meta, :dependent => :destroy, :autosave => true
+  belongs_to :meta, :dependent => :destroy
 
   # attributes
   accepts_nested_attributes_for :meta
@@ -16,6 +16,24 @@ class Node < ActiveRecord::Base
   # callbacks
   before_create :add_meta
 
+  def initialize(attributes = nil)
+    if attributes and attributes.has_key?(:meta)
+      meta_attrs = attributes[:meta]
+      attributes.delete(:meta)
+      attributes.merge!(:meta_attributes => meta_attrs)
+    end
+    super
+  end
+
+  def update_attributes(attributes)
+    if attributes.has_key?(:meta)
+      meta_attrs = attributes[:meta]
+      attributes.delete(:meta)
+      self.meta.update_attributes(meta_attrs)
+    end
+    super(attributes)
+  end
+
   def url
     self.page.url+'/'+self.id.to_s
   end
@@ -23,7 +41,7 @@ class Node < ActiveRecord::Base
   private
 
   def add_meta
-    self.create_meta
+    self.create_meta unless self.meta
   end
 
 end

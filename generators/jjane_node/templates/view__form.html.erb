@@ -26,11 +26,11 @@
       <% end -%>
     </div>
     <div id="tabContent2" class="tabContent" style="display:none;">
-      <%% f.fields_for action_name=='new' ? :meta_attributes : :meta do |meta_f| %>
+      <%% f.fields_for @<%= node_name %>.meta do |meta_f| %>
 	<%% Meta.tags.each do |meta_tag| %>
 	  <p>
 	  <%%= meta_f.label meta_tag %><br />
-	  <%%= meta_f.text_field meta_tag.to_sym %>
+	  <%%= meta_f.text_field meta_tag %>
 	  </p>
 	<%% end %>
       <%% end %>
