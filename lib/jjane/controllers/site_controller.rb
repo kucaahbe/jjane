@@ -5,12 +5,12 @@ class SiteController < ApplicationController
 
   def home_page
     @page = Page.home_page
-    @nodes = @page.nodes
+    @nodes = @page.nodes.paginate :page => params[:page], :per_page => @page.pagination, :order => 'updated_at DESC'
     render "/pages/#{@page.page_type}/show", :layout => @page.layout
   end
 
   def page
-    @nodes = @page.nodes
+    @nodes = @page.nodes.paginate :page => params[:page], :per_page => @page.pagination, :order => 'updated_at DESC'
     render "/pages/#{@page.page_type}/show", :layout => @page.layout
   end
 
