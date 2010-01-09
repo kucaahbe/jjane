@@ -2,7 +2,12 @@ module JJane
   module Helpers
     module Navigation
 
-      # меню навигации(Главная > Каталог > жопа с ручкой)
+      # Breadcrumbs
+      #   :include_self - if true then adds current page link
+      #   :separator - wich separator use,default: '&nbsp;&raquo;&nbsp;'
+      #   :before - what to write before breadcrumbs
+      #   :after - what to write after breadcrumbs
+      #   :include_node - if true then include node title
       def nav_menu(args={})
 	default_options = {
 	  :include_self => true,
@@ -28,7 +33,7 @@ module JJane
 	''
       end
 
-      # рисует менюхи список страниц в том порядке в котором они есть
+      # UL LI navigation menu
       def ul_li_menu(name='main',args={})
 	default_options = {
 	  :roots_only => false
@@ -36,9 +41,16 @@ module JJane
 	default_html_options = {
 	  :id => 'nav',
 	  :class =>'',
-	  :dir_class => 'dir'
+	  :dir_class => 'dir',
+	  :active_class => 'active',
+	  :active_link_class => 'active'
 	}
-	args[:html] = default_html_options.merge(args[:html])
+
+	if args[:html]
+	  args[:html] = default_html_options.merge(args[:html])
+	else
+	  args[:html] = default_html_options
+	end
 	args = default_options.merge(args)
 
 	view = ''
@@ -48,7 +60,9 @@ module JJane
 	  :page => root,
 	  :menu_name => name,
 	  :roots_only => args[:roots_only],
-	  :dir_class => args[:html][:dir_class]
+	  :dir_class => args[:html][:dir_class],
+	  :active_class => args[:html][:active_class],
+	  :active_link_class => args[:html][:active_link_class]
 	  )
 	end
 	content_tag :ul, view, :id => args[:html][:id], :class => args[:html][:class]
