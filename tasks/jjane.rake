@@ -22,10 +22,11 @@ namespace :jjane do
     end
   end
 
-  require 'highline/import'
 
   desc 'Add JJane root user for the current RAILS_ENV'
   task :addroot => :environment do
+    require 'highline/import'
+
     print "Enter data for root user:\n"
     email = ask('E-mail adress:') do |q|
       q.validate = Authlogic::Regex.email
