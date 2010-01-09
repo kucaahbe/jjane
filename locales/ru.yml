@@ -51,6 +51,10 @@ ru:
   label_title:                 'Титулка'
   label_pagination:            'Количество статей на страницу'
 
+  notice_invalid_login_or_password: 'Не правильное сочетание логина и пароля'
+  notice_logged_in:                 'Добро пожаловать! :)'
+  notice_logged_out:                'До новых встреч!'
+
   link_title_pages_path:    'Настройка страниц'
   link_title_users_path:    'Настройка пользователей'
   link_title_snippets_path: 'Настройка кусочков'

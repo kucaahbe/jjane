@@ -1,8 +1,0 @@
-Description:
-    Generates JJane node with given Name
-
-Example:
-    ./script/generate jjane_node Name
-
-    This will create:
-        what/will/it/create

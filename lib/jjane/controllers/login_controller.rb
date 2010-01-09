@@ -9,10 +9,10 @@ class LoginController < ApplicationController
   def login(redirect_place = :root_url)
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      flash[:login_notice] = "Successfully logged in."
+      flash[:login_notice] = t(:notice_logged_in)
       redirect_to method(redirect_place).call
     else
-      flash[:login_error] = "Invalid login or/and password"
+      flash[:login_error] = t(:notice_invalid_login_or_password)
       render :action => 'welcome'
     end
   end
@@ -21,7 +21,7 @@ class LoginController < ApplicationController
     if current_user_session then
       @user_session = UserSession.find(params[:id])
       @user_session.destroy
-      flash[:login_notice] = "Successfully logged out."
+      flash[:login_notice] = t(:notice_logged_out)
       redirect_to method(redirect_place).call
     else
       error_404
