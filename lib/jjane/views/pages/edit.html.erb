@@ -16,7 +16,7 @@
 	</p>
 	<p>
 	<%= f.label t(:label_link) %><br />
-	<%= f.text_field :url, :disabled => true %>
+	<%= f.text_field :url %>
 	</p>
 
 	<%= partial "pages/#{@page.page_type}/edit", :f => f %>
