@@ -21,9 +21,9 @@ module JJane
       end
 
       def filesystem_link
-	#link_to engine_image('filesystem.png'),
-	#  attached_files_path,
-	#  :title => t(:filemanager)
+	link_to engine_image('filesystem.png'),
+	  attached_files_path,
+	  :title => t(:filemanager)
       end
 
       def item_name

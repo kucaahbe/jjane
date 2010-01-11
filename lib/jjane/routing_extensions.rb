@@ -22,6 +22,11 @@ module JJane#:nodoc:
       end
 
       def jjane_connect
+	resources :attached_files do |m|
+	  m.resource :directory, :controller => :attached_files, :only => :new
+	  m.upload 'file/new', :controller => :attached_files, :action => :new_file
+	end
+
 	connect        'pages/:page_id/:controller',          :action => :create,  :conditions => { :method => :post }
 	new_page_node  'pages/:page_id/:controller/new',      :action => :new,     :conditions => { :method => :get }
 	edit_page_node 'pages/:page_id/:controller/:id/edit', :action => :edit,    :conditions => { :method => :get }
@@ -33,8 +38,8 @@ module JJane#:nodoc:
 	end
 	resources :snippets, :except => [:show]
 	resources :users
-	login '__login__', { :controller => :login, :action => :login }
-	logout '__logout__', { :controller => :login, :action => :logout }
+	login   '__login__',  { :controller => :login, :action => :login }
+	logout  '__logout__', { :controller => :login, :action => :logout }
 	connect '*uri/:year/:month/:day', {
 	  :controller => 'site',
 	  :action     => 'find_by_day',

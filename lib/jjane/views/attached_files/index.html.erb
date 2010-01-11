@@ -1,0 +1,32 @@
+<h1>Listing attached_files</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+  <% if @updir %>
+    <tr>
+      <td><%= link_to '..', (@updir.parent ? attached_file_path(@updir.parent) : attached_files_path) %></td>
+    </tr>
+  <% end %>
+  <% @files.each do |file| %>
+    <tr>
+      <td>
+	<% if file.directory? %>
+	  [<%= link_to file.name, attached_file_path(file) %>]
+	<% else %>
+	  <%= link_to file.name, file.atachment.url %>
+	<% end %>
+      </td>
+      <td><%= link_to 'Edit', edit_attached_file_path(file) %></td>
+      <td><%= link_to 'Destroy', file, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New directory', (@updir ? new_attached_file_directory_path(@updir) : new_attached_file_path) %>
+<br />
+<%= link_to('New file', attached_file_upload_path(@updir)) if @updir %>
