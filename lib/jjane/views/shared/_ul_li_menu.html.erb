@@ -1,22 +1,21 @@
 <% draw = page.some_child_visible_in_menu?(menu_name) || page.visible_in_menu?(menu_name) -%>
-
+<% -%>
 <% content_tag :li, :class => "#{page.some_child_visible_in_menu?(menu_name) && !roots_only ? dir_class : ''} #{page == @page ? active_class : ''}" do %>
-
-  <%= link_to(page.menu, root_url+page.url, :class => page==@page ? active_link_class : '') if page.visible_in_menu?(menu_name) %>
-
-  <% if page.some_child_visible_in_menu?(menu_name) && !roots_only -%>
-    <% content_tag :ul do %>
-      <% page.children.each do |child| %>
-	<%= partial 'shared/ul_li_menu',
-	  :page => child,
-	  :menu_name => menu_name,
-	  :roots_only => roots_only,
-	  :dir_class => dir_class,
-	  :active_class => active_class,
-	  :active_link_class => active_link_class
-	%>
-      <% end %>
-    <% end %>
+<% -%>
+<%= link_to(page.menu, root_url+page.url, :class => page==@page ? active_link_class : '') if page.visible_in_menu?(menu_name) %>
+<% -%>
+<% if page.some_child_visible_in_menu?(menu_name) && !roots_only -%>
+<% content_tag :ul do %>
+  <% page.children.each do |child| -%>
+    <%= partial 'shared/ul_li_menu',
+      :page => child,
+      :menu_name => menu_name,
+      :roots_only => roots_only,
+      :dir_class => dir_class,
+      :active_class => active_class,
+      :active_link_class => active_link_class
+    %>
   <% end -%>
-
+<% end %>
+<% end -%>
 <% end if draw %>
