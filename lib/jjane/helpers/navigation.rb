@@ -8,7 +8,7 @@ module JJane
       #   :before - what to write before breadcrumbs
       #   :after - what to write after breadcrumbs
       #   :include_node - if true then include node title
-      def nav_menu(args={})
+      def breadcrumbs(args={})
 	default_options = {
 	  :include_self => true,
 	  :before => '',
