@@ -12,7 +12,7 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
 
       # css and main layout
       m.file 'notices.css', File.join('public','stylesheets','notices.css')
-      m.file 'views/layout.html.erb', File.join('app','views','layouts','application.html.erb')
+      m.file 'views/layout.html.erb', File.join('app','views','layouts','application.html.erb'), :collision => :skip
 
       # files for default static page
       m.file 'views/static_edit.html.erb', File.join('app','views','pages','static','_edit.html.erb')
@@ -35,7 +35,7 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
   private
 
   def controllers
-    %w[ admin crud login pages site snippets  ]
+    %w[ admin crud login pages site snippets attached_files ]
   end
 
   def models

@@ -1,3 +1,4 @@
+require 'paperclip'
 class AttachedFile < ActiveRecord::Base
   acts_as_nested_set :parent_column => :directory_id
   has_attached_file :atachment

@@ -1,5 +1,18 @@
 class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
   def self.up
+    create_table :attached_files do |t|
+      t.string   :name
+      t.integer  :directory_id
+      t.string   :atachment_file_name
+      t.string   :atachment_content_type
+      t.integer  :atachment_file_size
+      t.datetime :atachment_updated_at
+      t.integer  :lft
+      t.integer  :rgt
+
+      t.timestamps
+    end
+
     create_table :groups do |t|
       t.string   :name
     end
@@ -32,15 +45,15 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
     end
 
     create_table :nodes do |t|
-       t.string  :title
-       t.text    :content
-       t.string  :preview
-       t.string  :type
-       t.integer :user_id
-       t.integer :page_id
-       t.integer :meta_id
+      t.string   :title
+      t.text     :content
+      t.string   :preview
+      t.string   :type
+      t.integer  :user_id
+      t.integer  :page_id
+      t.integer  :meta_id
 
-       t.timestamps
+      t.timestamps
     end
 
     create_table :config do |t|
@@ -58,6 +71,7 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
   end
 
   def self.down
+    drop_table   :attached_files
     drop_table   :groups
     drop_table   :pages
     drop_table   :snippets
