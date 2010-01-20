@@ -10,9 +10,9 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
       m.directory File.join('app','views','pages','static')
       m.directory File.join('app','views','login')
 
-      # css and main layout
+      # csses and main layout
       m.file 'notices.css', File.join('public','stylesheets','notices.css')
-      m.file 'views/layout.html.erb', File.join('app','views','layouts','application.html.erb'), :collision => :skip
+      m.dependency 'jjane_layout', ['application']
 
       # files for default static page
       m.file 'views/static_edit.html.erb', File.join('app','views','pages','static','_edit.html.erb')
