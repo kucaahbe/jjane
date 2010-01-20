@@ -1,8 +1,12 @@
-<% Meta.tags.each do |name| -%>
-  <meta name="<%= name %>" content="<%= (@node || @page).meta.content(name) %>" />
-<% end if controller_name=='site' -%>
+<%# Meta tags -%>
+  <% Meta.tags.each do |name| -%>
+    <meta name="<%= name %>" content="<%= (@node || @page).meta.content(name) %>" />
+  <% end if controller_name=='site' -%>
+<%# Stylesheets -%>
 <%= stylesheet :notices %>
+<%= stylesheet @page.layout if defined?(@page)%>
 <%= stylesheet('/jjane/stylesheets/default', '/jjane/stylesheets/form_notices') if logged_in? %>
+<%# Javascripts -%>
 <%= javascript :defaults %>
 <%= javascript_include_tag '/jjane/javascripts/application' %>
 <%= include_tiny_mce_if_needed %>
