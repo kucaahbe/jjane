@@ -4,7 +4,7 @@
   <% end if controller_name=='site' -%>
 <%# Stylesheets -%>
 <%= stylesheet :notices %>
-<%= stylesheet @page.layout if defined?(@page)%>
+<%= stylesheet (defined?(@page) ? @page.layout : 'application') %>
 <%= stylesheet('/jjane/stylesheets/default', '/jjane/stylesheets/form_notices') if logged_in? %>
 <%# Javascripts -%>
 <%= javascript :defaults %>
