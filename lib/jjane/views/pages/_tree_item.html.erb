@@ -27,7 +27,7 @@
   <% if page.have_children? %>
     <% content_tag :ul do %>
       <% page.children.each do |child| %>
-	<%= partial 'tree', :page => child %>
+	<%= partial 'tree_item', :page => child %>
       <% end %>
     <% end %>
   <% end %>
