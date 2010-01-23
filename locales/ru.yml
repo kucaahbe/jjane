@@ -11,6 +11,8 @@ ru:
   title_edit_page:    'Редактирование страницы'
   title_new_node:     'Добавить материал'
   title_edit_node:    'Редактировать материал'
+  title_filesystem:   'Файловая система'
+  title_new_dir:      'Новый каталог'
 
   page_id:           'ID'
   page_menu:         'меню'
@@ -25,6 +27,7 @@ ru:
   email:             'Ел. почта'
   group:             'Группа'
   content:           'Содержимое'
+  file:              'Файл'
 
   link_login:        'Войти'
   link_logout:       'Выйти'
@@ -33,6 +36,8 @@ ru:
   link_show_page:    'Просмотреть материал'
   link_home_page:    'Вернуться на домашнюю'
   link_to_node:      'Просмотреть материал'
+  link_new_dir:      'Новый каталог'
+  link_new_file:     'Загрузить файл'
 
   button_update:     'Обновить'
   button_create:     'Создать'
