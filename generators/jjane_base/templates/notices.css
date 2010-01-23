@@ -13,3 +13,5 @@
   background-color: #FCC;
   border: solid 1px #C66;
 }
+
+.warning { color:red; border:2px dotted red; padding:1px; }

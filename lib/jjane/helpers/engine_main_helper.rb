@@ -28,6 +28,10 @@ module JJane
       def engine_image(source,options={})
 	image_tag "/jjane/images/#{source}", options.merge(:style => 'vertical-align:middle; border:none;')
       end
+
+      def warning(text)
+	%Q(<span class="warning">#{text}</span>)
+      end
     end
   end
 end

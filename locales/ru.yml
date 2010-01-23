@@ -12,7 +12,7 @@ ru:
   title_new_node:     'Добавить материал'
   title_edit_node:    'Редактировать материал'
 
-  page_link:         'url'
+  page_id:           'ID'
   page_menu:         'меню'
   page_show:         'Перейти'
   static_pages:      'Статические страницы'

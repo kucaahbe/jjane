@@ -39,7 +39,7 @@ module JJane
       end
 
       #--
-      #подумать_start
+      #подумать_нужно ли он сдесь_start
       def login_form#:nodoc:
 	partial 'shared/login_form' unless logged_in?
       end
@@ -50,7 +50,7 @@ module JJane
       rescue
         %Q(no such page '#{page.to_s}')
       end
-      #поддумать_end
+      #поддумать_нужно ли он сдесь__end
       #++
 
       # writes snippet content to page
@@ -65,6 +65,12 @@ module JJane
 	return content
       rescue
 	%(<p style='color:red;'>snippet not found</p>)
+      end
+
+      def link_to_page(name, page_name)
+	link_to name, root_url+Page.find_by_name(page_name.to_s).url
+      rescue
+	warning("no such page with ID '#{page_name}'")
       end
     end
   end

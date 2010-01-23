@@ -3,7 +3,7 @@
   <% content_tag :div, :style => "padding-left:#{10 * page.level}px;", :class => :list_item, :onmouseover =>"$('show_#{page.id}').show()", :onmouseout => "$('show_#{page.id}').hide()" do %>
     <div style="float:left">
       <%= published_img(page) %>
-      <%= link_to page.link, edit_page_path(page) %>
+      <%= link_to page.name, edit_page_path(page) %>
       &nbsp; &nbsp;
       <%= link_to "(#{t(:page_show)})", root_url+page.url, :style => 'display:none; color:black;', :id => "show_#{page.id}" %>
     </div>
