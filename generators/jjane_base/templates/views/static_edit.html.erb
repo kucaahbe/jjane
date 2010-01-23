@@ -1,6 +1,6 @@
 <% f.fields_for :node do |node_f| %>
   <p>
-  <%= node_f.label t(:label_title) %><br />
+  <%= node_f.label :title, t(:label_title) %><br />
   <%= node_f.text_field :title, :class => :title %>
   </p>
 

@@ -6,19 +6,25 @@
   <p><%= f.hidden_field :parent_id %></p>
 
   <% tabbar do |tabs| %>
-    <%= tabs.headers t(:tab_content), t(:tab_meta) %>
-    <% tabs.content do |tabcontent| %>
+    <%= tabs.headers t(:tab_page_settings), t(:tab_content), t(:tab_meta) %>
 
+    <% tabs.content do |tabcontent| %>
       <% tabcontent.draw do %>
 	<p>
-	<%= f.label t(:label_menu) %><br />
+	<%= f.label :name, t(:label_page_name) %><br />
+	<%= f.text_field :name, :disabled => 'disabled' %>
+	</p>
+	<p>
+	<%= f.label :menu, t(:label_menu) %><br />
 	<%= f.text_field :menu %>
 	</p>
 	<p>
-	<%= f.label t(:label_link) %><br />
+	<%= f.label :url, t(:label_link) %><br />
 	<%= f.text_field :url %>
 	</p>
+      <% end %>
 
+      <% tabcontent.draw do %>
 	<%= partial "pages/#{@page.page_type}/edit", :f => f %>
       <% end %>
 

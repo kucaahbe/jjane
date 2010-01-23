@@ -1,7 +1,8 @@
-<div id="tabs">
-  <%%= tab_header t(:tab_content), t(:tab_meta) %>
-  <div id="tabscontent">
-    <div id="tabContent1" class="tabContent" style="display:yes;">
+<%% tabbar do |tabs| %>
+  <%%= tabs.headers t(:tab_content), t(:tab_meta) %>
+
+  <%% tabs.content do |tabcontent| %>
+    <%% tabcontent.draw do %>
       <%%= f.error_messages %>
       <p>
       <%%= f.hidden_field :user_id %>
@@ -18,14 +19,15 @@
       <p>
       <%%= f.text_area :content, :class => 'mceEditor' %>
       </p>
-      <% for attribute in attributes -%>
+<% for attribute in attributes -%>
       <p>
       <%%= f.label t(:label_<%= attribute.name %>) %><br />
       <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
       </p>
-      <% end -%>
-    </div>
-    <div id="tabContent2" class="tabContent" style="display:none;">
+<%- end -%>
+    <%% end %>
+
+    <%% tabcontent.draw do %>
       <%% f.fields_for @<%= node_name %>.meta do |meta_f| %>
 	<%% Meta.tags.each do |meta_tag| %>
 	  <p>
@@ -34,6 +36,6 @@
 	  </p>
 	<%% end %>
       <%% end %>
-    </div>
-  </div>
-</div>
+    <%% end %>
+  <%% end %>
+<%% end %>

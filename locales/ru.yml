@@ -51,6 +51,7 @@ ru:
   label_type:                  'тип'
   label_title:                 'Титулка'
   label_pagination:            'Количество статей на страницу'
+  label_page_name:             'ID'
 
   notice_invalid_login_or_password: 'Не правильное сочетание логина и пароля'
   notice_logged_in:                 'Добро пожаловать! :)'
@@ -65,6 +66,7 @@ ru:
 
   question_are_you_shure:   'Вы уверены?'
 
+  tab_page_settings: 'настройки страницы'
   tab_content: 'содержимое'
   tab_meta:    'мета'
 

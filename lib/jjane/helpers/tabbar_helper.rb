@@ -14,7 +14,7 @@ module JJane
 	    @template.capture(&block),
 	    :id => "tabContent#{@number}",
 	    :class => "tabContent",
-	    :style => "display:#{@number==1 ? 'block' : 'none'};"
+	    :style => "display:#{@number==1 ? 'yes' : 'none'};"
           @template.send :concat, result
 	end
       end
