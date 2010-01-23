@@ -61,8 +61,9 @@ namespace :jjane do
     unless Page.exists?
       puts 'Creating home page...'
       page = Page.create!(
+	:name                  => 'homepage',
 	:link                  => 'home',
-	:menu                  => 'home',
+	:menu                  => 'Home Page',
 	:page_type             => 'static',
 	:user_id               =>  Group.find_by_name('roots').users.first.id,
 	:nav_main              =>  true

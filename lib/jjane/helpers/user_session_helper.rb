@@ -1,7 +1,7 @@
 module JJane
   module Helpers
     # Methods of this helper can be used in views and controllers
-    module User_Session
+    module User_SessionHelper
 
       def current_user_session
 	return @current_user_session if defined?(@current_user_session)

@@ -39,6 +39,7 @@ ru:
   button_save:       'Сохранить'
   button_login:      'Войти'
 
+  label_id:                    'Уникальный ID'
   label_login:                 'Логин'
   label_password:              'Пароль'
   label_password_confirmation: 'Подтверждение пароля'
@@ -66,3 +67,54 @@ ru:
 
   tab_content: 'содержимое'
   tab_meta:    'мета'
+
+  activerecord:
+    models:
+      page: 'страница'
+
+    attributes:
+      page:
+        name: 'Уникальный ID'
+        link: 'URL адрес'
+        menu: 'Меню'
+      user:
+        name: 'Имя'
+        password:              'Пароль'
+        password_confirmation: 'Подтверждение пароля'
+        email:                 'Электронная почта'
+      snippet:
+        name: 'Имя'
+
+    errors:
+      template:
+        header:
+          one:   'Возникла ошибка при сохранении'
+          other: 'Возникло {{count}} ошибок при сохранении'
+        body:    'Проблемы со следующими полями:'
+      models:
+        page:
+          attributes:
+            name:
+              blank:   'оставлен пустым'
+              invalid: 'должен состоять ТОЛЬКО из маленьких букв латинского алфавита'
+            link:
+              blank:   'оставлен пустым'
+              invalid: 'должен состоять из латиницы, цифр или знака "_", и начинаться с латинской буквы'
+            menu:
+              blank:   'оставлен пустым'
+        user:
+          attributes:
+            name:
+              blank:   'оставлено пустым'
+            email:
+              too_short: 'оставлена пустой'
+            password:
+              too_short: 'слишком короткий(от 4-х символов)'
+              confirmation: 'не совпадает с подтверждением'
+            password_confirmation:
+              too_short: 'не совпадает'
+        snippet:
+          attributes:
+            name:
+              blank: 'оставлено пустым'
+              taken: 'уже существует'

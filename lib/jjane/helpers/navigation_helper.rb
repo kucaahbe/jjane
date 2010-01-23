@@ -1,6 +1,6 @@
 module JJane
   module Helpers
-    module Navigation
+    module NavigationHelper
 
       # Breadcrumbs
       #   :framing_tag (default=:div)

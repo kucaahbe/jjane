@@ -10,7 +10,7 @@ module JJane
 
 	private
 
-	include JJane::Helpers::User_Session
+	include JJane::Helpers::User_SessionHelper
 
 	# if you want restrict access to some actions in controller just do:
 	#   before_filter :check_access ,:only => [:action]

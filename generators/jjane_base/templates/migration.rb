@@ -18,6 +18,7 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
     end
 
     create_table :pages do |t|
+      t.string   :name
       t.string   :link
       t.string   :menu
       t.string   :url

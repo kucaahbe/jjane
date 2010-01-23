@@ -1,6 +1,6 @@
 module JJane
   module Helpers
-    module Layout
+    module LayoutHelper
 
       # put this into your _title_ tag:
       #   <title><%= site_title %></title>

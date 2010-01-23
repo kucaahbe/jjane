@@ -12,12 +12,13 @@ class Page < ActiveRecord::Base
   #serialize :nav, Hash#TODO or TODEL
 
   # validations
-  validates_presence_of :link, :menu, :page_type, :user_id
+  validates_presence_of :name, :link, :menu, :page_type, :user_id
   validates_uniqueness_of :link, :scope => :parent_id
+  validates_uniqueness_of :name
   validates_numericality_of :pagination, :allow_nil => true, :only_integer => true, :greater_than => 0
   validates_format_of :link,
-    :with => /^[a-zA-Z][\w_]+$/,
-    :message => %q(должен состоять из латиницы цифр или знака '_',и начинаться с латинской буквы)
+    :with => /^[a-zA-Z][\w_]+$/
+  validates_format_of :name, :with => /^[a-z]+$/
 
   # callbacks
   before_save :calculate_url
@@ -62,40 +63,42 @@ class Page < ActiveRecord::Base
   #-- 
   #PUBLIC CLASS METHODS
   #++
+  class << self
 
-  def self.home_page
-    root
-  end
+    def home_page
+      root
+    end
 
-  def self.menus_columns
-    columns = []
-    self.columns.each { |column| columns << column.name if column.name =~ /^nav_/ }
-    return columns.sort
-  end
+    def menus_columns
+      columns = []
+      self.columns.each { |column| columns << column.name if column.name =~ /^nav_/ }
+      return columns.sort
+    end
 
-  def self.menus
-    menus = []
-    self.menus_columns.each { |column| menus << column.slice(4,column.length-3) }
-    return menus
-  end
+    def menus
+      menus = []
+      self.menus_columns.each { |column| menus << column.slice(4,column.length-3) }
+      return menus
+    end
 
-  def self.menu_exists?(name)
-    self.menus.include?(name) ? true : false
-  end
+    def menu_exists?(name)
+      self.menus.include?(name) ? true : false
+    end
 
-  def self.static_page_types
-    pages_dir=File.join(RAILS_ROOT,'app','views','pages','**')
-    static_page_types = []
-    Dir.glob(pages_dir) { |fname| static_page_types << File.basename(fname) }
+    def static_page_types
+      pages_dir=File.join(RAILS_ROOT,'app','views','pages','**')
+      static_page_types = []
+      Dir.glob(pages_dir) { |fname| static_page_types << File.basename(fname) }
 
-    static_page_types = static_page_types - self.nodes_types
-  end
+      static_page_types = static_page_types - self.nodes_types
+    end
 
-  def self.nodes_types
-    nodes_dir=File.join(RAILS_ROOT,'app','views','nodes','**')
-    nodes_types = []
-    Dir.glob(nodes_dir) { |fname| nodes_types << File.basename(fname) }
-    nodes_types
+    def nodes_types
+      nodes_dir=File.join(RAILS_ROOT,'app','views','nodes','**')
+      nodes_types = []
+      Dir.glob(nodes_dir) { |fname| nodes_types << File.basename(fname) }
+      nodes_types
+    end
   end
 
   private
