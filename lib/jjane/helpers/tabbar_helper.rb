@@ -2,6 +2,23 @@ module JJane
   module Helpers
     class TabbarBuilder
 
+      class Content
+	def initialize(template)
+	  @template = template
+	  @number = 0
+	end
+
+	def draw(&block)
+	  @number += 1
+	  result = @template.content_tag :div,
+	    @template.capture(&block),
+	    :id => "tabContent#{@number}",
+	    :class => "tabContent",
+	    :style => "display:#{@number==1 ? 'block' : 'none'};"
+	  @template.send :concat, result
+	end
+      end
+
       def initialize(template)
 	@template = template
 	@tabnames = []
@@ -20,9 +37,7 @@ module JJane
 	tabnames[1..tabnames.length].each_index do |n|
 	  list += wrap.call(tabnames[n+1],n+2,tabnames.length,false)
 	end
-	@template.content_tag :ul do
-	  list
-	end
+	@template.content_tag :ul, list
       end
 
       # tabbar content
@@ -30,7 +45,7 @@ module JJane
 	raise ArgumentError, "Missing block" unless block_given?
 	options = { :id => 'tabscontent', :style => 'outline:1px solid green;' }.merge(html_options)
 
-	result = @template.content_tag(:div, @template.capture(&block), options)
+	result = @template.content_tag(:div, @template.capture(Content.new(@template),&block), options)
 
 	if @template.send :block_called_from_erb?, block
 	  @template.send :concat, result

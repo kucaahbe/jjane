@@ -7,30 +7,34 @@
 
   <% tabbar do |tabs| %>
     <%= tabs.headers t(:tab_content), t(:tab_meta) %>
-    <% tabs.content do %>
-      <p>
-      <%= f.label t(:label_menu) %><br />
-      <%= f.text_field :menu %>
-      </p>
-      <p>
-      <%= f.label t(:label_link) %><br />
-      <%= f.text_field :url %>
-      </p>
+    <% tabs.content do |tabcontent| %>
 
-      <%= partial "pages/#{@page.page_type}/edit", :f => f %>
+      <% tabcontent.draw do %>
+	<p>
+	<%= f.label t(:label_menu) %><br />
+	<%= f.text_field :menu %>
+	</p>
+	<p>
+	<%= f.label t(:label_link) %><br />
+	<%= f.text_field :url %>
+	</p>
 
-    </div>
-    <div id="tabContent2" class="tabContent" style="display:none;">
-      <% f.fields_for :node do |node_f| %>
-	<% node_f.fields_for :meta do |meta_f |%>
-	  <% Meta.tags.each do |meta_tag| %>
-	    <p>
-	    <%= meta_f.label meta_tag %><br />
-	    <%= meta_f.text_field meta_tag.to_sym %>
-	    </p>
+	<%= partial "pages/#{@page.page_type}/edit", :f => f %>
+      <% end %>
+
+      <% tabcontent.draw do %>
+	<% f.fields_for :node do |node_f| %>
+	  <% node_f.fields_for :meta do |meta_f |%>
+	    <% Meta.tags.each do |meta_tag| %>
+	      <p>
+	      <%= meta_f.label meta_tag %><br />
+	      <%= meta_f.text_field meta_tag.to_sym %>
+	      </p>
+	    <% end %>
 	  <% end %>
 	<% end %>
       <% end %>
+
     <% end %>
   <% end %>
 
