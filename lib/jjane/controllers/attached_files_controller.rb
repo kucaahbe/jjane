@@ -1,11 +1,19 @@
 class AttachedFilesController < AdminController
   def index
     @files = AttachedFile.roots
+    @files.sort! { |one,two| one.name <=> two.name }
   end
 
   def show
     @updir = AttachedFile.find(params[:id])
     @files = @updir.children
+    @files.sort! do |one,two|
+      if one.directory? and two.directory?
+	one.name <=> two.name
+      else
+	one.directory? ? -1 : 1
+      end
+    end
     render :action => :index
   end
 
@@ -26,7 +34,7 @@ class AttachedFilesController < AdminController
     @attached_file = AttachedFile.new(params[:attached_file])
 
     if @attached_file.save
-      flash[:notice] = 'AttachedFile was successfully created.'
+      notice AttachedFile, :created
       redirect_to (@attached_file.parent || {:action => :index})
     else
       render :action => "new"
@@ -37,7 +45,7 @@ class AttachedFilesController < AdminController
     @attached_file = AttachedFile.find(params[:id])
 
     if @attached_file.update_attributes(params[:attached_file])
-      flash[:notice] = 'AttachedFile was successfully updated.'
+      notice AttachedFile, :updated
       redirect_to (@attached_file.parent || {:action => :index})
     else
       render :action => "edit"
