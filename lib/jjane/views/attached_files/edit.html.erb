@@ -1,16 +1,13 @@
-<h1>Editing attached_file</h1>
+<%= title t(:title_edit_file) %>
 
 <% form_for @attached_file do |f| %>
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label :name, t(:name) %><br />
+    <%= f.text_field :name %><%= ".#{@attached_file.extension}" if @attached_file.file? %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit t(:button_save) %>
   </p>
 <% end %>
-
-<%= link_to 'Show', @attached_file %> |
-<%= link_to 'Back', attached_files_path %>

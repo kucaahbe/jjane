@@ -13,6 +13,7 @@ ru:
   title_edit_node:    'Редактировать материал'
   title_filesystem:   'Файловая система'
   title_new_dir:      'Новый каталог'
+  title_edit_file:    'Редактировать файл'
 
   page_id:           'ID'
   page_menu:         'меню'
@@ -28,6 +29,7 @@ ru:
   group:             'Группа'
   content:           'Содержимое'
   file:              'Файл'
+  size:              'Размер'
 
   link_login:        'Войти'
   link_logout:       'Выйти'
@@ -36,13 +38,14 @@ ru:
   link_show_page:    'Просмотреть материал'
   link_home_page:    'Вернуться на домашнюю'
   link_to_node:      'Просмотреть материал'
-  link_new_dir:      'Новый каталог'
   link_new_file:     'Загрузить файл'
 
   button_update:     'Обновить'
   button_create:     'Создать'
   button_save:       'Сохранить'
   button_login:      'Войти'
+  button_create_dir: 'Создать каталог'
+  button_upload_file: 'Загрузить'
 
   label_id:                    'Уникальный ID'
   label_login:                 'Логин'
@@ -57,6 +60,7 @@ ru:
   label_title:                 'Титулка'
   label_pagination:            'Количество статей на страницу'
   label_page_name:             'ID'
+  label_upload_file:           'Загрузить файл'
 
   notice_invalid_login_or_password: 'Не правильное сочетание логина и пароля'
   notice_logged_in:                 'Добро пожаловать! :)'
@@ -91,12 +95,14 @@ ru:
         email:                 'Электронная почта'
       snippet:
         name: 'Имя'
+      attached_file:
+        name: 'Имя'
 
     errors:
       template:
         header:
-          one:   'Возникла ошибка при сохранении'
-          other: 'Возникло {{count}} ошибок при сохранении'
+          one:   'В ходе сохранения возникла ошибка'
+          other: 'В ходе сохранения возникло {{count}} ошибок'
         body:    'Проблемы со следующими полями:'
       models:
         page:
@@ -125,3 +131,8 @@ ru:
             name:
               blank: 'оставлено пустым'
               taken: 'уже существует'
+        attached_file:
+          attributes:
+            name:
+              blank: 'не должно быть пустым'
+              taken: 'уже использовано'

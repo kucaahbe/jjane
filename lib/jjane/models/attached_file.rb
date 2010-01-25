@@ -1,9 +1,16 @@
 require 'paperclip'
 class AttachedFile < ActiveRecord::Base
+
+  EXT_REGEXP = /\w+$/
+
   acts_as_nested_set :parent_column => :directory_id
+
   has_attached_file :atachment
 
+  validates_presence_of :name
   validates_uniqueness_of :name, :scope => :directory_id
+
+  before_validation :set_name
 
   def file?
     self.atachment_file_name
@@ -13,11 +20,29 @@ class AttachedFile < ActiveRecord::Base
     !self.file?
   end
 
-  def name
-    if self.file?
-      super+'.'+self.atachment.original_filename.gsub(/^.+\./,'').downcase
+  def size
+    (self.atachment_file_size/1024).to_i+"Kb" if self.atachment_file_size
+  end
+
+  def extension
+    self.atachment.content_type.slice(EXT_REGEXP) if self.file?
+  end
+
+  def <=>(another)
+    me = self;
+    if me.directory? and another.directory?
+      me.name <=> another.name
     else
-      super
+      me.directory? ? -1 : 1
+    end
+  end
+
+  private
+
+  def set_name
+    unless self.directory?
+      self.name = self.atachment_file_name
+      self.name = Time.now.to_s(:number)+'_'+self.name if self.class.find_by_name_and_directory_id(self.name,self.directory_id)
     end
   end
 end

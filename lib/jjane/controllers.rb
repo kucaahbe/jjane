@@ -5,7 +5,6 @@ module JJane
 
 	def self.included(mod)
 	  mod.filter_parameter_logging :password, :content
-	  mod.helper_method :log
 	end
 
 	private
@@ -51,22 +50,6 @@ module JJane
 	  render :partial => view, :locals => params
 	end
 
-	#--
-	#       DEBUG METHODS
-	#++
-	# if you want to log something
-	def log(something,msg='')#:doc:
-	  logger.info "###########################################################"
-	  if something.class==Array
-	    logger.info "DEBUG::[#{something.class}]"
-	    something.each_with_index do |s,i|
-	      logger.info "       [#{i}][#{s.class}]"+s.inspect
-	    end
-	  else
-	    logger.info "DEBUG::[#{something.class}]> "+something.inspect
-	  end
-	  logger.info msg
-	end
       end
     end
   end

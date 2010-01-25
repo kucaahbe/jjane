@@ -1,0 +1,11 @@
+<% unless action_name=='index' %>
+  <% form_for @new_file, :html => { :multipart => true } do |f| %>
+    <%= f.error_messages %>
+    <p>
+    <%= f.hidden_field :directory_id %>
+    <%= f.label :file, t(:label_upload_file) %><br />
+    <%= f.file_field :atachment %>
+    <%= f.submit t(:button_upload_file) %>
+    </p>
+  <% end %>
+<% end %>

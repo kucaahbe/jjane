@@ -22,10 +22,7 @@ module JJane#:nodoc:
       end
 
       def jjane_connect
-	resources :attached_files do |m|
-	  m.resource :directory, :controller => :attached_files, :only => :new
-	  m.upload 'file/new', :controller => :attached_files, :action => :new_file
-	end
+	resources :attached_files
 
 	connect        'pages/:page_id/:controller',          :action => :create,  :conditions => { :method => :post }
 	new_page_node  'pages/:page_id/:controller/new',      :action => :new,     :conditions => { :method => :get }

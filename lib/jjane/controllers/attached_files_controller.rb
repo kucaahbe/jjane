@@ -1,29 +1,17 @@
 class AttachedFilesController < AdminController
+  before_filter :new_items_init, :only => [:index, :show]
+
   def index
     @files = AttachedFile.roots
-    @files.sort! { |one,two| one.name <=> two.name }
+    @files.sort!
   end
 
   def show
     @updir = AttachedFile.find(params[:id])
     @files = @updir.children
-    @files.sort! do |one,two|
-      if one.directory? and two.directory?
-	one.name <=> two.name
-      else
-	one.directory? ? -1 : 1
-      end
-    end
+    @breadcrumbs = @updir.self_and_ancestors
+    @files.sort!
     render :action => :index
-  end
-
-  def new
-    @attached_file = AttachedFile.new( params[:attached_file_id] ? {:directory_id => params[:attached_file_id]} : nil )
-  end
-
-  def new_file
-    @attached_file = AttachedFile.new( :directory_id => params[:attached_file_id] )
-    render :action => :new
   end
 
   def edit
@@ -37,7 +25,14 @@ class AttachedFilesController < AdminController
       notice AttachedFile, :created
       redirect_to (@attached_file.parent || {:action => :index})
     else
-      render :action => "new"
+      new_items_init
+      if @attached_file.directory?
+	@new_dir = @attached_file
+      else
+	@new_file = @attached_file
+      end
+      self.index
+      render :action => :index
     end
   end
 
@@ -58,5 +53,12 @@ class AttachedFilesController < AdminController
     @attached_file.destroy
 
     redirect_to (parent || {:action => :index})
+  end
+
+  private
+
+  def new_items_init
+    @new_dir = AttachedFile.new(:directory_id => params[:id])
+    @new_file = AttachedFile.new(:directory_id => params[:id])
   end
 end

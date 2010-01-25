@@ -1,8 +1,27 @@
 <%= title t(:title_filesystem) %>
 
+
+<% form_for @new_dir, :html => { :id => 'new_directory'} do |f| %>
+  <%= f.error_messages %>
+  <p>
+
+  <% content_tag :span, :id => 'files_breadcrumbs' do %>
+    /&nbsp;<%= link_to 'root', attached_files_path %>&nbsp;/
+    <% (@breadcrumbs || []).each do |dir| %>
+      <%= link_to dir.name, attached_file_path(dir) %>&nbsp;/
+    <% end %>
+  <% end %>
+
+  <%= f.hidden_field :directory_id %>
+  <%= f.text_field :name %>
+  <%= f.submit t(:button_create_dir) %>
+  </p>
+<% end %>
+
 <table class="list">
   <tr>
-    <th width="95%"><%=t :name %></th>
+    <th width="85%"><%=t :name %></th>
+    <th width="10%"><%=t :size %></th>
     <th width="5%"><%=t :actions %></th>
   </tr>
 
@@ -12,6 +31,7 @@
 	<%= engine_image 'folder.png' %>
 	<%= link_to '[..]', (@updir.parent ? attached_file_path(@updir.parent) : attached_files_path) %>
       </td>
+      <td>&nbsp;</td>
       <td>&nbsp;</td>
     </tr>
   <% end -%>
@@ -24,8 +44,11 @@
 	  <%= link_to "[#{file.name}]", attached_file_path(file) %>
 	<% else -%>
 	  <%= engine_image 'file.png' %>
-	  <%= link_to file.name, file.atachment.url %>
+	  <%= link_to "#{file.name}.#{file.extension}", file.atachment.url %>
 	<% end -%>
+      </td>
+      <td>
+	<%= file.size %>
       </td>
       <td>
 	<%= link_to_edit 'edit', edit_attached_file_path(file) %>
@@ -35,8 +58,4 @@
   <% end -%>
 </table>
 
-<br />
-
-<%= link_to(t(:link_new_file), attached_file_upload_path(@updir)) if @updir %>
-<br />
-<%= link_to t(:link_new_dir), (@updir ? new_attached_file_directory_path(@updir) : new_attached_file_path) %>
+<%= render 'upload_form' %>
