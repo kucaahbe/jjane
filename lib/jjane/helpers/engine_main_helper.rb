@@ -6,6 +6,9 @@ module JJane
 	content_tag :h1, text, :class => 'jjane-title jjane'
       end
 
+      #--
+      # engine links start
+      #++
       def link_to_new(path)
 	link_to engine_image('add.png'), path
       end
@@ -21,6 +24,10 @@ module JJane
       def link_to_destroy(something)
 	link_to engine_image('delete.png'), something, :confirm => t(:question_are_you_shure), :method => :delete
       end
+      #--
+      # engine links end
+      #++
+
       def partial(view, params = nil)
 	render :partial => view, :locals => params
       end
