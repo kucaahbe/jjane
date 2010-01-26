@@ -9,11 +9,14 @@
 
 <table class="list jjane">
   <tr>
-    <th width="85%"><%=t :name %></th>
+    <th width="20%"><%= 'info' %></th>
+    <th width="65%"><%=t :name %></th>
     <th width="10%"><%=t :size %></th>
     <th width="5%"><%=t :actions %></th>
   </tr>
-
+  <tr>
+    <td rowspan="<%= @files.length+2 %>" id="file_preview" style="overflow:hidden; width:100px;">&nbsp;</td>
+  </tr>
   <% if @updir -%>
     <tr>
       <td>
@@ -24,7 +27,6 @@
       <td>&nbsp;</td>
     </tr>
   <% end -%>
-
   <% @files.each do |file| -%>
     <tr>
       <td>
@@ -33,11 +35,14 @@
 	  <%= link_to "[#{file.name}]", attached_file_path(file,:type => params[:type]) %>
 	<% else -%>
 	  <%= engine_image 'file.png' %>
-	  <% if params[:type] %>
-	    <%= link_to_function "#{file.name}.#{file.extension}", %Q(FileBrowserDialogue.mySubmit("#{file.atachment.url}");) %>
-	  <% else%>
-	    <%= link_to "#{file.name}.#{file.extension}", file.atachment.url %>
-	  <% end %>
+	  <% content_tag :span,
+	    :onmouseover => update_page { |p| p.replace_html('file_preview',image_tag(file.atachment.url),:size => '50x50') } do -%>
+	    <% if params[:type] -%>
+	      <%= link_to_function "#{file.name}.#{file.extension}", %Q(FileBrowserDialogue.mySubmit("#{file.atachment.url}");) %>
+	    <% else -%>
+	      <%= link_to "#{file.name}.#{file.extension}", file.atachment.url %>
+	    <% end -%>
+	  <% end -%>
 	<% end -%>
       </td>
       <td>

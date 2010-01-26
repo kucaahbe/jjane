@@ -1,7 +1,7 @@
 <% content_tag :span, :id => 'file_manager_breadcrumbs', :class => 'jjane' do %>
-  <%= link_to 'root', attached_files_path %>
+  <%= link_to 'root', attached_files_path(:type => params[:type]) %>
   <% (@breadcrumbs || []).each do |dir| %>
-    <%= link_to dir.name, attached_file_path(dir) %>
+    <%= link_to dir.name, attached_file_path(dir,:type => params[:type]) %>
   <% end %>
 <% end %>
 
