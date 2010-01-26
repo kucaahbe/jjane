@@ -3,7 +3,7 @@ module JJane
     module EngineMainHelper#:nodoc:
 
       def title(text)
-	content_tag :h1, text
+	content_tag :h1, text, :class => 'jjane-title jjane'
       end
 
       def link_to_new(path)
@@ -30,7 +30,7 @@ module JJane
       end
 
       def warning(text)
-	%Q(<span class="warning">#{text}</span>)
+	%Q(<span class="warning jjane">#{text}</span>)
       end
     end
   end

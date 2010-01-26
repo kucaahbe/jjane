@@ -1,3 +1,4 @@
+.jjane { font-family:Verdana, Arial, Helvetica, sans-serif; }
 #admin_panel {
   padding:0px;
   margin:0px;
@@ -17,6 +18,8 @@
   border-left:1px solid #cfcccc;
 }
 #admin_panel a { color:#6d6969; }
+
+h1.jjane-title { color:#2b6fb6; }
 
 form.jform {
   margin:0px;
