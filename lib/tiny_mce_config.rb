@@ -1,6 +1,7 @@
 class TinyMCEconfig
   DEFAULT_SETTINGS = {
-    :file_browser_callback => 'jjaneRubyCommander'
+    :file_browser_callback => 'jjaneRubyCommander',
+    :relative_urls => false
   }
   def self.load(config='default')
     config = File.open(File.join(RAILS_ROOT, 'config', "tiny_mce_config_#{config}.yml"))
