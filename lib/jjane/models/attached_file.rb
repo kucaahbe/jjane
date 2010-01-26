@@ -21,7 +21,7 @@ class AttachedFile < ActiveRecord::Base
   end
 
   def size
-    (self.atachment_file_size/1024).to_i+"Kb" if self.atachment_file_size
+    (self.atachment_file_size/1024).to_s+"Kb" if self.atachment_file_size
   end
 
   def extension

@@ -82,7 +82,7 @@ function jjaneRubyCommander (field_name, url, type, win) {
      the session name and session ID in the request string (can look like this: "?PHPSESSID=88p0n70s9dsknra96qhuk6etm5").
      These lines of code extract the necessary parameters and add them back to the filebrowser URL again. */
 
-  var cmsURL = window.location.toString();    // script URL - use an absolute path!
+  var cmsURL = '/attached_files';//window.location.toString();    // script URL - use an absolute path!
   if (cmsURL.indexOf("?") < 0) {
     //add the type as the only query parameter
     cmsURL = cmsURL + "?type=" + type;
