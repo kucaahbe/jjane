@@ -3,7 +3,7 @@ class AttachedFile < ActiveRecord::Base
 
   EXT_REGEXP = /\w+$/
 
-  acts_as_nested_set :parent_column => :directory_id
+  acts_as_nested_set :parent_column => :directory_id, :dependent => :destroy
 
   has_attached_file :atachment
 
