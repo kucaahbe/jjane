@@ -1,0 +1,16 @@
+<% content_tag :span, :id => 'file_manager_breadcrumbs', :class => 'jjane' do %>
+  <%= link_to 'root', attached_files_path %>
+  <% (@breadcrumbs || []).each do |dir| %>
+    <%= link_to dir.name, attached_file_path(dir) %>
+  <% end %>
+<% end %>
+
+<% form_for @new_dir, :html => { :id => 'new_directory' } do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :directory_id, :id => 'parent_dir_id' %>
+  <%= f.text_field :name, :id => 'dir_name' %>
+  <%= f.submit t(:button_create_dir), :id => 'dir_submit' %>
+<% end %>
+
+<br />
+<br />

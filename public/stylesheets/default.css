@@ -21,6 +21,27 @@
 
 h1.jjane-title { color:#2b6fb6; }
 
+#new_directory { display:inline; }
+#file_manager_breadcrumbs {   }
+#file_manager_breadcrumbs a { 
+  display:inline-block;
+  text-decoration:none;
+  background:#f3f3f3;
+  color:blue;
+  padding:0px 5px;
+  border-top:1px solid white;
+  border-left:1px solid white;
+  border-right:1px solid black;
+  border-bottom:1px solid black;
+}
+#file_manager_breadcrumbs a:hover {
+  border-top:1px solid black;
+  border-left:1px solid black;
+  border-right:1px solid white;
+  border-bottom:1px solid white;
+}
+#file_manager_breadcrumbs a:visited { color:blue; }
+
 form.jform {
   margin:0px;
   padding:5px;
@@ -117,6 +138,7 @@ ul.list .list_item { border-bottom:1px dashed #e0e0e0; padding:7px; }
 ul.list .list_item:hover { background:#c1d9f9; }
 ul.list a { text-decoration:none; color:#661bff; margin:10px 0; }
 ul.list a:hover { text-decoration:underline; }
+ul.list a:visited { color:#661bff; }
 ul.list li > ul {
   list-style:none;
   margin:0;

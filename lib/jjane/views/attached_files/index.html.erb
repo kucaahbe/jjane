@@ -5,22 +5,7 @@
   <%= javascript '/jjane/javascripts/file_browser' %>
 <% end %>
 
-<% form_for @new_dir, :html => { :id => 'new_directory'} do |f| %>
-  <%= f.error_messages %>
-  <p>
-
-  <% content_tag :span, :id => 'files_breadcrumbs' do %>
-    /&nbsp;<%= link_to 'root', attached_files_path %>&nbsp;/
-    <% (@breadcrumbs || []).each do |dir| %>
-      <%= link_to dir.name, attached_file_path(dir) %>&nbsp;/
-    <% end %>
-  <% end %>
-
-  <%= f.hidden_field :directory_id %>
-  <%= f.text_field :name %>
-  <%= f.submit t(:button_create_dir) %>
-  </p>
-<% end %>
+<%= render 'new_dir_form' %>
 
 <table class="list jjane">
   <tr>
@@ -33,7 +18,7 @@
     <tr>
       <td>
 	<%= engine_image 'folder.png' %>
-	<%= link_to '[..]', (@updir.parent ? attached_file_path(@updir.parent) : attached_files_path) %>
+	<%= link_to '[..]', (@updir.parent ? attached_file_path(@updir.parent,:type => params[:type]) : attached_files_path(:type => params[:type])) %>
       </td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
@@ -48,15 +33,18 @@
 	  <%= link_to "[#{file.name}]", attached_file_path(file,:type => params[:type]) %>
 	<% else -%>
 	  <%= engine_image 'file.png' %>
-	  <%= link_to "#{file.name}.#{file.extension}", file.atachment.url %>
-	  <%= link_to_function 'insert', %Q(FileBrowserDialogue.mySubmit("#{file.atachment.url}");) if params[:type]%>
+	  <% if params[:type] %>
+	    <%= link_to_function "#{file.name}.#{file.extension}", %Q(FileBrowserDialogue.mySubmit("#{file.atachment.url}");) %>
+	  <% else%>
+	    <%= link_to "#{file.name}.#{file.extension}", file.atachment.url %>
+	  <% end %>
 	<% end -%>
       </td>
       <td>
 	<%= file.size %>
       </td>
       <td>
-	<%= link_to_edit 'edit', edit_attached_file_path(file) %>
+	<%= link_to_edit 'edit', edit_attached_file_path(file,:type => params[:type]) %>
 	<%= link_to_destroy file %>
       </td>
     </tr>
