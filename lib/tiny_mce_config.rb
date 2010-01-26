@@ -1,10 +1,10 @@
 class TinyMCEconfig
   DEFAULT_SETTINGS = {
-    :external_image_list_url => "myexternallist.js"
+    :file_browser_callback => 'jjaneRubyCommander'
   }
   def self.load(config='default')
     config = File.open(File.join(RAILS_ROOT, 'config', "tiny_mce_config_#{config}.yml"))
-    YAML::load(config)
+    YAML::load(config).merge DEFAULT_SETTINGS
   rescue
     {}
   end
