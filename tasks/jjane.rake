@@ -1,24 +1,28 @@
 namespace :jjane do
   desc 'install JJane'
   task :copy_files do
+
+    dot = Proc.new { print '.' }
+
     plugin_path = File.join File.dirname(__FILE__), '..'
 
-    puts '=> installing JJane public files...'
+    puts '=> installing JJane public files'
     FileUtils.mkdir_p File.join(RAILS_ROOT, 'public', 'jjane')
     %w[ images stylesheets javascripts ].each do |dir|
-      FileUtils.cp_r File.join(plugin_path, 'public', dir),
-	File.join(RAILS_ROOT, 'public', 'jjane')
+      FileUtils.cp_r File.join(plugin_path, 'public', dir), File.join(RAILS_ROOT, 'public', 'jjane')
+      dot
     end
 
-    puts '=> creating symlinks for plugins...'
+    puts '=> installing plugins'
     Dir["#{plugin_path}/plugins/**"].each do |plugin_dir|
-	FileUtils.ln_s plugin_dir, File.join(RAILS_ROOT, 'vendor', 'plugins'),
-	  :force => true
+      FileUtils.cp_r plugin_dir, File.join(RAILS_ROOT, 'vendor', 'plugins')
+      dot
     end
 
-    puts '=> copying config files...'
+    puts '=> installing sample config files'
     Dir["#{plugin_path}/config/*"].each do |file|
       FileUtils.cp_r file, File.join(RAILS_ROOT, 'config')
+      dot
     end
   end
 
