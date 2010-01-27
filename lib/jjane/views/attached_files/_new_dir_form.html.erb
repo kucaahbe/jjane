@@ -5,7 +5,7 @@
   <% end %>
 <% end %>
 
-<% form_for @new_dir, :html => { :id => 'new_directory' } do |f| %>
+<% form_for @new_dir, :url => { :action => :create, :type => params[:type] }, :html => { :id => 'new_directory' } do |f| %>
   <%= f.error_messages %>
   <%= f.hidden_field :directory_id, :id => 'parent_dir_id' %>
   <%= f.text_field :name, :id => 'dir_name' %>

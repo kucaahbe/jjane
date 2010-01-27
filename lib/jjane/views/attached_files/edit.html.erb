@@ -1,6 +1,6 @@
 <%= title t(:title_edit_file) %>
 
-<% form_for @attached_file do |f| %>
+<% form_for @attached_file, :url => { :action => :update, :type => params[:type] } do |f| %>
   <%= f.error_messages %>
 
   <p>

@@ -5,7 +5,7 @@
     $('file-load').show();
   }
 <% end %>
-<% form_for @new_file, :html => { :multipart => true } do |f| %>
+<% form_for @new_file, :url => { :action => :create, :type => params[:type] }, :html => { :multipart => true } do |f| %>
   <%= f.error_messages %>
   <p>
   <%= f.hidden_field :directory_id %>

@@ -21,8 +21,8 @@ module JJane
 	link_to t(:link_cancel)+engine_image('cancel.png'), path
       end
 
-      def link_to_destroy(something)
-	link_to engine_image('delete.png'), something, :confirm => t(:question_are_you_shure), :method => :delete
+      def link_to_destroy(path)
+	link_to engine_image('delete.png'), path, :confirm => t(:question_are_you_shure), :method => :delete
       end
       #--
       # engine links end

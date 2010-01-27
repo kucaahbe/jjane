@@ -23,7 +23,11 @@ class AttachedFilesController < AdminController
 
     if @attached_file.save
       notice AttachedFile, :created
-      redirect_to (@attached_file.parent || {:action => :index})
+      if @attached_file.parent_id
+	redirect_to :action => :show, :id => @attached_file.parent_id, :type => params[:type]
+      else
+	redirect_to :action => :index, :type => params[:type]
+      end
     else
       new_items_init
       if @attached_file.directory?
@@ -41,7 +45,11 @@ class AttachedFilesController < AdminController
 
     if @attached_file.update_attributes(params[:attached_file])
       notice AttachedFile, :updated
-      redirect_to (@attached_file.parent || {:action => :index})
+      if @attached_file.parent_id
+	redirect_to :action => :show, :id => @attached_file.parent_id, :type => params[:type]
+      else
+	redirect_to :action => :index, :type => params[:type]
+      end
     else
       render :action => "edit"
     end
@@ -49,10 +57,14 @@ class AttachedFilesController < AdminController
 
   def destroy
     @attached_file = AttachedFile.find(params[:id])
-    parent = @attached_file.parent
+    parent_id = @attached_file.parent_id
     @attached_file.destroy
 
-    redirect_to (parent || {:action => :index})
+    if parent_id
+      redirect_to :action => :show, :id => parent_id, :type => params[:type]
+    else
+      redirect_to :action => :index, :type => params[:type]
+    end
   end
 
   private

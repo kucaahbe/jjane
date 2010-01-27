@@ -50,7 +50,7 @@
       </td>
       <td>
 	<%= link_to_edit 'edit', edit_attached_file_path(file,:type => params[:type]) %>
-	<%= link_to_destroy file %>
+	<%= link_to_destroy attached_file_path(file,:type => params[:type]) %>
       </td>
     </tr>
   <% end -%>
