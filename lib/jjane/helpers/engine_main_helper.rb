@@ -33,7 +33,7 @@ module JJane
       end
 
       def engine_image(source,options={})
-	image_tag "/jjane/images/#{source}", options.merge(:style => 'vertical-align:middle; border:none;')
+	image_tag "/jjane/images/#{source}", options.merge(:style => "#{options[:style]} vertical-align:middle; border:none;")
       end
 
       def warning(text)

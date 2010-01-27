@@ -61,6 +61,7 @@ ru:
   label_pagination:            'Количество статей на страницу'
   label_page_name:             'ID'
   label_upload_file:           'Загрузить файл'
+  label_uploading_file:        'Идет загрузка файла...'
 
   notice_invalid_login_or_password: 'Не правильное сочетание логина и пароля'
   notice_logged_in:                 'Добро пожаловать! :)'

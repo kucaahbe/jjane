@@ -1,11 +1,17 @@
-<% unless action_name=='index' %>
-  <% form_for @new_file, :html => { :multipart => true } do |f| %>
-    <%= f.error_messages %>
-    <p>
-    <%= f.hidden_field :directory_id %>
-    <%= f.label :file, t(:label_upload_file) %><br />
-    <%= f.file_field :atachment %>
-    <%= f.submit t(:button_upload_file), :onclick => 'showLoadImg();' %>
-    </p>
-  <% end %>
+<% javascript_tag do %>
+  function showLoadImg(hide_class) {
+    $('file-label').replace('<%=t :label_uploading_file %>');
+    $$('.'+hide_class).each (function(e) { e.hide(); } );
+    $('file-load').show();
+  }
+<% end %>
+<% form_for @new_file, :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  <p>
+  <%= f.hidden_field :directory_id %>
+  <%= f.label :file, t(:label_upload_file), :id => 'file-label' %><br />
+  <%= f.file_field :atachment, :class => 'hide_me' %>
+  <%= f.submit t(:button_upload_file), :onclick => 'showLoadImg("hide_me");', :class => 'hide_me' %>
+  <%= engine_image 'file-loading.gif', :style => 'display:none;', :id => 'file-load' %>
+  </p>
 <% end %>

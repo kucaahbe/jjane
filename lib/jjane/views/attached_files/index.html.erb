@@ -3,7 +3,7 @@
 <% content_for :head do %>
   <%= javascript 'tiny_mce/tiny_mce_popup' %>
   <%= javascript '/jjane/javascripts/file_browser' %>
-<% end %>
+<% end if params[:type] %>
 
 <%= render 'new_dir_form' %>
 
