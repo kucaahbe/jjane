@@ -67,11 +67,6 @@ module JJane
 	%(<p style='color:red;'>snippet not found</p>)
       end
 
-      def link_to_page(name, page_name)
-	link_to name, root_url+Page.find_by_name(page_name.to_s).url
-      rescue
-	warning("no such page with ID '#{page_name}'")
-      end
     end
   end
 end

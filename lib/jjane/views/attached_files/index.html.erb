@@ -36,7 +36,7 @@
 	<% else -%>
 	  <%= engine_image 'file.png' %>
 	  <% content_tag :span,
-	    :onmouseover => update_page { |p| p.replace_html('file_preview',image_tag(file.atachment.url(:preview))) } do -%>
+	    :onmouseover => update_page { |p| p.replace_html('file_preview',image_tag(file.atachment.url(:thumb))) } do -%>
 	    <% if params[:type] -%>
 	      <%= link_to_function "#{file.name}.#{file.extension}", %Q(FileBrowserDialogue.mySubmit("#{file.atachment.url}");) %>
 	    <% else -%>

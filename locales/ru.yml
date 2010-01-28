@@ -30,6 +30,7 @@ ru:
   content:           'Содержимое'
   file:              'Файл'
   size:              'Размер'
+  type:              'тип'
 
   link_login:        'Войти'
   link_logout:       'Выйти'
@@ -57,7 +58,7 @@ ru:
   label_menu:                  'Пункт меню'
   label_link:                  'url'
   label_type:                  'тип'
-  label_title:                 'Титулка'
+  label_title:                 'Заголовок'
   label_pagination:            'Количество статей на страницу'
   label_page_name:             'ID'
   label_upload_file:           'Загрузить файл'
@@ -89,6 +90,8 @@ ru:
         name: 'Уникальный ID'
         link: 'URL адрес'
         menu: 'Меню'
+      node:
+        title: 'Заголовок'
       user:
         name: 'Имя'
         password:              'Пароль'
@@ -115,6 +118,10 @@ ru:
               blank:   'оставлен пустым'
               invalid: 'должен состоять из латиницы, цифр или знака "_", и начинаться с латинской буквы'
             menu:
+              blank:   'оставлен пустым'
+        node:
+          attributes:
+            node_title:
               blank:   'оставлен пустым'
         user:
           attributes:

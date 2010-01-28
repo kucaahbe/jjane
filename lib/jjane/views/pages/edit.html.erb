@@ -1,4 +1,4 @@
-<%= title t(:title_edit_page) %>
+<%= title t(:title_edit_page)+'('+t(:type)+'='+@page.page_type+')' %>
 
 <% form_for @page, :html => { :class => 'jform' } do |f| %>
   <%= f.error_messages %>
@@ -20,7 +20,7 @@
 	</p>
 	<p>
 	<%= f.label :url, t(:label_link) %><br />
-	<%= f.text_field :url %>
+	<%= f.text_field :link %>
 	</p>
       <% end %>
 

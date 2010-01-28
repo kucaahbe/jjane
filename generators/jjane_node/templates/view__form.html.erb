@@ -9,7 +9,7 @@
       <%%= f.hidden_field :page_id %>
       </p>
       <p>
-      <%%= f.label t(:label_title) %>
+      <%%= f.label :title, t(:label_title) %>
       <%%= f.text_field :title, :class => 'title' %>
       </p>
       <%% field_set_tag nil, :id => 'preview_node', :class => 'collapsed' do %>
@@ -21,7 +21,7 @@
       </p>
 <% for attribute in attributes -%>
       <p>
-      <%%= f.label t(:label_<%= attribute.name %>) %><br />
+      <%%= f.label :<%= attribute.name %>, t(:label_<%= attribute.name %>) %><br />
       <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
       </p>
 <%- end -%>

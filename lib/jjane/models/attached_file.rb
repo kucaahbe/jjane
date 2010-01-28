@@ -5,7 +5,11 @@ class AttachedFile < ActiveRecord::Base
 
   acts_as_nested_set :parent_column => :directory_id, :dependent => :destroy
 
-  has_attached_file :atachment, :styles => { :preview => "100x100>" }
+  has_attached_file :atachment, :styles => { 
+    :thumb => "100x100#",
+    :medium => "300x200#",
+    :big => "800x600>"
+  }
 
   before_validation :set_name
   validates_presence_of :name
@@ -25,6 +29,10 @@ class AttachedFile < ActiveRecord::Base
 
   def extension
     self.atachment.content_type.slice(EXT_REGEXP) if self.file?#BUGHERE
+  end
+
+  def url(scheme=:original)
+    self.atachment.url(scheme) if self.file?
   end
 
   def <=>(another)

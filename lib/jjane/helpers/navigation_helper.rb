@@ -9,47 +9,47 @@ module JJane
       #   :before - what to write before breadcrumbs(default='&nbsp;&raquo;&nbsp;')
       #   :after - what to write after breadcrumbs(default='')
       #   :include_node - if true then include node title(default=false)
-      #   :before_node
-      #   :after_node
+      #   :before_node - what to draw before node(if :include_node specified)
+      #   :after_node - what to draw after node(if :include_node specified)
+      #   :html - hash of html options for :framing_tag
       def breadcrumbs(options={})
-	default_options = {
-	  :framing_tag => :div,
-	  :include_self => true,
-	  :before => '',
-	  :after => '',
-	  :separator => '&nbsp;&raquo;&nbsp;',
-	  :include_node => false,
-	  :before_node => '',
-	  :after_node => ''
-	}
-	default_html_options = { :id => 'breadcrumbs' }
+	if controller_name=='site' then
+	  default_options = {
+	    :framing_tag => :div,
+	    :include_self => true,
+	    :before => '',
+	    :after => '',
+	    :separator => '&nbsp;&raquo;&nbsp;',
+	    :include_node => false,
+	    :before_node => '',
+	    :after_node => ''
+	  }
+	  default_html_options = { :id => 'breadcrumbs' }
 
-	if options[:html]
-	  options[:html] = default_html_options.merge(options[:html])
-	else
-	  options[:html] = default_html_options
+	  if options[:html]
+	    options[:html] = default_html_options.merge(options[:html])
+	  else
+	    options[:html] = default_html_options
+	  end
+	  options = default_options.merge(options)
+
+	  line = options[:before]
+	  @page.ancestors.each do |page|
+	    line += link_to(page.menu, root_url+page.url) + options[:separator]
+	  end
+	  line += link_to(@page.menu,root_url+@page.url) if options[:include_self]
+
+	  if defined?(@node) && options[:include_node]
+	    line += options[:separator] +
+	      options[:before_node] +
+	      content_tag(:span,link_to(@node.title,root_url+@node.url),:class => 'node') +
+	      options[:after_node]
+	  end
+
+	  line += options[:after]
+
+	  content_tag options[:framing_tag], line, options[:html]
 	end
-	options = default_options.merge(options)
-
-	line = options[:before]
-	@page.ancestors.each do |page|
-	  line += link_to(page.menu, root_url+page.url) + options[:separator]
-	end
-	line += link_to(@page.menu,root_url+@page.url) if options[:include_self]
-
-	if defined?(@node) && options[:include_node]
-	  line += options[:separator] +
-	    options[:before_node] +
-	    content_tag(:span,link_to(@node.title,root_url+@node.url),:class => 'node') +
-	    options[:after_node]
-	end
-
-	line += options[:after]
-
-	content_tag options[:framing_tag], line, options[:html]
-      # if no @page specified:
-      rescue
-	''
       end
 
       # UL LI navigation menu
@@ -84,6 +84,12 @@ module JJane
 	content_tag :ul, view, options[:html]
       end
 
+      # Draws link to page specified by it's unique ID
+      def link_to_page(name, page_name, options={})
+	link_to name, root_url+Page.find_by_name(page_name.to_s).url, options
+      rescue
+	warning("no such page with ID '#{page_name}'")
+      end
     end
   end
 end
