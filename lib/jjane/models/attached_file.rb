@@ -8,7 +8,7 @@ class AttachedFile < ActiveRecord::Base
   has_attached_file :atachment, :styles => { 
     :thumb => "100x100#",
     :medium => "300x200#",
-    :big => "800x600>"
+    :big => "800x600#"
   }
 
   before_validation :set_name
@@ -31,8 +31,8 @@ class AttachedFile < ActiveRecord::Base
     self.atachment.content_type.slice(EXT_REGEXP) if self.file?#BUGHERE
   end
 
-  def url(scheme=:original)
-    self.atachment.url(scheme) if self.file?
+  def url(scheme = :original, include_updated_timestamps = true)
+    self.atachment.url(scheme,include_updated_timestamps) if self.file?
   end
 
   def <=>(another)

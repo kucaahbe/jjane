@@ -37,7 +37,7 @@ module JJane
       end
 
       def warning(text)
-	%Q(<span class="warning jjane">#{text}</span>)
+	%Q(<span class="jjane" style="color:red; text-weight:bold;">#{text}</span>)
       end
     end
   end
