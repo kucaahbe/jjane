@@ -1,6 +1,6 @@
 <%%= title "#{t(:title_edit_node)}(<%= node_name %>)" %>
 
-<%% form_for @<%= node_name %>, :url => { :action => "update" }, :html => { :class => 'jform' } do |f| %>
+<%% form_for @<%= node_name %>, :url => { :action => "update" }, :html => { :class => 'jjane' } do |f| %>
   <%%= partial '/nodes/<%= node_table_name %>/form',{ :f => f } %>
   <p>
   <%%= f.submit t(:button_save) %> |

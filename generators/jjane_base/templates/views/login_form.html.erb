@@ -1,10 +1,9 @@
 <% content_for :head do %>
-  <%= stylesheet '/engine/stylesheets/default' %>
   <%= stylesheet '/engine/stylesheets/form_notices' %>
 <% end %>
 
 <div style="text-align:center;">
-  <% form_for :user_session, :url => login_path, :html => { :class => 'jform' } do |f| %>
+  <% form_for :user_session, :url => login_path do |f| %>
 
     <p><%= f.label :email, t(:label_login) %></p>
     <p><%= f.text_field :email, :size => "17" %></p>
