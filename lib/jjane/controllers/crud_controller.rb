@@ -19,7 +19,7 @@ class CrudController < AdminController
   before_filter :find_model, :only => [:show, :edit, :update, :destroy]
 
   def index(render_command = nil)
-    instance_variable_set "@#{@thing}".to_sym, @model.all
+    instance_variable_set "@#{@thing}".to_sym, @model.paginate(:page => params[:page], :per_page => 10, :order => 'updated_at DESC')
     render render_command if render_command
   end
 
