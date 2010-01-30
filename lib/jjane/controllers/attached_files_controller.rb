@@ -1,4 +1,4 @@
-class AttachedFilesController < AdminController
+class AttachedFilesController < AdminController#:nodoc:
   before_filter :new_items_init, :only => [:index, :show]
 
   def index
