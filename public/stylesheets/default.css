@@ -40,21 +40,17 @@ table.jjane td { height:30px; border-bottom:1px dashed #e0e0e0; }
 table.jjane tr:hover { background:#c1d9f9; border-bottom:1px dashed red; }
 /* START TABS */
 #tabs{margin:0 -5px 0 -5px;padding: 0;background: transparent;voice-family: "\"}\"";voice-family: inherit;}
-#tabs ul{z-index:5;font-size:11px;font-weight:bold;margin:0;padding:0;list-style:none;margin-left: 10px;}
+#tabs ul{font-size:11px;font-weight:bold;margin:0;padding:0;list-style:none;margin-left: 10px;}
 #tabs li{display:inline;margin:0 2px 0 0;padding:0;text-transform:uppercase;}
 #tabs a.tablink {float:left;margin:0 2px 0 0;padding:0 0 1px 3px;text-decoration:none;background-color:#ededed;border:1px solid #d5d5d5;}
 #tabs a.tablink span {float:left;display:block;background: transparent;padding:4px 9px 2px 6px;}
 #tabs a.tablink:hover {background-color:white;}
 #tabs a.tablink:hover span{background-color: white;}
 #tabHeaderActive span, #tabHeaderActive a.tablink { background-color: white;}
-#tabHeaderActive a.tablink {border-bottom:1px solid white;}
-div.tabContent {position:relative;top:-1px;z-index:-5;clear:both;border:1px solid #d5d5d5;padding:5px;margin:0px;}
+div.tabContent {position:relative;top:-1px;clear:both;border:1px solid #d5d5d5;padding:5px;margin:0px;}
 /* END TABS */
 /* for pages: */
 ul.jjane {list-style:none;}
 ul.jjane .list_item { border-bottom:1px dashed #e0e0e0; padding:7px; }
 ul.jjane .list_item:hover { background:#c1d9f9; }
-ul.jjane a { text-decoration:none; color:#661bff; margin:10px 0; }
-ul.jjane a:hover { text-decoration:underline; }
-ul.jjane a:visited { color:#661bff; }
 ul.jjane li > ul {list-style:none;margin:0;padding:0;}
