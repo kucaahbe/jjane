@@ -1,29 +1,15 @@
-#jjane_panel {
-  background-color: white;
-  height:40px;
-  color:black;
-  border:1px solid #cfcccc;
-}
+#jjane_panel {background-color: white;height:40px;color:black;border:1px solid #cfcccc;}
 #jjane_panel span { vertical-align:top; }/* спан для того что б текст и картинки рисовались в опере и фф одинаково */
-#jjane_panel div {
-  float:left;
-  height:20px;
-  padding:10px;
-  margin:0px;
-  font-weight:bold;
-  border-left:1px solid #cfcccc;
-}
+#jjane_panel div {float:left;height:20px;padding:10px;margin:0px;font-weight:bold;border-left:1px solid #cfcccc;}
+
 .jjane { font-family:verdana,arial,helvetica,sans-serif; padding:0; margin:0; }
-.jjane a {color:#2b6fb6;font-weight:bold;}
+.jjane a {color:#2b6fb6;font-weight:bold;text-decoration:none;}
 h1.jjane {color:#2b6fb6;margin:10px;}
 
-/*
-#file_manager_breadcrumbs {   }
-#file_manager_breadcrumbs a { 
+#file_manager_breadcrumbs a {
   display:inline-block;
   text-decoration:none;
   background:#f3f3f3;
-  color:blue;
   padding:0px 5px;
   border-top:1px solid white;
   border-left:1px solid white;
@@ -36,44 +22,22 @@ h1.jjane {color:#2b6fb6;margin:10px;}
   border-right:1px solid white;
   border-bottom:1px solid white;
 }
-#file_manager_breadcrumbs a:visited { color:blue; }
-*/
 
-/*form.jjane {padding:5px;border:1px solid #d5d5d5;}*/
-/*form.jjane p {
-  width:100%;
-  border:none;
-}*/
 form.jjane label {margin:5px 0;font-weight:bold;}
 form.jjane input[type="submit"] {font-weight:bold;}
-/*
-form.jform p { margin:5px 0; }*/
-form.jjane textarea.mceEditor  { /*width:90%;*/ height:500px;/* margin:0 auto;*/}
-/*
-input.title { width:100%; height:35px; font-weight:bold; font-size:24px; }
-
-#preview_node { overflow: hidden; padding:5px; }
+form.jjane textarea.mceEditor  {width:99%;height:500px;}
+input.title {width:99%;height:25px;font-weight:bold;font-size:18px;}
+/*#preview_node { overflow: hidden; padding:5px; }
 #preview_node legend { text-decoration:none; color:#661bff; font-weight:bold; }
 #preview_node legend:hover { text-decoration:underline; cursor:pointer; }*/
 fieldset.collapsed { height:10px; border:1px solid transparent; border-top:1px solid black; }
 fieldset.expanded { border:1px solid black; }
-/*
-table.list {
-  width:100%;
-  text-align:left;
-  margin-bottom:5px;
-  background:white;
-  border-spacing:0;
-}
 
-
-table.list th,td { padding:2px; vertical-align:middle; }
-table.list td { height:30px; border-bottom:1px dashed #e0e0e0; }
-table.list th,#pages_list_header { background-color: #e2e5e9; padding:1px; font-weight:bold; }
-table.list tr:hover { background:#c1d9f9; border-bottom:1px dashed red; }
-table.list a { text-decoration:none; color:#661bff; }
-table.list a:hover { text-decoration:underline; }
-*/
+table.jjane {text-align:left;margin-bottom:5px;background:white;border-spacing:0;}
+table.jjane th,#pages_list_header {background-color:#e2e5e9;padding:3px;font-weight:bold;}
+table.jjane th,td { padding:2px; vertical-align:middle; }
+table.jjane td { height:30px; border-bottom:1px dashed #e0e0e0; }
+table.jjane tr:hover { background:#c1d9f9; border-bottom:1px dashed red; }
 /* START TABS */
 #tabs{margin:0 -5px 0 -5px;padding: 0;background: transparent;voice-family: "\"}\"";voice-family: inherit;}
 #tabs ul{z-index:5;font-size:11px;font-weight:bold;margin:0;padding:0;list-style:none;margin-left: 10px;}
@@ -86,20 +50,11 @@ table.list a:hover { text-decoration:underline; }
 #tabHeaderActive a.tablink {border-bottom:1px solid white;}
 div.tabContent {position:relative;top:-1px;z-index:-5;clear:both;border:1px solid #d5d5d5;padding:5px;margin:0px;}
 /* END TABS */
-/* for pages */
-/*
-  ul.list {
-  padding:0;
-  margin:0;
-  list-style:none;
-}
-ul.list .list_item { border-bottom:1px dashed #e0e0e0; padding:7px; }
-ul.list .list_item:hover { background:#c1d9f9; }
-ul.list a { text-decoration:none; color:#661bff; margin:10px 0; }
-ul.list a:hover { text-decoration:underline; }
-ul.list a:visited { color:#661bff; }
-ul.list li > ul {
-  list-style:none;
-  margin:0;
-  padding:0;
-}*/
+/* for pages: */
+ul.jjane {list-style:none;}
+ul.jjane .list_item { border-bottom:1px dashed #e0e0e0; padding:7px; }
+ul.jjane .list_item:hover { background:#c1d9f9; }
+ul.jjane a { text-decoration:none; color:#661bff; margin:10px 0; }
+ul.jjane a:hover { text-decoration:underline; }
+ul.jjane a:visited { color:#661bff; }
+ul.jjane li > ul {list-style:none;margin:0;padding:0;}
