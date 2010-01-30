@@ -1,4 +1,4 @@
 <p>
-<%= f.label t(:label_pagination) %><br />
+<%= f.label :pagination, t(:label_pagination) %><br />
 <%= f.select :pagination, options_for_select(%w[1 2 3 4 5 10 15 20 25 30], :selected => @page.pagination.to_s) %>
 </p>

@@ -1,7 +1,7 @@
 <% form_for @snippet, :html => { :class => 'jform' } do |f| %>
   <%= f.error_messages %>
   <p>
-  <%= f.label t(:label_name) %>
+  <%= f.label :name, t(:label_name) %>
   <%= f.text_field :name, :class => :title %>
   </p>
   <p>
