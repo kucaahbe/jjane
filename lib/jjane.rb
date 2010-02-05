@@ -1,7 +1,21 @@
+module JJane
+  VERSION="0.0.3-dev"
+
+  class <<self
+    def boot_log msg
+      puts "=> [JJane] " + msg
+    end
+
+    def booted
+      puts "=> ....................................."
+    end
+  end
+end
+
+JJane.boot_log "#{JJane::VERSION} starting"
 require 'jjane/rails_config'
-require 'jjane/models'
-require 'jjane/helpers'
-require 'jjane/controllers'
 require 'jjane/routing_extensions'
 require 'jjane/logger'
-require 'tiny_mce_config'
+require 'jjane/editor_config'
+JJane.boot_log "loaded."
+JJane.booted

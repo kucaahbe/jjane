@@ -1,11 +1,12 @@
-require 'paperclip'
 class AttachedFile < ActiveRecord::Base
 
   EXT_REGEXP = /\w+$/
 
-  acts_as_nested_set :parent_column => :directory_id, :dependent => :destroy
+    acts_as_nested_set :parent_column => :directory_id, :dependent => :destroy
 
-  has_attached_file :atachment, :styles => { 
+  has_attached_file :atachment,
+    :path => ":rails_root/attachments/:id/:style.:extension",
+    :styles => { 
     :thumb => "100x100#",
     :medium => "300x200#",
     :big => "800x600#"
