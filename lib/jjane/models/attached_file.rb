@@ -5,7 +5,8 @@ class AttachedFile < ActiveRecord::Base
     acts_as_nested_set :parent_column => :directory_id, :dependent => :destroy
 
   has_attached_file :atachment,
-    :path => ":rails_root/attachments/:id/:style.:extension",
+    :url => "/attachments/:id/:id_:style.:extension",
+    :whiny => false,
     :styles => { 
     :thumb => "100x100#",
     :medium => "300x200#",
@@ -17,7 +18,7 @@ class AttachedFile < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => :directory_id
 
   def file?
-    self.atachment_file_name
+    self.atachment_file_size
   end
 
   def directory?
