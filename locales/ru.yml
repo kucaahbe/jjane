@@ -35,6 +35,7 @@ ru:
   link_login:        'Войти'
   link_logout:       'Выйти'
   link_cancel:       'Отмена'
+  link_destroy:      'Удалить'
   link_show_node:    'Просмотреть страницу'
   link_show_page:    'Просмотреть материал'
   link_home_page:    'Вернуться на домашнюю'

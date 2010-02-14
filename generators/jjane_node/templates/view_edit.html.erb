@@ -5,6 +5,7 @@
   <p>
   <%%= f.submit t(:button_save) %> |
   <%%= link_to t(:link_to_node), show_node_path(@page.url,@<%= node_name %>) %> |
-  <%%= link_to_cancel root_url %>
+  <%%= link_to_cancel root_url %> |
+  <%%= link_to_destroy page_node_path(@<%= node_name %>.page_id,:<%= controller_name %>,@<%= node_name %>), t(:link_destroy) %>
   </p>
 <%% end %>
