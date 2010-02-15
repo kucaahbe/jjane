@@ -2,8 +2,12 @@ module JJane
   # Logger class consists helper methods for debugging
   module Logger
     # if you want to log something
-    def log(something,msg='')#:doc:
-      logger.info "###########################################################"
+    def log(something,msg=nil)#:doc:
+      if msg
+	logger.info "### #{msg.to_s} ###"
+      else
+	logger.info "#############################"
+      end
       if something.class==Array
 	logger.info "DEBUG::[#{something.class}]"
 	something.each_with_index do |s,i|
@@ -12,7 +16,6 @@ module JJane
       else
 	logger.info "DEBUG::[#{something.class}]> "+something.inspect
       end
-      logger.info msg
     end
   end
 end
