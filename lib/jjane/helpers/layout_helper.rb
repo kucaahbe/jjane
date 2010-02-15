@@ -10,7 +10,7 @@ module JJane
 
       # Показывает напоминания типа: "вы успешно авторизировались"
       def notice
-	partial 'shared/notice'
+	partial 'shared/notice' if flash
       end
 
       # alias for stylesheet_link_tag

@@ -1,5 +1,3 @@
-<% if flash -%>
-  <% flash.each_key do |key| -%>
-    <%= content_tag :div, flash[key], :id => key, :class =>"flash_#{key.to_s.include?('error') ? 'error' : 'notice'}" %>
-  <% end -%>
+<% flash.each_key do |key| -%>
+  <%= content_tag :div, flash[key], :id => key, :class =>"flash_#{key.to_s.include?('error') ? 'error' : 'notice'}" %>
 <% end -%>
