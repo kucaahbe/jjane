@@ -8,6 +8,7 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
   def manifest
     record do |m|
       m.directory File.join('app','views','pages','static')
+      m.directory File.join('app','views','users')
       m.directory File.join('app','views','login')
 
       # csses and main layout
@@ -24,8 +25,14 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
       for model in models do
 	m.file "models/#{model}_model.rb", File.join('app','models',"#{model}.rb")
       end
-      # files for login controller
+      # views for login controller
       m.file 'views/login_form.html.erb', File.join('app','views','login','welcome.html.erb')
+      # views for users controller
+      m.file 'views/users/edit.html.erb', File.join('app','views','users','edit.html.erb')
+      m.file 'views/users/_form.html.erb', File.join('app','views','users','_form.html.erb')
+      m.file 'views/users/index.html.erb', File.join('app','views','users','index.html.erb')
+      m.file 'views/users/new.html.erb', File.join('app','views','users','new.html.erb')
+      m.file 'views/users/show.html.erb', File.join('app','views','users','show.html.erb')
 
       # base migration
       m.migration_template 'migration.rb', 'db/migrate'
@@ -35,10 +42,10 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
   private
 
   def controllers
-    %w[ admin crud login pages site snippets attached_files ]
+    %w[ admin crud login pages site snippets attached_files users ]
   end
 
   def models
-    %w[ user_session ]
+    %w[ user_session user ]
   end
 end

@@ -9,8 +9,7 @@ Another Rails CMF plugin
 * rake jjane:copy_files
 * sudo rake gems:install
 * ./script/generate jjane_base 
-* ./script/generate jjane_user [field:type, field:type]
-* ./script/generate jjane_node NodeName [field:type, field:type]
+* ./script/generate jjane_node NodeName
 * rake db:migrate
 * rake jjane:setup
 * add to end of config/routes.rb lines

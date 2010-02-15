@@ -69,6 +69,17 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
       t.string   :copyright
       t.string   :robots
     end
+
+    create_table :users do |t|
+      t.string   :name
+      t.string   :email
+      t.integer  :group_id
+      t.string   :crypted_password
+      t.string	 :password_salt
+      t.string	 :persistence_token
+
+      t.timestamps
+    end
   end
 
   def self.down
@@ -79,5 +90,6 @@ class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
     drop_table   :nodes
     drop_table   :config
     drop_table   :meta
+    drop_table   :users
   end
 end
