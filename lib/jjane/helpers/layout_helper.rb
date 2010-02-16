@@ -38,21 +38,6 @@ module JJane
 	partial 'shared/administrator_panel' if logged_in?('roots')
       end
 
-      #--
-      #подумать_нужно ли он сдесь_start
-      def login_form#:nodoc:
-	partial 'shared/login_form' unless logged_in?
-      end
-
-      def nodes_from(page, count=5)#:nodoc:
-	nodes = Page.find_by_link(page.to_s).nodes.find(:all, :limit => count, :order => "created_at DESC")
-	partial 'shared/news', :nodes => nodes
-      rescue
-        %Q(no such page '#{page.to_s}')
-      end
-      #поддумать_нужно ли он сдесь__end
-      #++
-
       # writes snippet content to page
       #   snippet('name_of_snippet')
       # options:
