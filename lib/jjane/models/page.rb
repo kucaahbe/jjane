@@ -18,7 +18,7 @@ class Page < ActiveRecord::Base
   validates_numericality_of :pagination, :allow_nil => true, :only_integer => true, :greater_than => 0
   validates_format_of :link,
     :with => /^[a-zA-Z][\w_]+$/
-  validates_format_of :name, :with => /^[a-z]+$/
+  validates_format_of :name, :with => /^[a-z,_]+$/
 
   # callbacks
   before_save :calculate_url

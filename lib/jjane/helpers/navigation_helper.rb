@@ -52,36 +52,64 @@ module JJane
 	end
       end
 
-      # UL LI navigation menu
-      def ul_li_menu(name='main',options={})
+      # navigation menu based on unordered lists
+      # name - name of menu to display
+      def menu menu_name = 'main', options = {}
 	default_options = {
-	  :roots_only => false,
-	  :dir_class => 'dir',
-	  :active_class => 'active',
+	  :dir_class         =>    'dir',
+	  :active_dir_class  => 'active',
 	  :active_link_class => 'active'
 	}
-	default_html_options = { :id => 'nav' }
-
-	if options[:html]
-	  options[:html] = default_html_options.merge(options[:html])
-	else
-	  options[:html] = default_html_options
-	end
+	html_options = default_html_options = { :id => 'nav' }
+	html_options = default_html_options.merge(options[:html]) if options[:html]
+	options.delete(:html)
 	options = default_options.merge(options)
 
-	view = ''
-	Page.roots.each do |root|
-	  view += partial(
-	  'shared/ul_li_menu',
-	  :page => root,
-	  :menu_name => name,
-	  :roots_only => options[:roots_only],
-	  :dir_class => options[:dir_class],
-	  :active_class => options[:active_class],
-	  :active_link_class => options[:active_link_class]
-	  )
+	if options[:for_page]
+	  collection = Page.find_by_name(options[:for_page]).self_and_descendants
+	else
+	  collection = Page.find(:all, :order => 'lft ASC')
 	end
-	content_tag :ul, view, options[:html]
+	pages = []
+	Page.each_with_level(collection) do |page,level|
+	  pages += [{
+	    :url => page.url,
+	    :menu => page.menu,
+	    :level => level,
+	    :have_children => page.have_children?,
+	    :visible => page.visible_in_menu?(menu_name)
+	  }]
+	end
+
+	menu_ = %[<ul id="#{html_options[:id]}" class="#{html_options[:class]}">\n]
+	pages.each_index do |i|
+	  previous = i==0 ? nil : pages[i-1]; current = pages[i]
+
+	  insert_active_dir_class = false
+	  if defined?(@page) && current[:url] == @page.url
+	    link = %[<a href="#{root_url+current[:url]}" class="#{options[:active_link_class]}">#{current[:menu]}</a>]
+	    insert_active_dir_class = true
+	  else
+	    link = %[<a href="#{root_url+current[:url]}">#{current[:menu]}</a>]
+	  end
+
+	  menu_ += %[</ul>\n</li>] if previous and current[:level] < previous[:level]
+
+	  if current[:have_children]
+	    menu_ += %[<li class="#{options[:dir_class]}#{insert_active_dir_class ? ' '+options[:active_dir_class].to_s : ''}">]
+	  else
+	    menu_ += %[<li class="#{insert_active_dir_class ? ' '+options[:active_dir_class].to_s : ''}">]
+	  end
+
+	  menu_ += link
+
+	  if current[:have_children] 
+	    menu_ += "\n<ul>\n"
+	  else
+	    menu_ += "</li>\n"
+	  end
+	end
+	menu_ += "</ul>"
       end
 
       # Draws link to page specified by it's unique ID
