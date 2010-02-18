@@ -104,9 +104,9 @@ module JJane
 	  menu_ += %[#{l}</ul>\n</li>\n] if previous and current[:level] < previous[:level]
 
 	  if current[:have_children]
-	    menu_ += %[#{l}<li class="#{options[:dir_class]}#{insert_active_dir_class ? ' '+options[:active_dir_class].to_s : ''}">\n]
+	    menu_ += %[#{l}<li class="#{options[:dir_class]}#{' '+options[:active_dir_class].to_s if insert_active_dir_class}">\n]
 	  else
-	    menu_ += %[#{l}<li#{insert_active_dir_class ? ' class="'+options[:active_dir_class].to_s+'"' : ''}>]
+	    menu_ += %[#{l}<li#{' class="'+options[:active_dir_class].to_s+'"' if insert_active_dir_class}>]
 	  end
 
 	  menu_ += link
@@ -118,7 +118,7 @@ module JJane
 	  end
 	  menu_ += "</ul>\n</li>"*current[:level] if pages[i] == pages.last
 	end
-	logger.info menu_ += "</ul>"
+	menu_ += "</ul>"
       end
 
       # Draws link to page specified by it's unique ID
