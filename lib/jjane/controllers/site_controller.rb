@@ -20,7 +20,13 @@ class SiteController < ApplicationController
 
   def find_by_day
     date = Date.new(params[:year].to_i,params[:month].to_i,params[:day].to_i)
-    @nodes = @page.nodes.find(:all, :conditions => { :created_at => date.beginning_of_day..date.end_of_day })
+    @nodes = @page.nodes.paginate(
+      :all,
+      :conditions => { :created_at => date.beginning_of_day..date.end_of_day },
+      :page => params[:page],
+      :per_page => @page.pagination,
+      :order => 'created_at DESC'
+    )
     unless @nodes.empty?
       render "/pages/#{@page.page_type}/show", :layout => @page.layout
     else

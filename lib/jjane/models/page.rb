@@ -44,14 +44,6 @@ class Page < ActiveRecord::Base
     self.send "nav_#{name}".to_sym
   end
 
-  def some_child_visible_in_menu?(name)
-    if self.have_children?
-      self.leaves.exists?("nav_#{name}".to_sym => true)
-    else
-      false
-    end
-  end
-
   def have_children?
     not self.children.empty?
   end
