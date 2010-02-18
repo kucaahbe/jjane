@@ -7,20 +7,20 @@
   <p><%= f.hidden_field :user_id %></p>
 
   <p>
-  <%= f.label t(:label_id) %><br />
+  <%= f.label :name, t(:label_id) %><br />
   <%= f.text_field :name %>
   </p>
   <p>
-  <%= f.label t(:label_menu) %><br />
-  <%= f.text_field :menu %>
-  </p>
-  <p>
-  <%= f.label t(:label_link) %><br />
+  <%= f.label :link, t(:label_link) %><br />
   <%= "/#{@page.parent.url}/" if @page.child? %>
   <%= f.text_field :link %>
   </p>
   <p>
-  <%= f.label t(:label_type) %><br />
+  <%= f.label :menu, t(:label_menu) %><br />
+  <%= f.text_field :menu %>
+  </p>
+  <p>
+  <%= f.label :page_type, t(:label_type) %><br />
   <%= f.select :page_type, grouped_options_for_select(@page_types) %>
   </p>
   <p>
