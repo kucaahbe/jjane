@@ -91,6 +91,8 @@ module JJane
 	pages.each_index do |i|
 	  previous = i==0 ? nil : pages[i-1]; current = pages[i]
 
+	  l = ' '*current[:level]
+
 	  insert_active_dir_class = false
 	  if defined?(@page) && current[:url] == @page.url
 	    link = %[<a href="#{root_url+current[:url]}" class="#{options[:active_link_class]}">#{current[:menu]}</a>]
@@ -99,23 +101,24 @@ module JJane
 	    link = %[<a href="#{root_url+current[:url]}">#{current[:menu]}</a>]
 	  end
 
-	  menu_ += %[</ul>\n</li>\n] if previous and current[:level] < previous[:level]
+	  menu_ += %[#{l}</ul>\n</li>\n] if previous and current[:level] < previous[:level]
 
 	  if current[:have_children]
-	    menu_ += %[<li class="#{options[:dir_class]}#{insert_active_dir_class ? ' '+options[:active_dir_class].to_s : ''}">]
+	    menu_ += %[#{l}<li class="#{options[:dir_class]}#{insert_active_dir_class ? ' '+options[:active_dir_class].to_s : ''}">\n]
 	  else
-	    menu_ += %[<li class="#{insert_active_dir_class ? ' '+options[:active_dir_class].to_s : ''}">]
+	    menu_ += %[#{l}<li#{insert_active_dir_class ? ' class="'+options[:active_dir_class].to_s+'"' : ''}>]
 	  end
 
 	  menu_ += link
 
 	  if current[:have_children] 
-	    menu_ += "\n<ul>\n"
+	    menu_ += "#{l}\n<ul>\n"
 	  else
 	    menu_ += "</li>\n"
 	  end
+	  menu_ += "</ul>\n</li>"*current[:level] if pages[i] == pages.last
 	end
-	menu_ += "</ul>"
+	logger.info menu_ += "</ul>"
       end
 
       # Draws link to page specified by it's unique ID
