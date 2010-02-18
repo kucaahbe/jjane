@@ -72,13 +72,19 @@ module JJane
 	end
 	pages = []
 	Page.each_with_level(collection) do |page,level|
-	  pages += [{
+	  pages << {
 	    :url => page.url,
 	    :menu => page.menu,
 	    :level => level,
-	    :have_children => page.have_children?,
 	    :visible => page.visible_in_menu?(menu_name)
-	  }]
+	  }
+	end
+	pages.map! do |p|
+	  if p == pages.last
+	    p.update :have_children => false
+	  else
+	    p.update(:have_children => p[:level] < pages[pages.index(p)+1][:level])
+	  end
 	end
 
 	menu_ = %[<ul id="#{html_options[:id]}" class="#{html_options[:class]}">\n]
@@ -93,7 +99,7 @@ module JJane
 	    link = %[<a href="#{root_url+current[:url]}">#{current[:menu]}</a>]
 	  end
 
-	  menu_ += %[</ul>\n</li>] if previous and current[:level] < previous[:level]
+	  menu_ += %[</ul>\n</li>\n] if previous and current[:level] < previous[:level]
 
 	  if current[:have_children]
 	    menu_ += %[<li class="#{options[:dir_class]}#{insert_active_dir_class ? ' '+options[:active_dir_class].to_s : ''}">]
