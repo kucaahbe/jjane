@@ -65,11 +65,13 @@ module JJane
 	options.delete(:html)
 	options = default_options.merge(options)
 
+	# collection
 	if options[:for_page]
 	  collection = Page.find_by_name(options[:for_page]).self_and_descendants
 	else
 	  collection = Page.find(:all, :order => 'lft ASC')
 	end
+	# one SQL!
 	pages = []
 	Page.each_with_level(collection) do |page,level|
 	  pages << {
@@ -79,6 +81,7 @@ module JJane
 	    :visible => page.visible_in_menu?(menu_name)
 	  }
 	end
+	# detecting children(ето делается для избежания дополнительного SQL-запроса)
 	pages.map! do |p|
 	  if p == pages.last
 	    p.update :have_children => false
@@ -86,7 +89,42 @@ module JJane
 	    p.update(:have_children => p[:level] < pages[pages.index(p)+1][:level])
 	  end
 	end
+	pages.each do |p|
+	  logger.info ' '*p[:level]+p[:menu]+' '+p[:have_children].to_s
+	end
+	logger.info '-------------'
+	# deleting invisible pages
+	this_level = 0
+	destroy_this_level = false
+	pages.each_index do |i|
+	  if destroy_this_level and (pages[i][:level] > this_level)
+	    pages[i] = nil
+	  else
+	    this_level = pages[i][:level]
+	    if pages[i][:visible]
+	      destroy_this_level = false
+	    else
+	      destroy_this_level = true
+	      pages[i] = nil
+	    end
+	  end
+	end
+	pages.compact!
+	# fixing :have_children
+	pages.each_index do |i|
+	  case i
+	  when 0
+	  when pages.length-1
+	    pages[i][:have_children]=false
+	  else
+	    pages[i-1][:have_children]=false if pages[i][:level] <= pages[i-1][:level]
+	  end
+	end
+	pages.each do |p|
+	  logger.info ' '*p[:level]+p[:menu]+' '+p[:have_children].to_s
+	end
 
+	# draw menu
 	menu_ = %[<ul id="#{html_options[:id]}" class="#{html_options[:class]}">\n]
 	pages.each_index do |i|
 	  previous = i==0 ? nil : pages[i-1]; current = pages[i]
@@ -101,7 +139,7 @@ module JJane
 	    link = %[<a href="#{root_url+current[:url]}">#{current[:menu]}</a>]
 	  end
 
-	  menu_ += %[#{l}</ul>\n</li>\n] if previous and current[:level] < previous[:level]
+	  menu_ += %[#{l}#{"</ul>\n</li>\n"*(previous[:level]-current[:level])}] if previous and current[:level] < previous[:level]
 
 	  if current[:have_children]
 	    menu_ += %[#{l}<li class="#{options[:dir_class]}#{' '+options[:active_dir_class].to_s if insert_active_dir_class}">\n]
