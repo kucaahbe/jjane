@@ -12,7 +12,7 @@ module JJane
       #   :before_node - what to draw before node(if :include_node specified)
       #   :after_node - what to draw after node(if :include_node specified)
       #   :html - hash of html options for :framing_tag
-      def breadcrumbs(options={})
+      def breadcrumbs options={}
 	if controller_name=='site' then
 	  default_options = {
 	    :framing_tag => :div,
@@ -55,6 +55,14 @@ module JJane
       # navigation menu based on unordered lists
       # name - name of menu to display
       def menu menu_name = 'main', options = {}
+	ul_li_menu(menu_name,options) do |page|
+          %[<a href="#{root_url+page[:page].url}" #{%[class="#{options[:active_link_class]}"] if options[:active_link_class] && page[:page]==@page}>#{page[:page].menu}</a>]
+	end
+      end
+
+      def ul_li_menu menu_name = 'main', options = {}, &block
+	raise 'no block given' unless block_given?
+
 	options = {
 	  :dir_class         =>    'dir',
 	  :active_dir_class  => 'active',
@@ -78,12 +86,7 @@ module JJane
 	    :visible => page.visible_in_menu?(menu_name)
 	  }
 	end
-=begin
-	pages.each do |p|
-	  logger.info ' '*p[:level]+p[:menu]+' '+p[:have_children].to_s
-	end
-	logger.info '-------------'
-=end
+
 	# deleting invisible pages
 	this_level = 0
 	destroy_this_level = false
@@ -111,30 +114,26 @@ module JJane
 	  end
 	end
 
-=begin
-	pages.each do |p|
-	  logger.info ' '*p[:level]+p[:menu]+' '+p[:have_children].to_s
-	end
-=end
 	# draw menu
-	ul_li_raw_menu(pages,options) do |page|
-          %[<a href="#{root_url+page[:page].url}" #{%[class="#{options[:active_link_class]}"] if options[:active_link_class] && page[:page]==@page}>#{page[:page].menu}</a>]
-	end
+	ul_li_for(pages,options,&block)
       end
 
       # Draws link to page specified by it's unique ID
-      def link_to_page(name, page_name, options={})
+      def link_to_page name, page_name, options={}
 	link_to name, root_url+Page.find_by_name(page_name.to_s).url, options
       rescue
 	warning("no such page with ID '#{page_name}'")
       end
 
-      # draws raw unordered list for site pages using 'pages' hash
-      # 'pages' hash format:
+      # draws raw unordered list for 'pages' array
+      # each element in 'pages' must be a hash with keys:
       #   :level - deep of nesting
       #   :have_children - boolean value that represents is this item have a children
-      # content to include in <li>...</li> tags is block given for ul_li_raw_menu
-      # block must presents
+      # content to include in <li>...</li> generated in block given to ul_li_for,like
+      #   ul_li_for(pages,options) do |page|
+      #     '<a href="#{pages[:page]}">pages[:page].menu</a>'
+      #   end
+      #
       # options:
       #   :include_framing - unclide framing <ul> and </ul> tags?(default true)
       #   :html - hash of html options(no default)
@@ -143,7 +142,7 @@ module JJane
       #   :active_dir_class что б опция бралась из блока,хехе,ебать
       #   
       #++
-      def ul_li_raw_menu(pages,options={}, &block)
+      def ul_li_for pages, options={}, &block
 	raise 'no block given' unless block_given?
 
 	options = {
