@@ -55,15 +55,12 @@ module JJane
       # navigation menu based on unordered lists
       # name - name of menu to display
       def menu menu_name = 'main', options = {}
-	default_options = {
+	options = {
 	  :dir_class         =>    'dir',
 	  :active_dir_class  => 'active',
-	  :active_link_class => 'active'
-	}
-	html_options = default_html_options = { :id => 'nav' }
-	html_options = default_html_options.merge(options[:html]) if options[:html]
-	options.delete(:html)
-	options = default_options.merge(options)
+	  :active_link_class => 'active',
+	  :html => { :id => 'nav' }
+	}.deep_merge(options)
 
 	# collection
 	if options[:for_page]
@@ -89,10 +86,12 @@ module JJane
 	    p.update(:have_children => p[:level] < pages[pages.index(p)+1][:level])
 	  end
 	end
+=begin
 	pages.each do |p|
 	  logger.info ' '*p[:level]+p[:menu]+' '+p[:have_children].to_s
 	end
 	logger.info '-------------'
+=end
 	# deleting invisible pages
 	this_level = 0
 	destroy_this_level = false
@@ -120,43 +119,15 @@ module JJane
 	    pages[i-1][:have_children]=false if pages[i][:level] <= pages[i-1][:level]
 	  end
 	end
+=begin
 	pages.each do |p|
 	  logger.info ' '*p[:level]+p[:menu]+' '+p[:have_children].to_s
 	end
-
+=end
 	# draw menu
-	menu_ = %[<ul id="#{html_options[:id]}" class="#{html_options[:class]}">\n]
-	pages.each_index do |i|
-	  previous = i==0 ? nil : pages[i-1]; current = pages[i]
-
-	  l = ' '*current[:level]
-
-	  insert_active_dir_class = false
-	  if defined?(@page) && current[:url] == @page.url
-	    link = %[<a href="#{root_url+current[:url]}" class="#{options[:active_link_class]}">#{current[:menu]}</a>]
-	    insert_active_dir_class = true
-	  else
-	    link = %[<a href="#{root_url+current[:url]}">#{current[:menu]}</a>]
-	  end
-
-	  menu_ += %[#{l}#{"</ul>\n</li>\n"*(previous[:level]-current[:level])}] if previous and current[:level] < previous[:level]
-
-	  if current[:have_children]
-	    menu_ += %[#{l}<li class="#{options[:dir_class]}#{' '+options[:active_dir_class].to_s if insert_active_dir_class}">\n]
-	  else
-	    menu_ += %[#{l}<li#{' class="'+options[:active_dir_class].to_s+'"' if insert_active_dir_class}>]
-	  end
-
-	  menu_ += link
-
-	  if current[:have_children] 
-	    menu_ += "#{l}\n<ul>\n"
-	  else
-	    menu_ += "</li>\n"
-	  end
-	  menu_ += "</ul>\n</li>"*current[:level] if pages[i] == pages.last
+	ul_li_raw_menu(pages,options.merge(:include_framing => true)) do |page|
+          %[<a href="#{root_url+page[:url]}">#{page[:menu]}</a>]
 	end
-	menu_ += "</ul>"
       end
 
       # Draws link to page specified by it's unique ID
@@ -164,6 +135,52 @@ module JJane
 	link_to name, root_url+Page.find_by_name(page_name.to_s).url, options
       rescue
 	warning("no such page with ID '#{page_name}'")
+      end
+
+      def ul_li_raw_menu(pages,options={}, &block)
+	raise 'no block given' unless block_given?
+	options = { :html => {} }.deep_merge(options)
+
+	if options[:include_framing]
+	  menu = %[<ul id="#{options[:html][:id]}" class="#{options[:html][:class]}">\n]
+	else
+	  menu = ''
+	end
+
+	pages.each_index do |i|
+	  previous = i==0 ? nil : pages[i-1]; current = pages[i]
+
+	  l = ' '*current[:level]
+
+	  menu += %[#{l}#{"</ul>\n</li>\n"*(previous[:level]-current[:level])}] if previous and current[:level] < previous[:level]
+
+	  if current[:have_children]
+	    menu += %[#{l}<li class="#{options[:dir_class]}#{' '+options[:active_dir_class].to_s if options[:insert_active_dir_class]}">\n]
+	  else
+	    menu += %[#{l}<li#{' class="'+options[:active_dir_class].to_s+'"' if options[:insert_active_dir_class]}>]
+	  end
+
+	  if block_called_from_erb?(block)
+	    menu += capture(current,&block)
+	  else
+	    menu += yield(current)
+	  end
+
+	  if current[:have_children] 
+	    menu += "#{l}\n<ul>\n"
+	  else
+	    menu += "</li>\n"
+	  end
+	  menu += "</ul>\n</li>"*current[:level] if pages[i] == pages.last
+	end
+
+	menu += "</ul>" if options[:include_framing]
+
+	if block_called_from_erb?(block)
+	  concat menu
+	else
+	  return menu
+	end
       end
     end
   end
