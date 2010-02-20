@@ -55,6 +55,13 @@ module JJane
       # navigation menu based on unordered lists
       # name - name of menu to display
       def menu menu_name = 'main', options = {}
+	options = {
+	  :dir_class         =>    'dir',
+	  :active_dir_class  => 'active',
+	  :active_link_class => 'active',
+	  :html => { :id => 'nav' }
+	}.deep_merge(options)
+
 	ul_li_menu(menu_name,options) do |page|
           %[<a href="#{root_url+page[:page].url}" #{%[class="#{options[:active_link_class]}"] if options[:active_link_class] && page[:page]==@page}>#{page[:page].menu}</a>]
 	end
@@ -62,13 +69,6 @@ module JJane
 
       def ul_li_menu menu_name = 'main', options = {}, &block
 	raise 'no block given' unless block_given?
-
-	options = {
-	  :dir_class         =>    'dir',
-	  :active_dir_class  => 'active',
-	  :active_link_class => 'active',
-	  :html => { :id => 'nav' }
-	}.deep_merge(options)
 
 	# collection
 	if options[:for_page]
