@@ -152,10 +152,10 @@ module JJane
 
 	  l = ' '*current[:level]
 
-	  menu += %[#{l}#{"</ul>\n</li>\n"*(previous[:level]-current[:level])}] if previous and current[:level] < previous[:level]
+	  menu += %[ #{l}#{"</ul>\n#{l}</li>\n"*(previous[:level]-current[:level])}] if previous and current[:level] < previous[:level]
 
 	  if current[:have_children]
-	    menu += %[#{l}<li class="#{options[:dir_class]}#{' '+options[:active_dir_class].to_s if options[:insert_active_dir_class]}">\n]
+	    menu += %[#{l}<li class="#{options[:dir_class]}#{' '+options[:active_dir_class].to_s if options[:insert_active_dir_class]}">]
 	  else
 	    menu += %[#{l}<li#{' class="'+options[:active_dir_class].to_s+'"' if options[:insert_active_dir_class]}>]
 	  end
@@ -167,7 +167,7 @@ module JJane
 	  end
 
 	  if current[:have_children] 
-	    menu += "#{l}\n<ul>\n"
+	    menu += "\n #{l}<ul>\n"
 	  else
 	    menu += "</li>\n"
 	  end
