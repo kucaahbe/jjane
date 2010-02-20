@@ -125,7 +125,7 @@ module JJane
 	end
 =end
 	# draw menu
-	ul_li_raw_menu(pages,options.merge(:include_framing => true)) do |page|
+	ul_li_raw_menu(pages,options) do |page|
           %[<a href="#{root_url+page[:url]}">#{page[:menu]}</a>]
 	end
       end
@@ -139,7 +139,11 @@ module JJane
 
       def ul_li_raw_menu(pages,options={}, &block)
 	raise 'no block given' unless block_given?
-	options = { :html => {} }.deep_merge(options)
+
+	options = {
+	  :include_framing => true
+	  :html => { :id => '', :class => ''}
+	}.deep_merge(options)
 
 	if options[:include_framing]
 	  menu = %[<ul id="#{options[:html][:id]}" class="#{options[:html][:class]}">\n]
@@ -155,7 +159,7 @@ module JJane
 	  menu += %[ #{l}#{"</ul>\n#{l}</li>\n"*(previous[:level]-current[:level])}] if previous and current[:level] < previous[:level]
 
 	  if current[:have_children]
-	    menu += %[#{l}<li class="#{options[:dir_class]}#{' '+options[:active_dir_class].to_s if options[:insert_active_dir_class]}">]
+	    menu += %[#{l}<li class="#{options[:dir_class] if options[:dir_class]}#{' '+options[:active_dir_class].to_s if options[:insert_active_dir_class]}">]
 	  else
 	    menu += %[#{l}<li#{' class="'+options[:active_dir_class].to_s+'"' if options[:insert_active_dir_class]}>]
 	  end
