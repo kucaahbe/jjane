@@ -137,11 +137,26 @@ module JJane
 	warning("no such page with ID '#{page_name}'")
       end
 
+      # draws raw unordered list for site pages using 'pages' hash
+      # 'pages' hash format:
+      #   :level - deep of nesting
+      #   :have_children - boolean value that represents is this item have a children
+      # content to include in <li>...</li> tags is block given for ul_li_raw_menu
+      # block must presents
+      # options:
+      #   :include_framing - unclide framing <ul> and </ul> tags?(default true)
+      #   :html - hash of html options(no default)
+      #   :dir_class - class for using in <li> tags of objects that has children(default nil)
+      #--TODO
+      #   :active_dir_class что б опция бралась из блока,хехе,ебать
+      #   
+      #++
       def ul_li_raw_menu(pages,options={}, &block)
 	raise 'no block given' unless block_given?
 
 	options = {
-	  :include_framing => true
+	  :dir_class => nil,
+	  :include_framing => true,
 	  :html => { :id => '', :class => ''}
 	}.deep_merge(options)
 
