@@ -68,6 +68,7 @@ module JJane
 	else
 	  collection = Page.find(:all, :order => 'lft ASC')
 	end
+
 	# one SQL!
 	pages = []
 	Page.each_with_level(collection) do |page,level|
@@ -76,14 +77,6 @@ module JJane
 	    :level => level,
 	    :visible => page.visible_in_menu?(menu_name)
 	  }
-	end
-	# detecting children(ето делается для избежания дополнительного SQL-запроса)
-	pages.map! do |p|
-	  if p == pages.last
-	    p.update :have_children => false
-	  else
-	    p.update(:have_children => p[:level] < pages[pages.index(p)+1][:level])
-	  end
 	end
 =begin
 	pages.each do |p|
@@ -108,21 +101,16 @@ module JJane
 	  end
 	end
 	pages.compact!
-	# fixing :have_children
-	pages.each_index do |i|
-	  case i
-	  when 0              #first
-	    if pages[i+1]===nil
-	      pages[i][:have_children] = false
-	    else
-	      pages[i][:have_children]=false if pages[i+1][:level] == pages[i][:level]
-	    end
-	  when pages.length-1 #last
-	    pages[i][:have_children]=false
-	  else                #other
-	    pages[i-1][:have_children]=false if pages[i][:level] <= pages[i-1][:level]
+
+	# detecting children(ето делается для избежания дополнительного SQL-запроса)
+	pages.map! do |p|
+	  if p == pages.last
+	    p.update :have_children => false
+	  else
+	    p.update(:have_children => p[:level] < pages[pages.index(p)+1][:level])
 	  end
 	end
+
 =begin
 	pages.each do |p|
 	  logger.info ' '*p[:level]+p[:menu]+' '+p[:have_children].to_s
