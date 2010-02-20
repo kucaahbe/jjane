@@ -72,8 +72,7 @@ module JJane
 	pages = []
 	Page.each_with_level(collection) do |page,level|
 	  pages << {
-	    :url => page.url,
-	    :menu => page.menu,
+	    :page => page,
 	    :level => level,
 	    :visible => page.visible_in_menu?(menu_name)
 	  }
@@ -112,10 +111,15 @@ module JJane
 	# fixing :have_children
 	pages.each_index do |i|
 	  case i
-	  when 0
-	  when pages.length-1
+	  when 0              #first
+	    if pages[i+1]===nil
+	      pages[i][:have_children] = false
+	    else
+	      pages[i][:have_children]=false if pages[i+1][:level] == pages[i][:level]
+	    end
+	  when pages.length-1 #last
 	    pages[i][:have_children]=false
-	  else
+	  else                #other
 	    pages[i-1][:have_children]=false if pages[i][:level] <= pages[i-1][:level]
 	  end
 	end
@@ -126,7 +130,7 @@ module JJane
 =end
 	# draw menu
 	ul_li_raw_menu(pages,options) do |page|
-          %[<a href="#{root_url+page[:url]}">#{page[:menu]}</a>]
+          %[<a href="#{root_url+page[:page].url}" #{%[class="#{options[:active_link_class]}"] if options[:active_link_class] && page[:page]==@page}>#{page[:page].menu}</a>]
 	end
       end
 
