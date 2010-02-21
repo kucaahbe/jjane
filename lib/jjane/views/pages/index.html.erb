@@ -14,10 +14,33 @@
   <div style="clear:both;"></div>
   </li>
 
-  <% @roots.each do |root| %>
-    <%= render 'tree_item', :page => root%>
+  <% ul_li_for(@pages,:include_framing => false) do |current| %>
+    <% content_tag :div, :style => "padding-left:#{10 * current[:page].level}px;", :class => :list_item, :onmouseover =>"$('show_#{current[:page].id}').show()", :onmouseout => "$('show_#{current[:page].id}').hide()" do %>
+      <div style="float:left">
+	<%= published_img(current[:page]) %>
+	<%= link_to %[#{current[:page].name} | #{current[:page].menu}], edit_page_path(current[:page]) %>
+	&nbsp; &nbsp;
+	<%= link_to "(#{t(:page_show)})", root_url+current[:page].url, :style => 'display:none; color:black;', :id => "show_#{current[:page].id}" %>
+      </div>
+
+      <div style="float:right; margin-left:20px;">
+	<%= link_to_new new_page_child_path(current[:page]) %>
+	<%= link_to_destroy current[:page] %>
+      </div>
+
+      <div style="float:right;">
+	<% remote_form_for current[:page], :html => { :style => 'margin:0;'} do |f| %>
+	  <% @menus_columns.each do |column| %>
+	    <%= f.check_box column.to_sym, :id => column+'_'+current[:page].id.to_s, :onclick => "this.form.onsubmit();" %>
+	  <% end %>
+	<% end %>
+      </div>
+
+      <div style="clear:both"></div>
+    <% end %>
+
   <% end %>
-</ul
+</ul>
 
 <%= link_to_new new_page_path %>
 

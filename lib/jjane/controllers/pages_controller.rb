@@ -6,9 +6,16 @@ class PagesController < AdminController#:nodoc:
   before_filter :find_page, :only => [:edit, :update, :destroy]
 
   def index
-    @roots = Page.roots
     @pages = []
-    Page.each_with_level( Page.find(:all, :order => 'lft ASC') ) { |page,level| @pages << { :page => page, :level => level } }
+    Page.each_with_level( Page.find(:all, :order => 'lft ASC') ) do |page,level| 
+      @pages << {
+	:page => page,
+	:id => dom_id(page),
+	:class => dom_class(Page),
+	:level => level,
+	:have_children => page.have_children?
+      }
+    end
     @menus_columns = Page.menus_columns
   end
 
