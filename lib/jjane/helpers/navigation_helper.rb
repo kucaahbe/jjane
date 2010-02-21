@@ -129,6 +129,8 @@ module JJane
       # each element in 'pages' must be a hash with keys:
       #   :level - deep of nesting
       #   :have_children - boolean value that represents is this item have a children
+      #   :id - dom id for <li> tag
+      #   :class - dom class for <li> tag
       # content to include in <li>...</li> generated in block given to ul_li_for,like
       #   ul_li_for(pages,options) do |page|
       #     '<a href="#{pages[:page]}">pages[:page].menu</a>'
@@ -164,10 +166,11 @@ module JJane
 
 	  menu += %[ #{l}#{"</ul>\n#{l}</li>\n"*(previous[:level]-current[:level])}] if previous and current[:level] < previous[:level]
 
+	  menu += %[#{l}<li#{' id="'+current[:id].to_s+'"' if current[:id]}]
 	  if current[:have_children]
-	    menu += %[#{l}<li class="#{options[:dir_class] if options[:dir_class]}#{' '+options[:active_dir_class].to_s if options[:insert_active_dir_class]}">]
+	    menu += %[ class="#{options[:dir_class] if options[:dir_class]}#{' '+options[:active_dir_class].to_s if options[:insert_active_dir_class]}">]
 	  else
-	    menu += %[#{l}<li#{' class="'+options[:active_dir_class].to_s+'"' if options[:insert_active_dir_class]}>]
+	    menu += %[#{' class="'+options[:active_dir_class].to_s+'"' if options[:insert_active_dir_class]}>]
 	  end
 
 	  if block_called_from_erb?(block)
