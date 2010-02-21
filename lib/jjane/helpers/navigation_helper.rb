@@ -106,13 +106,10 @@ module JJane
 	pages.compact!
 
 	# detecting children(ето делается для избежания дополнительного SQL-запроса)
-	pages.map! do |p|
-	  if p == pages.last
-	    p.update :have_children => false
-	  else
-	    p.update(:have_children => p[:level] < pages[pages.index(p)+1][:level])
-	  end
+	pages[0..-2].map! do |p|
+	  p.update(:have_children => p[:level] < pages[pages.index(p)+1][:level])
 	end
+	pages[-1].update :have_children => false
 
 	# draw menu
 	ul_li_for(pages,options,&block)

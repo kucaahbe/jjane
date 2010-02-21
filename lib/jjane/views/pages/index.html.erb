@@ -15,7 +15,7 @@
   </li>
 
   <% ul_li_for(@pages,:include_framing => false) do |current| %>
-    <% content_tag :div, :style => "padding-left:#{10 * current[:page].level}px;", :class => :list_item, :onmouseover =>"$('show_#{current[:page].id}').show()", :onmouseout => "$('show_#{current[:page].id}').hide()" do %>
+    <% content_tag :div, :style => "padding-left:#{10 * current[:level]}px;", :class => :list_item, :onmouseover =>"$('show_#{current[:page].id}').show()", :onmouseout => "$('show_#{current[:page].id}').hide()" do %>
       <div style="float:left">
 	<%= published_img(current[:page]) %>
 	<%= link_to %[#{current[:page].name} | #{current[:page].menu}], edit_page_path(current[:page]) %>
