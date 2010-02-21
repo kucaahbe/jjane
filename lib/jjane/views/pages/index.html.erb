@@ -13,6 +13,10 @@
   </div>
   <div style="clear:both;"></div>
   </li>
+
+  <% @roots.each do |root| %>
+    <%= render 'tree_item', :page => root%>
+  <% end %>
 </ul
 
 <%= link_to_new new_page_path %>

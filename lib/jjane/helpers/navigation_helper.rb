@@ -153,11 +153,9 @@ module JJane
 	  :html => { :id => '', :class => ''}
 	}.deep_merge(options)
 
-	if options[:include_framing]
-	  menu = %[<ul id="#{options[:html][:id]}" class="#{options[:html][:class]}">\n]
-	else
-	  menu = ''
-	end
+	menu = ''
+
+	menu += %[<ul id="#{options[:html][:id]}" class="#{options[:html][:class]}">\n]	if options[:include_framing]
 
 	pages.each_index do |i|
 	  previous = i==0 ? nil : pages[i-1]; current = pages[i]
@@ -166,12 +164,13 @@ module JJane
 
 	  menu += %[ #{l}#{"</ul>\n#{l}</li>\n"*(previous[:level]-current[:level])}] if previous and current[:level] < previous[:level]
 
-	  menu += %[#{l}<li#{' id="'+current[:id].to_s+'"' if current[:id]}]
-	  if current[:have_children]
-	    menu += %[ class="#{options[:dir_class] if options[:dir_class]}#{' '+options[:active_dir_class].to_s if options[:insert_active_dir_class]}">]
-	  else
-	    menu += %[#{' class="'+options[:active_dir_class].to_s+'"' if options[:insert_active_dir_class]}>]
-	  end
+	  menu += l+'<li'
+	  menu += ' id="'+current[:id].to_s+'"' if current[:id]
+	  class_string = ''
+	  class_string += options[:dir_class]+' ' if current[:have_children] && options[:dir_class]!=nil
+	  class_string += current[:class] if current[:class]!=nil
+	  menu += %[ class="#{class_string}"] if class_string!=''
+	  menu += '>'
 
 	  if block_called_from_erb?(block)
 	    menu += capture(current,&block)
