@@ -5,25 +5,9 @@ module JJane
 
 	def self.included(mod)
 	  mod.filter_parameter_logging :password, :content
-	  mod.before_filter :get_browser_string
 	end
 
 	private
-
-	def get_browser_string
-	  log user_agent = request.env['HTTP_USER_AGENT'].downcase
-	  case user_agent
-	  when /presto|opera/
-	    @browser = 'opera'
-	  when /msie/
-	    @browser = 'ie'
-	  when /khtml/
-	    @browser = 'konqueror'
-	  when /gecko/
-	    @browser = 'mozilla'
-	  end
-	  log @browser,'browser'
-	end
 
 	include JJane::Helpers::User_SessionHelper
 
