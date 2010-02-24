@@ -10,7 +10,7 @@ module JJane
 
       # Показывает напоминания типа: "вы успешно авторизировались"
       def notice
-	partial 'shared/notice' if flash
+	partial 'engine/notice' if flash
       end
 
       # alias for stylesheet_link_tag
@@ -26,7 +26,7 @@ module JJane
 
       # defualt engine head(css's javascripts and other tags)
       def engine_head
-	partial 'shared/engine_head'
+	partial 'engine/head'
       end
 
       def hide_me_if(something)
@@ -35,7 +35,7 @@ module JJane
 
       # put thin in place where you want admin panel appear
       def admin_panel
-	partial 'shared/administrator_panel' if logged_in?('roots')
+	partial 'engine/administrator_panel' if logged_in?('roots')
       end
 
       # writes snippet content to page
