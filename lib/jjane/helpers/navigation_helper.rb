@@ -113,7 +113,7 @@ module JJane
 	pages[0..-2].map! do |p|
 	  p.update(:have_children => p[:level] < pages[pages.index(p)+1][:level])
 	end
-	pages[-1].update :have_children => false
+	pages.last.update(:have_children => false) unless pages.empty?
 
 	# draw menu
 	ul_li_for(pages,options,&block)
