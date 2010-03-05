@@ -6,7 +6,11 @@
   <p><%= f.hidden_field :parent_id %></p>
 
   <% tabbar do |tabs| %>
-    <%= tabs.headers t(:tab_page_settings), t(:tab_content), t(:tab_meta) %>
+    <% unless @page.page_type=='directory' -%>
+      <%= tabs.headers t(:tab_page_settings), t(:tab_content), t(:tab_meta) %>
+    <% else -%>
+      <%= tabs.headers t(:tab_page_settings) %>
+    <% end -%>
 
     <% tabs.content do |tabcontent| %>
       <% tabcontent.draw do %>
@@ -24,29 +28,33 @@
 	</p>
       <% end %>
 
-      <% tabcontent.draw do %>
-	<%= partial "pages/#{@page.page_type}/edit", :f => f %>
-      <% end %>
+      <% unless @page.page_type=='directory' -%>
+	<% tabcontent.draw do %>
+	  <%= partial "pages/#{@page.page_type}/edit", :f => f %>
+	<% end %>
 
-      <% tabcontent.draw do %>
-	<% f.fields_for :node do |node_f| %>
-	  <% node_f.fields_for :meta do |meta_f |%>
-	    <% Meta.tags.each do |meta_tag| %>
-	      <p>
-	      <%= meta_f.label meta_tag %><br />
-	      <%= meta_f.text_field meta_tag.to_sym %>
-	      </p>
+	<% tabcontent.draw do %>
+	  <% f.fields_for :node do |node_f| %>
+	    <% node_f.fields_for :meta do |meta_f |%>
+	      <% Meta.tags.each do |meta_tag| -%>
+		<p>
+		<%= meta_f.label meta_tag %><br />
+		<%= meta_f.text_field meta_tag.to_sym %>
+		</p>
+	      <% end -%>
 	    <% end %>
 	  <% end %>
 	<% end %>
-      <% end %>
+      <% end -%>
 
     <% end %>
   <% end %>
 
   <p>
   <%= f.submit t(:button_update) %> |
-  <%= link_to t(:link_show_page), root_url+@page.url %> |
+  <% unless @page.page_type=='directory' -%>
+    <%= link_to t(:link_show_page), root_url+@page.url %> |
+  <% end -%>
   <%= link_to_cancel pages_path %> |
   <%= link_to_destroy @page, t(:link_destroy) %>
   </p>

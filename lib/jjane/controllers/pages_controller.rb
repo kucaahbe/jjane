@@ -4,6 +4,7 @@ class PagesController < AdminController#:nodoc:
   uses_tiny_mce :options => TinyMCEconfig.load, :only => [:new,:edit,:create,:update]
 
   before_filter :find_page, :only => [:edit, :update, :destroy]
+  before_filter :calculate_page_types, :only => [:new, :create]
 
   def index
     @pages = []
@@ -42,7 +43,6 @@ class PagesController < AdminController#:nodoc:
   end
 
   def new
-    @page_types = { t(:static_pages) => Page.static_page_types, t(:nodes) => Page.nodes_types }
     if params[:page_id]
       @page = Page.new(:parent_id => params[:page_id])
     else
@@ -55,7 +55,6 @@ class PagesController < AdminController#:nodoc:
   end
 
   def create
-    @page_types = { t(:static_pages) => Page.static_page_types, t(:nodes) => Page.nodes_types }
     @page = Page.new(params[:page])
 
     if @page.save
@@ -88,5 +87,11 @@ class PagesController < AdminController#:nodoc:
     @page = Page.find(params[:id])
   end
 
-
+  def calculate_page_types
+    @page_types = {
+      t(:page_type_static) => Page.static_page_types,
+      t(:page_type_nodes) => Page.nodes_types,
+      t(:page_type_special) => ['directory']
+    }
+  end
 end

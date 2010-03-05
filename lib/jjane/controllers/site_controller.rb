@@ -5,13 +5,11 @@ class SiteController < ApplicationController
 
   def home_page
     @page = Page.home_page
-    @nodes = @page.nodes.paginate :page => params[:page], :per_page => @page.pagination, :order => 'updated_at DESC'
-    render "/pages/#{@page.page_type}/show", :layout => @page.layout
+    render_page
   end
 
   def page
-    @nodes = @page.nodes.paginate :page => params[:page], :per_page => @page.pagination, :order => 'updated_at DESC'
-    render "/pages/#{@page.page_type}/show", :layout => @page.layout
+    render_page
   end
 
   def node
@@ -35,6 +33,15 @@ class SiteController < ApplicationController
   end
 
   private
+
+  def render_page
+    @nodes = @page.nodes.paginate :page => params[:page], :per_page => @page.pagination, :order => 'updated_at DESC'
+    if @page.page_type=='directory'
+      error_404
+    else
+      render "/pages/#{@page.page_type}/show", :layout => @page.layout
+    end
+  end
 
   # checks uri for exstence
   def check_uri#:doc:

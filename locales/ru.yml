@@ -18,8 +18,10 @@ ru:
   page_id:           'ID'
   page_menu:         'меню'
   page_show:         'Перейти'
-  static_pages:      'Статические страницы'
-  nodes:             'Материал'
+
+  page_type_static:  'Статические страницы'
+  page_type_nodes:   'Материал'
+  page_type_special: 'Специальные страницы'
 
   preview:           'предпросмотр'
 

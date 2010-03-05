@@ -20,7 +20,7 @@
 	<%= published_img(current[:page]) %>
 	<%= link_to %[#{current[:page].name} | #{current[:page].menu}], edit_page_path(current[:page]) %>
 	&nbsp; &nbsp;
-	<%= link_to "(#{t(:page_show)})", root_url+current[:page].url, :style => 'display:none; color:black;', :id => "show_#{current[:page].id}" %>
+	<%= link_to "(#{t(:page_show)})", root_url+current[:page].url, :style => 'display:none; color:black;', :id => "show_#{current[:page].id}" unless current[:page].page_type=='directory' %>
       </div>
 
       <div style="float:right; margin-left:20px;">

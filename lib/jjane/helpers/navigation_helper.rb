@@ -63,7 +63,11 @@ module JJane
 	}.deep_merge(options)
 
 	ul_li_menu(menu_name,options) do |page|
-          %[<a href="#{root_url+page[:page].url}" #{%[class="#{options[:active_link_class]}"] if options[:active_link_class] && page[:page]==@page}>#{page[:page].menu}</a>]
+	  if page[:page].page_type=='directory'
+	    page[:page].menu
+	  else
+	    %[<a href="#{root_url+page[:page].url}" #{%[class="#{options[:active_link_class]}"] if options[:active_link_class] && page[:page]==@page}>#{page[:page].menu}</a>]
+	  end
 	end
       end
 
@@ -126,8 +130,8 @@ module JJane
       # each element in 'pages' must be a hash with keys:
       #   :level - deep of nesting
       #   :have_children - boolean value that represents is this item have a children
-      #   :id - dom id for <li> tag
-      #   :class - dom class for <li> tag
+      #   :id - DOM id for <li> tag
+      #   :class - DOM class for <li> tag
       # content to include in <li>...</li> generated in block given to ul_li_for,like
       #   ul_li_for(pages,options) do |page|
       #     '<a href="#{pages[:page]}">pages[:page].menu</a>'
