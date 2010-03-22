@@ -16,14 +16,14 @@
       <% tabcontent.draw do %>
 	<p>
 	<%= f.label :name, t(:label_page_name) %><br />
-	<%= f.text_field :name, :disabled => 'disabled' %>
+	<%= f.text_field :name, :readonly => 'readonly' %>
 	</p>
 	<p>
 	<%= f.label :menu, t(:label_menu) %><br />
 	<%= f.text_field :menu %>
 	</p>
 	<p>
-	<%= f.label :url, t(:label_link) %><br />
+	<%= f.label :link, t(:label_link) %><br />
 	<%= f.text_field :link %>
 	</p>
       <% end %>
