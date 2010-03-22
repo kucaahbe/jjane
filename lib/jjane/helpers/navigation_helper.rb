@@ -59,6 +59,7 @@ module JJane
 	  :dir_class         =>    'dir',
 	  :active_dir_class  => 'active',
 	  :active_link_class => 'active',
+	  :root => nil,
 	  :html => { :id => 'nav' }
 	}.deep_merge(options)
 
@@ -72,12 +73,18 @@ module JJane
       end
 
       # draws menu, but takes block that represent content of <li> tags
+      # options:
+      #   :root - ID of page,if present draws child pages of this page
       def ul_li_menu menu_name = 'main', options = {}, &block
 	raise 'no block given' unless block_given?
 
 	# collection
-	if options[:for_page]
-	  collection = Page.find_by_name(options[:for_page]).self_and_descendants
+	if options[:root]
+	  begin
+	    collection = Page.find_by_name(options[:root]).self_and_descendants
+	  rescue
+	    collection = []
+	  end
 	else
 	  collection = Page.find(:all, :order => 'lft ASC')
 	end
@@ -117,7 +124,11 @@ module JJane
 	pages.last.update(:have_children => false) unless pages.empty?
 
 	# draw menu
-	ul_li_for(pages,options,&block)
+	unless pages.empty?
+	  ul_li_for(pages,options,&block)
+	else
+	  warning('pages array empty')
+	end
       end
 
       # Draws link to page specified by it's unique ID
