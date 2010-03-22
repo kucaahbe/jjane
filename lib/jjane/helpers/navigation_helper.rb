@@ -52,7 +52,7 @@ module JJane
 	end
       end
 
-      # navigation menu based on unordered lists
+      # simple navigation menu based on unordered lists
       # name - name of menu to display
       def menu menu_name = 'main', options = {}
 	options = {
@@ -71,6 +71,7 @@ module JJane
 	end
       end
 
+      # draws menu, but takes block that represent content of <li> tags
       def ul_li_menu menu_name = 'main', options = {}, &block
 	raise 'no block given' unless block_given?
 
@@ -134,7 +135,7 @@ module JJane
       #   :class - DOM class for <li> tag
       # content to include in <li>...</li> generated in block given to ul_li_for,like
       #   ul_li_for(pages,options) do |page|
-      #     '<a href="#{pages[:page]}">pages[:page].menu</a>'
+      #     %[<a href="#{root_url+page[:page].url}">#{page[:page].menu}</a>]
       #   end
       #
       # options:
@@ -193,6 +194,25 @@ module JJane
 	  concat menu
 	else
 	  return menu
+	end
+      end
+
+      # site map ul li
+      def sitemap
+	pages = []
+	Page.each_with_level(Page.find(:all, :order => 'lft ASC')) do |page,level|
+	  pages << {
+	    :page => page,
+	    :level => level
+	  }
+	end
+	pages[0..-2].map! do |p|
+	  p.update(:have_children => p[:level] < pages[pages.index(p)+1][:level])
+	end
+	pages.last.update(:have_children => false) unless pages.empty?
+
+	ul_li_for pages do |page|
+          %[<a href="#{root_url+page[:page].url}">#{page[:page].menu}</a>]
 	end
       end
     end
