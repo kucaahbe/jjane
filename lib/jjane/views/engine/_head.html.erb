@@ -1,3 +1,7 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<% content_tag :title do -%>
+  <%= site_title %>
+<%- end %>
 <%# Meta tags -%>
   <% Meta.tags.each do |name| -%>
     <meta name="<%= name %>" content="<%= (@node || @page).meta.content(name) %>" />
