@@ -2,12 +2,6 @@ module JJane
   module Helpers
     module LayoutHelper
 
-      # put this into your _title_ tag:
-      #   <title><%= site_title %></title>
-      def site_title
-	@page.title if controller_name=='site'
-      end
-
       # Показывает напоминания типа: "вы успешно авторизировались"
       def notice
 	partial 'engine/notice' if flash

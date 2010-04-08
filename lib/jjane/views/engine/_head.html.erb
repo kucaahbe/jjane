@@ -1,6 +1,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <% content_tag :title do -%>
-  <%= site_title %>
+  <%- if controller_name=='site' -%>
+  <%= (@node || @page).title -%>
+  <%- else -%>
+  <%= controller_name.capitalize+'::'+action_name.capitalize -%>
+  <%- end -%>
 <%- end %>
 <%# Meta tags -%>
   <% Meta.tags.each do |name| -%>
