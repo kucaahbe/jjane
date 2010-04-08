@@ -54,13 +54,12 @@ module JJane
 
       # simple navigation menu based on unordered lists
       # name - name of menu to display
-      def menu menu_name = 'main', options = {}
+      def menu menu_name, options = {}
 	options = {
 	  :dir_class         =>    'dir',
 	  :active_dir_class  => 'active',
 	  :active_link_class => 'active',
-	  :root => nil,
-	  :html => { :id => 'nav' }
+	  :root => nil
 	}.deep_merge(options)
 
 	ul_li_menu(menu_name,options) do |page|
@@ -75,7 +74,7 @@ module JJane
       # draws menu, but takes block that represent content of <li> tags
       # options:
       #   :root - ID of page,if present draws child pages of this page
-      def ul_li_menu menu_name = 'main', options = {}, &block
+      def ul_li_menu menu_name, options = {}, &block
 	raise 'no block given' unless block_given?
 
 	# collection
@@ -168,7 +167,7 @@ module JJane
 
 	menu = ''
 
-	menu += %[<ul id="#{options[:html][:id]}" class="#{options[:html][:class]}">\n]	if options[:include_framing]
+	menu += %[<ul#{' id="'+options[:html][:id]+'"' unless options[:html][:id].empty?}#{' class="'+options[:html][:class]+'"' unless options[:html][:class].empty?}>\n] if options[:include_framing]
 
 	pages.each_index do |i|
 	  previous = i==0 ? nil : pages[i-1]; current = pages[i]
