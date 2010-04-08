@@ -12,12 +12,11 @@ Rails.configuration.gem 'kete-tiny_mce',
 Rails.configuration.gem 'paperclip',
 			:version => '2.3.1.1',
 			:source => 'http://gemcutter.org'
+Rails.configuration.gem 'highline'
 
-
-JJane.boot_log "appending view paths"
+JJane.boot_log "appending load paths"
 I18n.load_path << Dir[File.join(File.dirname(__FILE__), '..', '..', 'locales', '*.{rb,yml}')]
 ActionController::Base.append_view_path File.join(File.dirname(__FILE__), 'views')
-
 
 JJane.boot_log "adding controllers models and helpers"
 Rails.configuration.after_initialize do

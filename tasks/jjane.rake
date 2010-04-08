@@ -13,12 +13,6 @@ namespace :jjane do
       dot
     end
 
-    puts '=> installing plugins'
-    Dir["#{plugin_path}/plugins/**"].each do |plugin_dir|
-      FileUtils.cp_r plugin_dir, File.join(RAILS_ROOT, 'vendor', 'plugins')
-      dot
-    end
-
     puts '=> installing sample config files'
     Dir["#{plugin_path}/config/*"].each do |file|
       FileUtils.cp_r file, File.join(RAILS_ROOT, 'config')
