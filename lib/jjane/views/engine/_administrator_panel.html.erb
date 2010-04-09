@@ -1,19 +1,22 @@
-<div id="jjane_panel" class="jjane">
-  <div style="margin-right:100px;"><%= main_links %></div>
-  
-  <div style="text-align:center;">
-    <span>
-      <%= item_name -%>
-    </span>
-    <%= crud_actions -%>
-  </div>
+<div id="jjane_panel_underlay">
+  <div id="jjane_panel" class="jjane">
+    <div style="margin-right:100px;"><%= main_links %></div>
 
-  <div style="float:right">
-    <%= engine_image 'user_me.png' %>
-    <span>
-      <%= link_to "#{current_user.name}[#{current_user.group.name.singularize}]", edit_user_path(current_user), :title => t(:link_title_edit_profile)  %> |
-      <%= link_to t(:link_logout), logout_path %>
-    </span>
+    <div style="text-align:center;">
+      <span><%= item_name -%></span>
+      <%= crud_actions -%>
+    </div>
+
+    <div style="float:right">
+      <%= engine_image 'user_me.png' %>
+      <span>
+	<%= link_to "#{current_user.name}[#{current_user.group.name.singularize}]",
+	  edit_user_path(current_user),
+	    :title => t(:admin_panel_edit_profile)
+	  %> |
+	  <%= link_to t(:link_logout), logout_path %>
+	</span>
+    </div>
+    <div style="clear:both;height:0;width:0;overflow:hidden;padding:0;margin:0;"></div>
   </div>
-  <div style="clear:both;border:none;height:0;width:0;padding:0;"></div>
 </div>

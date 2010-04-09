@@ -1,4 +1,12 @@
-#jjane_panel {background-color: white;height:40px;color:black;border:1px solid #cfcccc;}
+#jjane_panel_underlay {height:42px !important;}
+#jjane_panel {
+  position:fixed;
+  left:0;top:0;
+  width:100%;height:40px;
+  border:1px solid #cfcccc;
+  background-color:white;
+  color:black;
+}
 #jjane_panel span { vertical-align:top; }/* спан для того что б текст и картинки рисовались в опере и фф одинаково */
 #jjane_panel div {float:left;height:20px;padding:10px;margin:0px;font-weight:bold;border-left:1px solid #cfcccc;}
 
