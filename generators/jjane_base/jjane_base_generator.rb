@@ -42,7 +42,7 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
   private
 
   def controllers
-    %w[ admin crud login pages site snippets attached_files users ]
+    %w[ snippets users ]
   end
 
   def models

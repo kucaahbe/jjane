@@ -1,7 +1,4 @@
 class <%= controller_class_name %>Controller < AdminController
-
-  prepend_view_path 'app/views/nodes'
-
   uses_tiny_mce :options => TinyMCEconfig.load, :only => [:new,:edit,:create,:update]
 
   before_filter :find_page

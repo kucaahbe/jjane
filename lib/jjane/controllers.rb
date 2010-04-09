@@ -55,3 +55,15 @@ class JJane
 end
 
 ActionController::Base.send :include, JJane::ActionController::Base::Extensions
+
+# dummy ApplicationController:)
+class ApplicationController < ActionController::Base
+end
+
+# Loading controllers.
+require 'jjane/controllers/admin'
+require 'jjane/controllers/crud'
+require 'jjane/controllers/site'
+require 'jjane/controllers/pages'
+require 'jjane/controllers/login'
+require 'jjane/controllers/attached_files'

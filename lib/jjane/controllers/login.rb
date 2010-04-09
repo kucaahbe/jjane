@@ -6,7 +6,7 @@ class LoginController < ApplicationController
     error_404 if logged_in?
   end
 
-  def login(redirect_place = :root_url)
+  def login(redirect_place = :root_url)#TODO redirect
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       flash[:login_notice] = t(:notice_logged_in)
@@ -17,7 +17,7 @@ class LoginController < ApplicationController
     end
   end
 
-  def logout(redirect_place = :root_url)
+  def logout(redirect_place = :root_url)#TODO redirect
     if current_user_session then
       @user_session = UserSession.find(params[:id])
       @user_session.destroy

@@ -15,28 +15,28 @@ class JjaneNodeGenerator < ScaffoldGenerator
       m.class_collisions("#{controller_class_name}Controller", "#{controller_class_name}Helper")
       m.class_collisions(class_name)
 
-      # Controller, helper, views, test and stylesheets directories.
+      # Directories.
       m.directory(File.join('app/models', class_path))
       m.directory(File.join('app/controllers', controller_class_path))
       m.directory(File.join('app/views/nodes', controller_class_path, controller_file_name))
       m.directory(File.join('app/views/pages', node_name.pluralize))
 
-      m.file 'page_edit.html.erb', File.join('app/views/pages/',node_name.pluralize,'_edit.html.erb')
-      m.file 'page_show.html.erb', File.join('app/views/pages/',node_name.pluralize,'show.html.erb')
+      # Controller.
+      m.template 'controller.rb', File.join('app/controllers', controller_class_path, "#{controller_file_name}_controller.rb")
 
+      # Views.
       for view in node_views
 	m.template(
 	  "view_#{view}.html.erb",
 	  File.join('app/views/nodes', controller_class_path, controller_file_name, "#{view}.html.erb")
 	)
       end
+      # [views for page]
+      m.file 'page_edit.html.erb', File.join('app/views/pages/',node_name.pluralize,'_edit.html.erb')
+      m.file 'page_show.html.erb', File.join('app/views/pages/',node_name.pluralize,'show.html.erb')
 
-      m.template(
-	'controller.rb', File.join('app/controllers', controller_class_path, "#{controller_file_name}_controller.rb")
-      )
-
+      # Model.
       m.template 'model.rb', File.join('app/models',class_path,"#{node_name}.rb"), :collision => :force
-
     end
   end
 
