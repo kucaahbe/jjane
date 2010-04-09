@@ -1,4 +1,4 @@
-module JJane
+class JJane
   module Helpers
     module LayoutHelper
 

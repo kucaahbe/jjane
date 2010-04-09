@@ -70,13 +70,14 @@ ru:
   notice_invalid_login_or_password: 'Не правильное сочетание логина и пароля'
   notice_logged_in:                 'Добро пожаловать! :)'
   notice_logged_out:                'До новых встреч!'
-
-  link_title_pages_path:    'Настройка страниц'
-  link_title_users_path:    'Настройка пользователей'
-  link_title_snippets_path: 'Настройка кусочков'
-  link_title_edit_page:     'редактировать страницу'
-  link_title_destroy_page:  'удалить страницу'
-  link_title_edit_profile:  'редактировать профиль'
+# administrator panel link titles
+  admin_panel_pages:         'Настройка страниц'
+  admin_panel_users:         'Настройка пользователей'
+  admin_panel_snippets:      'Настройка кусочков'
+  admin_panel_filemanager:   'Управление файлами'
+  admin_panel_edit_page:     'редактировать страницу'
+  admin_panel_destroy_page:  'удалить страницу'
+  admin_panel_edit_profile:  'редактировать профиль'
 
   question_are_you_shure:   'Вы уверены?'
 

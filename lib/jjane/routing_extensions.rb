@@ -1,4 +1,4 @@
-module JJane#:nodoc:
+class JJane#:nodoc:
   module Routing #:nodoc:
     # Adds routing extensions
     #

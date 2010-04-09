@@ -1,29 +1,12 @@
-module JJane
+class JJane
   module Helpers
     module AdminPanelHelper#:nodoc:
 
-      def pages_link
-	link_to engine_image('pages.png'),
-	  pages_path,
-	  :title => t(:link_title_pages_path)
-      end
-
-      def users_link
-	link_to engine_image('users.png'),
-	  users_path,
-	  :title => t(:link_title_users_path)
-      end
-
-      def snippets_link
-	link_to engine_image('snippets.png'),
-	  snippets_path,
-	  :title => t(:link_title_snippets_path)
-      end
-
-      def filesystem_link
-	link_to engine_image('filesystem.png'),
-	  attached_files_path,
-	  :title => t(:filemanager)
+      def main_links
+	link_to( engine_image('pages.png'),      pages_path,          :title => t(:admin_panel_pages) )+
+	  link_to( engine_image('users.png'),      users_path,          :title => t(:admin_panel_users) )+
+	  link_to( engine_image('snippets.png'),   snippets_path,	     :title => t(:admin_panel_snippets) )+
+	  link_to( engine_image('filesystem.png'), attached_files_path, :title => t(:admin_panel_filemanager) )
       end
 
       def item_name
@@ -46,19 +29,19 @@ module JJane
       def edit_page_link
 	link_to engine_image('pencil.png'),
 	  edit_page_path(@page),
-	  :title => t(:link_title_edit_page)
+	  :title => t(:admin_panel_edit_page)
       end
 
       def destroy_page_link
 	link_to engine_image('delete.png'), @page, :confirm => t(:question_are_you_shure), :method => :delete,
-	  :title => t(:link_title_destroy_page)
+	  :title => t(:admin_panel_destroy_page)
       end
 
       def new_node_link
 	unless Page.static_page_types.include?(@page.page_type)
 	  link_to engine_image('add.png'),
 	    new_page_node_path(@page.id,@page.page_type),
-	    :title => t(:link_title_new_node)
+	    :title => t(:admin_panel_new_node)
 	else
           ''
 	end
@@ -67,12 +50,12 @@ module JJane
       def edit_node_link
 	link_to engine_image('pencil.png'),
 	  edit_page_node_path(@page.id,@page.page_type,@node),
-	  :title => t(:link_title_edit_node)
+	  :title => t(:admin_panel_edit_node)
       end
 
       def destroy_node_link
 	link_to engine_image('delete.png'), page_node_path(@page,@page.page_type,@node), :confirm => t(:question_are_you_shure), :method => :delete,
-	  :title => t(:link_title_destroy_node)
+	  :title => t(:admin_panel_destroy_node)
       end
 
     end

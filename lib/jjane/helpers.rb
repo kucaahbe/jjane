@@ -6,9 +6,13 @@ require 'jjane/helpers/layout_helper.rb'
 require 'jjane/helpers/pages_helper'
 require 'jjane/helpers/tabbar_helper'
 
-module JJane
+class JJane
   # This module adds helper methods for using in your layout
   module Helpers
+    #TODO
+    #def self.included(base)
+    # и тут включаем все модули
+    #end
     include LayoutHelper
     include EngineMainHelper
     include NavigationHelper

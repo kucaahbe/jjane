@@ -1,4 +1,4 @@
-module JJane
+class JJane
   module Helpers
     # Methods of this helper can be used in views and controllers
     module User_SessionHelper

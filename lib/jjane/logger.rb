@@ -1,4 +1,4 @@
-module JJane
+class JJane
   # Logger class consists helper methods for debugging
   module Logger
     # if you want to log something

@@ -1,6 +1,4 @@
-module JJane
-  VERSION="0.0.3"
-
+class JJane
   class <<self
     def boot_log msg
       puts "=> [JJane] " + msg
@@ -9,7 +7,16 @@ module JJane
     def booted
       puts "=> ....................................."
     end
+
+    def get_version
+      version_file = File.new File.join(File.dirname(__FILE__),'..','VERSION'), 'r'
+      version_string = version_file.gets.chop
+    rescue
+      'unstable-dev'
+    end
   end
+
+  VERSION=JJane.get_version
 end
 
 JJane.boot_log "#{JJane::VERSION} starting"

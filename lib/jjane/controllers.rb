@@ -1,4 +1,4 @@
-module JJane
+class JJane
   module ActionController#:nodoc:
     class Base#:nodoc:
       module Extensions
