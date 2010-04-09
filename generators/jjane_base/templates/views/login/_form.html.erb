@@ -1,0 +1,13 @@
+<% form_for :user_session, :url => login_path do |f| %>
+
+  <p><%= f.label :email, t(:label_login) %></p>
+  <p><%= f.text_field :email, :size => "17" %></p>
+
+  <p><%= f.label :password, t(:label_password) %></p>
+  <p><%= f.password_field :password, :size => "17"%></p>
+
+  <p>
+  <%= f.submit t(:button_login) %><br />
+  <%= link_to t(:link_home_page), root_url %>
+  </p>
+<% end %>

@@ -35,8 +35,8 @@ class JJane#:nodoc:
 	end
 	resources :snippets, :except => [:show]
 	resources :users
-	login   '__login__',  { :controller => :login, :action => :login }
-	logout  '__logout__', { :controller => :login, :action => :logout }
+	login   'login',  { :controller => :login, :action => :error, :conditions => { :method => :post } }
+	logout  'logout', { :controller => :login, :action => :logout, :conditions => { :method => :post } }
 	connect '*uri/:year/:month/:day', {
 	  :controller => 'site',
 	  :action     => 'find_by_day',

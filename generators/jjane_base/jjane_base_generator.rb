@@ -26,7 +26,8 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
 	m.file "models/#{model}_model.rb", File.join('app','models',"#{model}.rb")
       end
       # views for login controller
-      m.file 'views/login_form.html.erb', File.join('app','views','login','welcome.html.erb')
+      m.file 'views/login/_form.html.erb', File.join('app','views','login','_form.html.erb')
+      m.file 'views/login/welcome.html.erb', File.join('app','views','login','welcome.html.erb')
       # views for users controller
       m.file 'views/users/edit.html.erb', File.join('app','views','users','edit.html.erb')
       m.file 'views/users/_form.html.erb', File.join('app','views','users','_form.html.erb')
