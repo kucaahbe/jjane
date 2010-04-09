@@ -1,0 +1,9 @@
+Description:
+    Creates empty JJane layout and css file
+
+Example:
+    `./script/generate jjane_layout LayoutName`
+
+    This creates 2 files:
+    Layout:    app/views/layouts/LayoutName.html.erb
+    CSS file:  public/stylesheets/LayoutName.css
