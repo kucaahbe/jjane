@@ -1,5 +1,7 @@
 class Node < ActiveRecord::Base
 
+  @@has_meta = false
+
   # associations
   belongs_to :user
   belongs_to :page
@@ -15,11 +17,18 @@ class Node < ActiveRecord::Base
   # callbacks
   before_create :add_meta
 
+  class <<self
+    def has_meta
+      @@has_meta = true
+    end
+  end
+
   def url
     self.page.url+'/'+self.id.to_s
   end
 
   def initialize(attributes = nil)#:nodoc:
+    self.build_meta
     if attributes and attributes.has_key?(:meta)
       meta_attrs = attributes[:meta]
       attributes.delete(:meta)

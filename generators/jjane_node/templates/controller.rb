@@ -6,7 +6,6 @@ class <%= controller_class_name %>Controller < AdminController
 
   def new
     @<%= node_name %> = <%= class_name %>.new(:page_id => params[:page_id], :user_id => current_user.id)
-    @<%= node_name %>.build_meta
   end
 
   def create
