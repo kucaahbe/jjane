@@ -36,7 +36,7 @@ class JjaneNodeGenerator < ScaffoldGenerator
       m.file 'page_show.html.erb', File.join('app/views/pages/',node_name.pluralize,'show.html.erb')
 
       # Model.
-      m.template 'model.rb', File.join('app/models',class_path,"#{node_name}.rb"), :collision => :force
+      m.template 'model.rb', File.join('app/models',class_path,"#{node_name}.rb")
     end
   end
 

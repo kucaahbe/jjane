@@ -1,0 +1,8 @@
+Description:
+    JJane node scaffold
+
+Example:
+    `./script/generate jjane_node NodeName`
+
+    this will create
+    TODO:)

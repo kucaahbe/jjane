@@ -1,10 +1,7 @@
-<% @nodes.each do |node| %>
+<% @nodes.each do |node| -%>
   <h3><%= link_to node.title, root_url+node.url %></h3>
-  
-<p>
-<%= node.preview %>
-</p>
-
-<% end %>
-
+  <p>
+  <%= node.preview %>
+  </p>
+<% end -%>
 <%= will_paginate @nodes %>

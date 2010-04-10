@@ -1,0 +1,8 @@
+Description:
+    Creates JJane base files
+
+Example:
+    `./script/generate jjane_base`
+
+    this will create
+    TODO:)

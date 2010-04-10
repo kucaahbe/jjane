@@ -1,4 +1,10 @@
 <p>
+<% f.fields_for :node do |node_f| %>
+  <%= node_f.label :title, t(:label_title) %><br />
+  <%= node_f.text_field :title, :class => 'title' %>
+<% end %>
+</p>
+<p>
 <%= f.label :pagination, t(:label_pagination) %><br />
 <%= f.select :pagination, options_for_select(%w[1 2 3 4 5 10 15 20 25 30], :selected => @page.pagination.to_s) %>
 </p>
