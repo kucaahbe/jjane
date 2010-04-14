@@ -1,5 +1,5 @@
-<% form_for :user_session, :url => login_path do |f| %>
-
+<% login_form do |f| %>
+  
   <p><%= f.label :email, t(:label_login) %></p>
   <p><%= f.text_field :email, :size => "17" %></p>
 
