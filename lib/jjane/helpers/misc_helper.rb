@@ -1,8 +1,64 @@
 class JJane
   module Helpers
-    class TabbarBuilder
 
-      class Content
+    module TableHelper
+      def table_for nodes, width, html_options={}, &block
+	raise ArgumentError, "Missing block" unless block_given?
+	JJane::Helpers::TableBuilder.new(nodes,width,html_options,self,&block)
+      end
+    end
+
+    class TableBuilder#:nodoc:
+      #TODO height option
+      def initialize nodes, width, html_options, template, &block
+	@template = template
+	length = nodes.length
+
+	result = @template.tag(:table, html_options, true)
+
+	(length/width).times do |i|
+	  result += "<tr>\n"
+	  nodes[i*width,width].each do |node|
+	    result += @template.content_tag(:td,
+					    if @template.send :block_called_from_erb?, block
+					      @template.send :capture, node, &block
+					    else
+					      yield(node)
+					    end
+					   )
+	  end
+	  result += "</tr>\n"
+	end
+
+	# ostatok
+	left = nodes[(length/width)*width,width]
+	unless left.empty?
+	  result += "<tr>\n"
+	  left.each do |node|
+	    result += @template.content_tag(:td,
+					    if @template.send :block_called_from_erb?, block
+					      @template.send :capture, node, &block
+					    else
+					      yield(node)
+					    end
+					   )
+	  end
+	  result += "</tr>\n"
+	end
+
+	result += '</table>'
+
+	if @template.send :block_called_from_erb?, block
+	  @template.send :concat, result
+	else
+	  result
+	end
+      end
+    end
+
+    class TabbarBuilder#:nodoc:
+
+      class Content#:nodoc:
 	def initialize(template)
 	  @template = template
 	  @number = 0
@@ -15,7 +71,7 @@ class JJane
 	    :id => "tabContent#{@number}",
 	    :class => "tabContent",
 	    :style => "display:#{@number==1 ? 'yes' : 'none'};"
-          @template.send :concat, result
+	    @template.send :concat, result
 	end
       end
 
@@ -23,6 +79,7 @@ class JJane
 	@template = template
 	@tabnames = []
       end
+
       # tabbar headers
       def headers(*tabnames)
 	@tabnames = tabnames = tabnames.to_a
@@ -46,15 +103,28 @@ class JJane
 	  result
 	end
       end
+
       private
 
       def wrap(text,n,l,active)
 	@template.content_tag :li,
-	  @template.link_to("<span>#{text}</span>", 'javascript:void(0)', :onclick => "toggleTab(#{n},#{l},null,false)", :class => :tablink),
-     	  :id => active ? "tabHeaderActive":"tabHeader#{n}" 
+	  @template.link_to(
+	  "<span>#{text}</span>",
+	  'javascript:void(0)',
+	  :onclick => "toggleTab(#{n},#{l},null,false)",
+	:class => :tablink),
+	  :id => active ? "tabHeaderActive":"tabHeader#{n}" 
       end
     end
 
+
+    #    <% tabbar do |tabbar| %>
+    #      <%= tabs.headers 'tab name' %>
+    #      <% tabs.content do |tabcontent| %>
+    #        <% tabcontent.draw do %>
+    #          'tabs content'
+    #        <% end %>
+    #    <% end %>
     module TabbarHelper
 
       # writes tabbar
@@ -70,9 +140,9 @@ class JJane
 	  result
 	end
       end
-
     end
   end
 end
 
 ActionView::Base.class_eval { include JJane::Helpers::TabbarHelper }
+ActionView::Base.class_eval { include JJane::Helpers::TableHelper }
