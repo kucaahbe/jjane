@@ -1,0 +1,11 @@
+static_page:
+ link: 'somelink',
+ menu: 'somemenu',
+ page_type: 'static',
+ user_id: 1
+  
+home_page:
+ link: 'home',
+ menu: 'bbbbbbbbbbb',
+ page_type: 'static',
+ user_id: 1

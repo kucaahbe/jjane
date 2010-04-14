@@ -5,12 +5,13 @@ require 'rake/rdoctask'
 desc 'Default: run unit tests.'
 task :default => :test
 
-desc 'Test the JJane plugin.'
+desc 'Unit testing the JJane plugin.'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
+#  t.pattern = 'test/**/*_test.rb'
+  t.pattern 'test/jjane_test.rb'
+  t.verbose = false
 end
 
 desc 'Generate documentation for the JJane plugin.'

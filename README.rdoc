@@ -20,4 +20,8 @@ Another Rails CMF plugin
 * go to http://localhost:3000/admin and enter your login and password
 * don't forget to remove or rename public/index.html
 
+= TESTING
+* setup test database
+* 
+
 Copyright (c) 2009 kuca, released under the MIT license

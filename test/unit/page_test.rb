@@ -2,27 +2,14 @@ require 'test_helper'
 
 class PageTest < ActiveSupport::TestCase
 
-  static_page = Page.new(
-    :link => 'somelink',
-    :menu => 'somemenu',
-    :page_type => 'static',
-    :user_id => 1
-  )
-
-  home_page = Page.create!(
-    :link => 'home',
-    :menu => 'bbbbbbbbbbb',
-    :page_type => 'static',
-    :user_id => 1
-  )
-
   test 'creating node for static page' do
-    page = static_page
+    puts pages(:static_page)
+    page = Page.new pages(:static_page)
     page.save!
     node = page.node
     assert Node.exists?(node.id)
   end
-
+=begin
   test "check update of url for child page" do
     page = Page.root.children.new(
       :menu => 'lolo',
@@ -37,4 +24,5 @@ class PageTest < ActiveSupport::TestCase
   test "check update of url for root page" do
     assert Page.root.update_attribute(:menu,'home')
   end
+=end
 end
