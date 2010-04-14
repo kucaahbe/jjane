@@ -4,7 +4,7 @@ require 'jjane/helpers/user_session_helper.rb'
 require 'jjane/helpers/engine_main_helper.rb'
 require 'jjane/helpers/layout_helper.rb'
 require 'jjane/helpers/pages_helper'
-require 'jjane/helpers/tabbar_helper'
+require 'jjane/helpers/misc_helper'
 
 class JJane
   # This module adds helper methods for using in your layout
@@ -23,6 +23,3 @@ class JJane
 end
 
 ActionController::Base.send(:helper,JJane::Helpers)
-#ActionView::Base.class_eval {
-#  include JJane::Helpers
-#}
