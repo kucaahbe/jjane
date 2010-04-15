@@ -79,6 +79,10 @@ ru:
   admin_panel_filemanager:   'Управление файлами'
   admin_panel_edit_page:     'редактировать страницу'
   admin_panel_destroy_page:  'удалить страницу'
+  admin_panel_list_nodes:    'список статей'
+  admin_panel_new_node:      'добавить материал'
+  admin_panel_edit_node:     'редактировать материал'
+  admin_panel_destroy_node:  'удалить материал'
   admin_panel_edit_profile:  'редактировать профиль'
 
   question_are_you_shure:   'Вы уверены?'

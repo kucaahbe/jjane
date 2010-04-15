@@ -14,8 +14,9 @@ class JJane
 	  content_tag(:span, 
 		      link_to(t(:admin_panel_page)+'['+@page.name+']',root_url+@page.url)+
 		      edit_page_link+
-		      new_node_link+
-		      destroy_page_link,
+		      destroy_page_link+
+		      list_nodes_link+
+		      new_node_link,
 		      :class => 'jjane-crud-actions'
 		     )
 	end
@@ -27,6 +28,14 @@ class JJane
 		      t(:admin_panel_node)+'['+@node.id.to_s+']'+edit_node_link+destroy_node_link,
 		      :class => 'jjane-crud-actions'
 		     )
+	end
+      end
+
+      def list_nodes_link
+	unless Page.static_page_types.include?(@page.page_type)
+	  link_to engine_image('nodes_list.png'), page_nodes_path(@page,@page.page_type), :title => t(:admin_panel_list_nodes)
+	else
+	  ''
 	end
       end
 

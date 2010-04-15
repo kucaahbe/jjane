@@ -24,6 +24,7 @@ class JJane#:nodoc:
       def jjane_connect
 	resources :attached_files
 
+	page_nodes     'pages/:page_id/:controller/list',     :action => :index,   :conditions => { :method => :get }
 	connect        'pages/:page_id/:controller',          :action => :create,  :conditions => { :method => :post }
 	new_page_node  'pages/:page_id/:controller/new',      :action => :new,     :conditions => { :method => :get }
 	edit_page_node 'pages/:page_id/:controller/:id/edit', :action => :edit,    :conditions => { :method => :get }

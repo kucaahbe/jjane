@@ -78,6 +78,10 @@ en:
   admin_panel_filemanager:   'Filemanager'
   admin_panel_edit_page:     'Edit page'
   admin_panel_destroy_page:  'Destory page'
+  admin_panel_list_nodes:    'list nodes'
+  admin_panel_new_node:      'add node'
+  admin_panel_edit_node:     'edit node'
+  admin_panel_destroy_node:  'destroy node'
   admin_panel_edit_profile:  'Edit profile'
 
   question_are_you_shure:   'Are you sure?'
