@@ -1,0 +1,7 @@
+Description:
+    Creates JJane migration
+
+Example:
+    `./script/generate jjane_menu MenuName`
+
+    This creates migration file.
