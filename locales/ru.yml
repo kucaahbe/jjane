@@ -71,6 +71,8 @@ ru:
   notice_logged_in:                 'Добро пожаловать! :)'
   notice_logged_out:                'До новых встреч!'
 # administrator panel link titles
+  admin_panel_page:          'Страница'
+  admin_panel_node:          'Материал'
   admin_panel_pages:         'Настройка страниц'
   admin_panel_users:         'Настройка пользователей'
   admin_panel_snippets:      'Настройка кусочков'

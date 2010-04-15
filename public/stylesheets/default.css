@@ -9,6 +9,16 @@
 }
 #jjane_panel span { vertical-align:top; }/* спан для того что б текст и картинки рисовались в опере и фф одинаково */
 #jjane_panel div {float:left;height:20px;padding:10px;margin:0px;font-weight:bold;border-left:1px solid #cfcccc;}
+#jjane_panel span.jjane-crud-actions {position:relative;top:-1px;}
+#jjane_panel span.jjane-crud-actions a {
+  padding:1px 5px;
+  margin:0 3px;
+  background:#e4ebff;
+  border-top:1px solid white;
+  border-left:1px solid white;
+  border-right:1px solid #aeb7d2;
+  border-bottom:1px solid #aeb7d2;
+}
 
 .jjane { font-family:verdana,arial,helvetica,sans-serif; padding:0; margin:0; }
 .jjane a {color:#2b6fb6;font-weight:bold;text-decoration:none;}

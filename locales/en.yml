@@ -71,7 +71,8 @@ en:
   notice_logged_in:                 'Successfully logged in.'
   notice_logged_out:                'Successfully logged out.'
 # administrator panel link titles
-  admin_panel_pages:         'Pages settings'
+  admin_panel_page:          'Page'
+  admin_panel_node:          'Node'
   admin_panel_users:         'Users settings'
   admin_panel_snippets:      'Snippets settings'
   admin_panel_filemanager:   'Filemanager'

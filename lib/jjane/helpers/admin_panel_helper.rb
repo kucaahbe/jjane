@@ -9,20 +9,24 @@ class JJane
 	  link_to( engine_image('filesystem.png'), attached_files_path, :title => t(:admin_panel_filemanager) )
       end
 
-      def item_name
-	if action_name!='node'
-      "page"
-	else
-      "node"
-	end if controller_name=='site'
+      def page_actions
+	if controller_name=='site'
+	  content_tag(:span, 
+		      link_to(t(:admin_panel_page)+'['+@page.name+']',root_url+@page.url)+
+		      edit_page_link+
+		      new_node_link+
+		      destroy_page_link,
+		      :class => 'jjane-crud-actions'
+		     )
+	end
       end
 
-      def crud_actions
-	case item_name
-	when 'page'
-	  edit_page_link + destroy_page_link + new_node_link
-	when 'node'
-	  edit_node_link + destroy_node_link
+      def node_actions
+	if controller_name=='site' && action_name=='node'
+	  content_tag(:span, 
+		      t(:admin_panel_node)+'['+@node.id.to_s+']'+edit_node_link+destroy_node_link,
+		      :class => 'jjane-crud-actions'
+		     )
 	end
       end
 
@@ -43,7 +47,7 @@ class JJane
 	    new_page_node_path(@page.id,@page.page_type),
 	    :title => t(:admin_panel_new_node)
 	else
-          ''
+	  ''
 	end
       end
 
