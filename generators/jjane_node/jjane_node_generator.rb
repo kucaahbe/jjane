@@ -43,6 +43,6 @@ class JjaneNodeGenerator < ScaffoldGenerator
   protected
 
   def node_views
-    %w[ new _form edit show ]
+    %w[ index new _form edit show ]
   end
 end

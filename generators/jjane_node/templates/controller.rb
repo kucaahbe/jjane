@@ -2,7 +2,11 @@ class <%= controller_class_name %>Controller < AdminController
   uses_tiny_mce :options => TinyMCEconfig.load, :only => [:new,:edit,:create,:update]
 
   before_filter :find_page
-  before_filter :find_<%= node_name %>, :except => [:new, :create]
+  before_filter :find_<%= node_name %>, :except => [:index, :new, :create]
+
+  def index
+    @nodes = @page.nodes.paginate :page => params[:page], :order => 'created_at DESC'
+  end
 
   def new
     @<%= node_name %> = <%= class_name %>.new(:page_id => params[:page_id], :user_id => current_user.id)

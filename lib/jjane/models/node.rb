@@ -46,6 +46,10 @@ class Node < ActiveRecord::Base
     super(attributes)
   end
 
+  def author
+    user.name
+  end
+
   private
 
   def add_meta

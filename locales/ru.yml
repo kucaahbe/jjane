@@ -9,6 +9,7 @@ ru:
   title_new_user:     'Новый пользователь'
   title_edit_user:    'Редактирование профиля'
   title_edit_page:    'Редактирование страницы'
+  title_list_nodes:   'Материал'
   title_new_node:     'Добавить материал'
   title_edit_node:    'Редактировать материал'
   title_filesystem:   'Файловая система'
@@ -25,6 +26,10 @@ ru:
 
   preview:           'предпросмотр'
 
+# Заголовки таблиц:
+  title:             'Заголовок'
+  author:            'Автор'
+  created_at:        'Создано'
   actions:           'Действия'
   name:              'Имя'
   email:             'Ел. почта'
@@ -70,7 +75,8 @@ ru:
   notice_invalid_login_or_password: 'Не правильное сочетание логина и пароля'
   notice_logged_in:                 'Добро пожаловать! :)'
   notice_logged_out:                'До новых встреч!'
-# administrator panel link titles
+
+# заголовки ссылок панели администратора
   admin_panel_page:          'Страница'
   admin_panel_node:          'Материал'
   admin_panel_pages:         'Настройка страниц'

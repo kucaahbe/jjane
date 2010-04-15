@@ -1,0 +1,23 @@
+<%%= title "#{t(:title_list_nodes)}(<%= node_name.pluralize %>)" %>
+
+<table class="jjane" width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+    <th><%%=t :title %></th>
+    <th><%%=t :author %></th>
+    <th><%%=t :created_at %></th>
+    <th><%%=t :actions %></th>
+  </tr>
+<%% @nodes.each do |node| -%>
+  <tr>
+    <td><%%= link_to node.title, show_node_path(@page.url,node), :title => node.preview %></td>
+    <td><%%=h node.author %></td>
+    <td><%%=h node.created_at %></td>
+    <td>
+      <%%= link_to_edit engine_image('pencil.png'), edit_page_node_path(node.page_id,:<%= controller_name -%>,node.id) %>
+      <%%= link_to_destroy page_node_path(node.page_id,:<%= controller_name %>,node), t(:link_destroy) %>
+    </td>
+  </tr>
+<%% end -%>
+</table>
+
+<%%= new_node_link %>
