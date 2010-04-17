@@ -113,8 +113,9 @@ class JJane
 	  else
 	    ''
 	  end+
+	  javascript('/jjane/javascripts/jquery.cookie.js')+
 	  stylesheet('/jjane/stylesheets/flick/style')+
-	  javascript_tag('$(document).ready( function() { $("#tabs").tabs(); } );')
+	  javascript_tag('$(document).ready( function() { $("#tabs").tabs({ cookie: { expires: 30 } }); } );')
 	end
 
 	if block_called_from_erb?(block)
