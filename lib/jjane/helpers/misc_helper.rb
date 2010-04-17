@@ -113,7 +113,7 @@ class JJane
 	  else
 	    ''
 	  end+
-	  stylesheet('/jjane/stylesheets/ui-lightness/style')+
+	  stylesheet('/jjane/stylesheets/flick/style')+
 	  javascript_tag('$(document).ready( function() { $("#tabs").tabs(); } );')
 	end
 
