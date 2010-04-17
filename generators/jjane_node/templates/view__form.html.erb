@@ -1,38 +1,36 @@
 <%% tabbar do |tabs| %>
   <%%= tabs.headers t(:tab_content), t(:tab_meta) %>
 
-  <%% tabs.content do |tabcontent| %>
-    <%% tabcontent.draw do %>
-      <%%= f.error_messages %>
-      <p>
-      <%%= f.hidden_field :user_id %>
-      <%%= f.hidden_field :page_id %>
-      </p>
-      <p>
-      <%%= f.label :title, t(:label_title) %><br />
-      <%%= f.text_field :title, :class => 'title' %>
-      </p>
-      <%%= f.label :preview, t(:label_preview) %><br />
-      <%%= f.text_area :preview, :style => 'width:100%;height:70px;overflow:auto;' %>
-      <p>
-      <%%= f.text_area :content, :class => 'mceEditor' %>
-      </p>
+  <%% tabs.content do %>
+    <%%= f.error_messages %>
+    <p>
+    <%%= f.hidden_field :user_id %>
+    <%%= f.hidden_field :page_id %>
+    </p>
+    <p>
+    <%%= f.label :title, t(:label_title) %><br />
+    <%%= f.text_field :title, :class => 'title' %>
+    </p>
+    <%%= f.label :preview, t(:label_preview) %><br />
+    <%%= f.text_area :preview, :style => 'width:100%;height:70px;overflow:auto;' %>
+    <p>
+    <%%= f.text_area :content, :class => 'mceEditor' %>
+    </p>
 <% for attribute in attributes -%>
-      <p>
-      <%%= f.label :<%= attribute.name %>, t(:label_<%= attribute.name %>) %><br />
-      <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
-      </p>
+    <p>
+    <%%= f.label :<%= attribute.name %>, t(:label_<%= attribute.name %>) %><br />
+    <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
+    </p>
 <%- end -%>
-    <%% end %>
+  <%% end %>
 
-    <%% tabcontent.draw do %>
-      <%% f.fields_for @<%= node_name %>.meta do |meta_f| %>
-	<%% Meta.tags.each do |meta_tag| %>
-	  <p>
-	  <%%= meta_f.label meta_tag %><br />
-	  <%%= meta_f.text_field meta_tag %>
-	  </p>
-	<%% end %>
+  <%% tabs.content do %>
+    <%% f.fields_for @<%= node_name %>.meta do |meta_f| %>
+      <%% Meta.tags.each do |meta_tag| %>
+	<p>
+	<%%= meta_f.label meta_tag %><br />
+	<%%= meta_f.text_field meta_tag %>
+	</p>
       <%% end %>
     <%% end %>
   <%% end %>

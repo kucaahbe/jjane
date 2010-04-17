@@ -12,40 +12,38 @@
       <%= tabs.headers t(:tab_page_settings) %>
     <% end -%>
 
-    <% tabs.content do |tabcontent| %>
-      <% tabcontent.draw do %>
-	<p>
-	<%= f.label :name, t(:label_page_name) %><br />
-	<%= f.text_field :name, :readonly => 'readonly' %>
-	</p>
-	<p>
-	<%= f.label :menu, t(:label_menu) %><br />
-	<%= f.text_field :menu %>
-	</p>
-	<p>
-	<%= f.label :link, t(:label_link) %><br />
-	<%= f.text_field :link %>
-	</p>
+    <% tabs.content do %>
+      <p>
+      <%= f.label :name, t(:label_page_name) %><br />
+      <%= f.text_field :name, :readonly => 'readonly' %>
+      </p>
+      <p>
+      <%= f.label :menu, t(:label_menu) %><br />
+      <%= f.text_field :menu %>
+      </p>
+      <p>
+      <%= f.label :link, t(:label_link) %><br />
+      <%= f.text_field :link %>
+      </p>
+    <% end %>
+
+    <% unless @page.page_type=='directory' -%>
+      <% tabs.content do %>
+	<%= partial "pages/#{@page.page_type}/edit", :f => f %>
       <% end %>
 
-      <% unless @page.page_type=='directory' -%>
-	<% tabcontent.draw do %>
-	  <%= partial "pages/#{@page.page_type}/edit", :f => f %>
-	<% end %>
-
-	<% tabcontent.draw do %>
-	  <% f.fields_for :node do |node_f| %>
-	    <% node_f.fields_for :meta do |meta_f |%>
-	      <% Meta.tags.each do |meta_tag| -%>
-		<p>
-		<%= meta_f.label meta_tag %><br />
-		<%= meta_f.text_field meta_tag.to_sym %>
-		</p>
-	      <% end -%>
-	    <% end %>
+      <% tabs.content do %>
+	<% f.fields_for :node do |node_f| %>
+	  <% node_f.fields_for :meta do |meta_f |%>
+	    <% Meta.tags.each do |meta_tag| -%>
+	      <p>
+	      <%= meta_f.label meta_tag %><br />
+	      <%= meta_f.text_field meta_tag.to_sym %>
+	      </p>
+	    <% end -%>
 	  <% end %>
 	<% end %>
-      <% end -%>
+      <% end %>
 
     <% end %>
   <% end %>

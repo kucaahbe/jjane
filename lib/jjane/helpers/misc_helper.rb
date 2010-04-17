@@ -58,44 +58,24 @@ class JJane
 
     class TabbarBuilder#:nodoc:
 
-      class Content#:nodoc:
-	def initialize(template)
-	  @template = template
-	  @number = 0
-	end
-
-	def draw(&block)
-	  @number += 1
-	  result = @template.content_tag :div,
-	    @template.capture(&block),
-	    :id => "tabContent#{@number}",
-	    :class => "tabContent",
-	    :style => "display:#{@number==1 ? 'yes' : 'none'};"
-	    @template.send :concat, result
-	end
-      end
-
-      def initialize(template)
+      def initialize template
 	@template = template
-	@tabnames = []
       end
 
       # tabbar headers
-      def headers(*tabnames)
-	@tabnames = tabnames = tabnames.to_a
-	list = wrap(tabnames[0],1,tabnames.length,true)
-	tabnames[1..tabnames.length].each_index do |n|
-	  list += wrap(tabnames[n+1],n+2,tabnames.length,false)
-	end
+      def headers *tabnames
+	tabnames = tabnames.to_a
+	list = ''
+	tabnames.each_index { |number| list += wrap tabnames[number], "#fragment-#{number+1}" }
 	@template.content_tag :ul, list
       end
 
       # tabbar content
-      def content(html_options={}, &block)
+      def content &block
 	raise ArgumentError, "Missing block" unless block_given?
-	options = { :id => 'tabscontent' }.merge(html_options)
+	@number ||= -1;	@number += 1
 
-	result = @template.content_tag(:div, @template.capture(Content.new(@template),&block), options)
+	result = @template.content_tag :div, @template.capture(&block), :id => "fragment-#{@number+1}"
 
 	if @template.send :block_called_from_erb?, block
 	  @template.send :concat, result
@@ -106,25 +86,17 @@ class JJane
 
       private
 
-      def wrap(text,n,l,active)
-	@template.content_tag :li,
-	  @template.link_to(
-	  "<span>#{text}</span>",
-	  'javascript:void(0)',
-	  :onclick => "toggleTab(#{n},#{l},null,false)",
-	:class => :tablink),
-	  :id => active ? "tabHeaderActive":"tabHeader#{n}" 
+      def wrap text,link
+	%[<li><a href="#{link}"><span>#{text}</span></a></li>]
       end
     end
 
 
     #    <% tabbar do |tabbar| %>
     #      <%= tabs.headers 'tab name' %>
-    #      <% tabs.content do |tabcontent| %>
-    #        <% tabcontent.draw do %>
+    #      <% tabs.content do %>
     #          'tabs content'
-    #        <% end %>
-    #    <% end %>
+    #      <% end %>
     module TabbarHelper
 
       # writes tabbar
@@ -133,6 +105,17 @@ class JJane
 	options = { :id => 'tabs' }.merge(html_options)
 
 	result = content_tag(:div, capture(JJane::Helpers::TabbarBuilder.new(self),&block), options)
+
+	content_for :head do
+	  unless ActionView::Helpers::PrototypeHelper.const_defined? :JQUERY_VAR
+	    javascript('http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js')+
+	      javascript('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js')
+	  else
+	    ''
+	  end+
+	  stylesheet('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css')+
+	  javascript_tag('$(document).ready( function() { $("#tabs").tabs(); } );')
+	end
 
 	if block_called_from_erb?(block)
 	  concat(result)
