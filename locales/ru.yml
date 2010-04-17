@@ -67,6 +67,7 @@ ru:
   label_link:                  'url'
   label_type:                  'тип'
   label_title:                 'Заголовок'
+  label_preview:               'Предпросмотр'
   label_pagination:            'Количество статей на страницу'
   label_page_name:             'ID'
   label_upload_file:           'Загрузить файл'

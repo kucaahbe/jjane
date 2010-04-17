@@ -45,11 +45,6 @@ form.jjane label {margin:5px 0;font-weight:bold;}
 form.jjane input[type="submit"] {font-weight:bold;}
 form.jjane textarea.mceEditor  {width:99%;height:500px;}
 input.title {width:99%;height:25px;font-weight:bold;font-size:18px;}
-/*#preview_node { overflow: hidden; padding:5px; }
-#preview_node legend { text-decoration:none; color:#661bff; font-weight:bold; }
-#preview_node legend:hover { text-decoration:underline; cursor:pointer; }*/
-fieldset.collapsed { height:10px; border:1px solid transparent; border-top:1px solid black; }
-fieldset.expanded { border:1px solid black; }
 
 table.jjane {text-align:left;margin-bottom:5px;background:white;border-spacing:0;}
 table.jjane th,#pages_list_header {background-color:#e2e5e9;padding:3px;font-weight:bold;}

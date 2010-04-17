@@ -67,6 +67,7 @@ en:
   label_link:                  'url'
   label_type:                  'type'
   label_title:                 'Title'
+  label_preview:               'Preview'
   label_pagination:            'Pagination'
   label_page_name:             'ID'
   label_upload_file:           'Upload file'

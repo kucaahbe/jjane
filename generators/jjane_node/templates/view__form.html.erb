@@ -12,10 +12,8 @@
       <%%= f.label :title, t(:label_title) %><br />
       <%%= f.text_field :title, :class => 'title' %>
       </p>
-      <%% field_set_tag nil, :id => 'preview_node', :class => 'collapsed' do %>
-	<%%= content_tag :legend, t(:preview), :onclick => 'PreviewNodeShowHide();' %>
-	<%%= f.text_area :preview, :style => 'width:100%; height:70px; display:none;' %>
-      <%% end %>
+      <%%= f.label :preview, t(:label_preview) %><br />
+      <%%= f.text_area :preview, :style => 'width:100%;height:70px;overflow:auto;' %>
       <p>
       <%%= f.text_area :content, :class => 'mceEditor' %>
       </p>
