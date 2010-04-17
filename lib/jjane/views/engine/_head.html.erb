@@ -13,7 +13,8 @@
 <%-# Stylesheets -%>
 <%= stylesheet :notices %>
 <%= stylesheet response.layout[/(?!\/)\w*$/] %>
-<%= stylesheet('/jjane/stylesheets/default', '/jjane/stylesheets/form_notices') if logged_in? %>
+<%= stylesheet('/jjane/stylesheets/default',
+'/jjane/stylesheets/form_notices') if logged_in? %>
 <%-# Javascripts -%>
 <%= javascript :defaults %>
 <%-# Include JJane UI scripts if need -%>

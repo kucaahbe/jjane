@@ -108,12 +108,12 @@ class JJane
 
 	content_for :head do
 	  unless ActionView::Helpers::PrototypeHelper.const_defined? :JQUERY_VAR
-	    javascript('http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js')+
-	      javascript('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js')
+	    javascript('/jjane/javascripts/jquery-1.3.2.min.js')+
+	      javascript('/jjane/javascripts/jquery-ui-1.7.2.custom.min.js')
 	  else
 	    ''
 	  end+
-	  stylesheet('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css')+
+	  stylesheet('/jjane/stylesheets/ui-lightness/style')+
 	  javascript_tag('$(document).ready( function() { $("#tabs").tabs(); } );')
 	end
 
