@@ -1,3 +1,4 @@
 # Install hook code here
-puts 'install dependency plugin'
+puts 'install plugins'
 `./script/plugin install git://github.com/collectiveidea/awesome_nested_set.git`
+`./script/plugin install git://github.com/aaronchi/jrails.git`
