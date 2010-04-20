@@ -25,6 +25,10 @@
       <%= f.label :link, t(:label_link) %><br />
       <%= f.text_field :link %>
       </p>
+      <p>
+      <%= f.label :layout, t(:label_layout) %><br />
+      <%= f.select :layout, options_for_select(Page.layouts, @page.layout) %>
+      </p>
     <% end %>
 
     <% unless @page.page_type=='directory' -%>

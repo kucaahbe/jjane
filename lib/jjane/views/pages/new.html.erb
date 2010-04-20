@@ -24,6 +24,10 @@
   <%= f.select :page_type, grouped_options_for_select(@page_types) %>
   </p>
   <p>
+  <%= f.label :layout, t(:label_layout) %><br />
+  <%= f.select :layout, options_for_select(Page.layouts,@page.layout) %>
+  </p>
+  <p>
   <%= f.submit t(:button_create) %> |
   <%= link_to_cancel pages_path %>
   </p>

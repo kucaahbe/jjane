@@ -91,6 +91,13 @@ class Page < ActiveRecord::Base
       Dir.glob(nodes_dir) { |fname| nodes_types << File.basename(fname) }
       nodes_types
     end
+
+    def layouts
+      layouts_dir=File.join(RAILS_ROOT,'app','views','layouts','**')
+      layouts_names = []
+      Dir.glob(layouts_dir) { |fname| layouts_names << File.basename(fname).sub(/(.html.erb|.erb)$/,'') }
+      layouts_names
+    end
   end
 
   private
@@ -102,7 +109,6 @@ class Page < ActiveRecord::Base
       parent.self_and_ancestors.each { |ancestor| url = ancestor.link+'/'+url }
     end
     self.url = url
-    logger.info self.url
   end
 
   def add_node

@@ -56,6 +56,7 @@ en:
   button_create_dir: 'Create directory'
   button_upload_file: 'Upload'
 
+# form labels
   label_id:                    'Unique ID'
   label_login:                 'Login'
   label_password:              'Password'
@@ -65,6 +66,7 @@ en:
   label_group:                 'Group'
   label_menu:                  'Menu'
   label_link:                  'url'
+  label_layout:                'Layout'
   label_type:                  'type'
   label_title:                 'Title'
   label_preview:               'Preview'
