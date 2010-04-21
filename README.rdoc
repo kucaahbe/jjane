@@ -20,7 +20,7 @@ gems:
 * ./script/plugin install git://github.com/kucaahbe/jjane.git
 * rake jjane:copy_files
 * sudo rake gems:install
-* ./script/generate jjane_base 
+* ./script/generate jjane_base install
 * ./script/generate jjane_node NodeName
 * rake db:migrate
 * rake jjane:setup
