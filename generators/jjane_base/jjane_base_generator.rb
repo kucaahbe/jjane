@@ -1,9 +1,19 @@
 class JjaneBaseGenerator < Rails::Generator::NamedBase
-
-  def initialize(runtime_args, runtime_options = {})
-    runtime_args[0]='CreateJJaneBaseTables'
-    super
+  module GeneratorExtension
+    def jjane_migration file
+      migration_name = File.basename(file,'.rb').sub(/^\d+_/,'')
+      migration_template "migrations/#{file}",
+      'db/migrate',
+	:migration_file_name => migration_name,
+	:assigns => { :migration_class_name => migration_name.camelize }
+    rescue
+      logger.info "migration #{migration_name} exists, skipping"
+    end
   end
+
+  Rails::Generator::Commands::Create.send  :include, GeneratorExtension
+  Rails::Generator::Commands::Destroy.send :include, GeneratorExtension
+  Rails::Generator::Commands::List.send    :include, GeneratorExtension
 
   def manifest
     record do |m|
@@ -35,8 +45,17 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
       m.file 'views/users/new.html.erb', File.join('app','views','users','new.html.erb')
       m.file 'views/users/show.html.erb', File.join('app','views','users','show.html.erb')
 
-      # base migration
-      m.migration_template 'migration.rb', 'db/migrate'
+      # migrations
+      case name
+      when 'install'
+	migration_file_name = "jjane_full_migration"
+	migration_class_name = migration_file_name.underscore.camelize
+	m.migration_template 'full_migration.rb', 'db/migrate', :migration_file_name => migration_file_name, :assigns => { :migration_class_name => migration_class_name }
+      when 'update'
+	Dir.glob(File.join(source_path('migrations'),'**')).each do |migration_file|
+	  m.jjane_migration File.basename(migration_file)
+	end
+      end
     end
   end
 

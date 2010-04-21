@@ -1,4 +1,4 @@
-class <%= class_name.underscore.camelize %> < ActiveRecord::Migration
+class <%= migration_class_name %> < ActiveRecord::Migration
   def self.up
     create_table :attached_files do |t|
       t.string   :name

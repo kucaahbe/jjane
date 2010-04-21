@@ -1,8 +1,7 @@
 Description:
-    Creates JJane base files
+    Creates JJane base files, takes 2 arguments: 'install' and 'update'
 
 Example:
-    `./script/generate jjane_base`
+    `./script/generate jjane_base install` - this will install base jjane files
 
-    this will create
-    TODO:)
+    `./script/generate jjane_base update` - this will update base jjane files(add new migration etc.)
