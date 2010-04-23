@@ -32,3 +32,8 @@ input : field_name
 } );
 return false;
 }
+
+function previewNode (html_data) {
+  previewWindow = window.open('about:blank', 'Node preview');
+  previewWindow.document.write(html_data);
+}

@@ -1,7 +1,7 @@
-<%%= title "#{t(:title_new_node)}(<%= node_name %>)" %>
+<%%= title "#{t(:title_new_node)}[#{t(:node_type_<%= node_name %>)}]" %>
 
 <%% form_for :<%= node_name %>, :url => { :action => :create }, :html => { :class => 'jjane' } do |f| %>
-  <%%= partial '/nodes/<%= node_table_name %>/form',{ :f => f } %>
+  <%%= partial 'form', { :f => f } %>
   <p>
   <%%= f.submit t(:button_create) %> |
   <%%= link_to_cancel root_url %>

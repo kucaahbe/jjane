@@ -1,11 +1,16 @@
-<%%= title "#{t(:title_edit_node)}(<%= node_name %>)" %>
-
-<%% form_for @<%= node_name %>, :url => { :action => "update" }, :html => { :class => 'jjane' } do |f| %>
-  <%%= partial '/nodes/<%= node_table_name %>/form',{ :f => f } %>
+<%%= title "#{t(:title_edit_node)}[#{t(:node_type_<%=node_name%>)}]" %>
+<%%= javascript_tag '$.ajaxSetup({ dataType: "html" });' %>
+<%% form_for @<%=node_name%>, :url => { :action => :update }, :html => { :class => 'jjane' } do |f| %>
+  <%%= partial 'form', { :f => f } %>
   <p>
   <%%= f.submit t(:button_save) %> |
-  <%%= link_to t(:link_to_node), show_node_path(@page.url,@<%= node_name %>) %> |
+  <%%= link_to_remote t(:link_to_node),
+    :url => { :action => :show },
+    :method => :put,
+    :with => %[$('##{dom_id(@<%=node_name%>,:edit)}').serialize()],
+    :success => %[previewNode(request);]
+    %> |
   <%%= link_to_cancel root_url %> |
-  <%%= link_to_destroy page_node_path(@<%= node_name %>.page_id,:<%= controller_name %>,@<%= node_name %>), t(:link_destroy) %>
+  <%%= link_to_destroy page_node_path(@<%=node_name%>.page_id,:<%=controller_name%>,@<%=node_name%>), t(:link_destroy) %>
   </p>
 <%% end %>

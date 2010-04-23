@@ -1,11 +1,15 @@
-class <%= controller_class_name %>Controller < AdminController
+class <%= controller_class_name %>Controller < NodesController
   uses_tiny_mce :options => TinyMCEconfig.load, :only => [:new,:edit,:create,:update]
 
-  before_filter :find_page
   before_filter :find_<%= node_name %>, :except => [:index, :new, :create]
 
   def index
     @nodes = @page.nodes.paginate :page => params[:page], :order => 'created_at DESC'
+  end
+
+  def show
+    self.class.layout @page.layout
+    @node = <%= class_name %>.new(params[:<%= node_name %>])
   end
 
   def new
@@ -45,9 +49,5 @@ class <%= controller_class_name %>Controller < AdminController
 
   def find_<%= node_name %>
     @<%= node_name %> = <%= class_name %>.find(params[:id])
-  end
-
-  def find_page
-    @page = Page.find(params[:page_id])
   end
 end

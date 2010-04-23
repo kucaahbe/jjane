@@ -24,12 +24,13 @@ class JJane#:nodoc:
       def jjane_connect
 	resources :attached_files
 
-	page_nodes     'pages/:page_id/:controller/list',     :action => :index,   :conditions => { :method => :get }
-	connect        'pages/:page_id/:controller',          :action => :create,  :conditions => { :method => :post }
-	new_page_node  'pages/:page_id/:controller/new',      :action => :new,     :conditions => { :method => :get }
-	edit_page_node 'pages/:page_id/:controller/:id/edit', :action => :edit,    :conditions => { :method => :get }
-	page_node      'pages/:page_id/:controller/:id',      :action => :update,  :conditions => { :method => :put }
-	connect        'pages/:page_id/:controller/:id',      :action => :destroy, :conditions => { :method => :delete }
+	page_nodes     'pages/:page_id/:controller/list',        :action => :index,   :conditions => { :method => :get }
+	connect        'pages/:page_id/:controller',             :action => :create,  :conditions => { :method => :post }
+	new_page_node  'pages/:page_id/:controller/new',         :action => :new,     :conditions => { :method => :get }
+	edit_page_node 'pages/:page_id/:controller/:id/edit',    :action => :edit,    :conditions => { :method => :get }
+	show_page_node 'pages/:page_id/:controller/:id/preview', :action => :show,    :conditions => { :method => :put }
+	page_node      'pages/:page_id/:controller/:id',         :action => :update,  :conditions => { :method => :put }
+	connect        'pages/:page_id/:controller/:id',         :action => :destroy, :conditions => { :method => :delete }
 
 	resources :pages, :except => [:show], :collection => { :sort => :put } do |page|
 	  page.resources :child, :controller => :pages, :only => [:new]
