@@ -7,7 +7,7 @@
   <%%= link_to_remote t(:link_to_node),
     :url => { :action => :show },
     :method => :put,
-    :with => %[$('##{dom_id(@<%=node_name%>,:edit)}').serialize()],
+    :with => %[serializeNodeForm('##{dom_id(@<%=node_name%>,:edit)}')],
     :success => %[previewNode(request);]
     %> |
   <%%= link_to_cancel root_url %> |

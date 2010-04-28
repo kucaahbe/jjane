@@ -33,6 +33,7 @@ input : field_name
 return false;
 }
 
+function serializeNodeForm(form_id) {tinyMCE.triggerSave();return $(form_id).serialize();}
 function previewNode (html_data) {
   previewWindow = window.open('about:blank', 'Node preview');
   previewWindow.document.write(html_data);
