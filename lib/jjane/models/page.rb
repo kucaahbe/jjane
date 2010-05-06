@@ -52,6 +52,26 @@ class Page < ActiveRecord::Base
     self.node.published?
   end
 
+  def get_nodes(page = nil)
+    time_now = Time.now
+    self.nodes.paginate :page => page,
+      :per_page => self.pagination,
+      :order => 'start_publishing DESC',
+      :conditions => [
+"IFNULL(start_publishing,:time_now+1) <= :time_now AND IFNULL(end_publishing,:time_now+1) > :time_now",
+{ :time_now => time_now }
+    ]
+  end
+
+  def get_node_by_id(id)
+    node = self.nodes.find(id)
+    if node.published?
+      node
+    else
+      nil
+    end
+  end
+
   #-- 
   #PUBLIC CLASS METHODS
   #++
