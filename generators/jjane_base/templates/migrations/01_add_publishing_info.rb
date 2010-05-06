@@ -4,6 +4,10 @@ class AddPublishingInfo < ActiveRecord::Migration
       t.column :start_publishing, :datetime
       t.column :end_publishing,   :datetime
     end
+    Node.all.each do |node|
+      node.start_publishing = node.created_at
+      node.save!
+    end
   end
 
   def self.down
