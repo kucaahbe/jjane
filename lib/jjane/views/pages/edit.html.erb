@@ -7,7 +7,7 @@
 
   <% tabbar do |tabs| %>
     <% unless @page.page_type=='directory' -%>
-      <%= tabs.headers t(:tab_page_settings), t(:tab_content), t(:tab_meta) %>
+      <%= tabs.headers t(:tab_page_settings), t(:tab_content), t(:tab_meta), t(:tab_publish_info) %>
     <% else -%>
       <%= tabs.headers t(:tab_page_settings) %>
     <% end -%>
@@ -46,6 +46,19 @@
 	      </p>
 	    <% end -%>
 	  <% end %>
+	<% end %>
+      <% end %>
+
+      <% tabs.content do %>
+	<% f.fields_for :node do |node_f| %>
+	  <p>
+	  <%= node_f.label :start_publishing, t(:label_start_publishing) %><br />
+	  <%= node_f.text_field :start_publishing %>
+	  </p>
+	  <p>
+	  <%= node_f.label :end_publishing, t(:label_end_publishing) %><br />
+	  <%= node_f.text_field :end_publishing %>
+	  </p>
 	<% end %>
       <% end %>
 

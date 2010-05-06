@@ -1,5 +1,5 @@
 <%% tabbar do |tabs| %>
-  <%%= tabs.headers t(:tab_content), t(:tab_meta) %>
+  <%%= tabs.headers t(:tab_content), t(:tab_meta), t(:tab_publish_info) %>
 
   <%% tabs.content do %>
     <%%= f.error_messages %>
@@ -34,4 +34,15 @@
       <%% end %>
     <%% end %>
   <%% end %>
+
+  <%% tabs.content do  %>
+    <p>
+    <%%= f.label :start_publishing, t(:label_start_publishing) %><br />
+    <%%= f.text_field :start_publishing %>
+    </p>
+    <p>
+    <%%= f.label :end_publishing, t(:label_end_publishing) %><br />
+    <%%= f.text_field :end_publishing %>
+    </p>
+  <%% end  %>
 <%% end %>
