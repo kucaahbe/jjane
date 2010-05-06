@@ -6,6 +6,7 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
       'db/migrate',
 	:migration_file_name => migration_name,
 	:assigns => { :migration_class_name => migration_name.camelize }
+      sleep 1
     rescue
       logger.info "migration #{migration_name} exists, skipping"
     end
@@ -52,7 +53,7 @@ class JjaneBaseGenerator < Rails::Generator::NamedBase
 	migration_class_name = migration_file_name.underscore.camelize
 	m.migration_template 'full_migration.rb', 'db/migrate', :migration_file_name => migration_file_name, :assigns => { :migration_class_name => migration_class_name }
       when 'update'
-	Dir.glob(File.join(source_path('migrations'),'**')).each do |migration_file|
+	Dir.glob(File.join(source_path('migrations'),'*.rb')).sort.each do |migration_file|
 	  m.jjane_migration File.basename(migration_file)
 	end
       end
