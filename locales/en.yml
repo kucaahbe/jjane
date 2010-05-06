@@ -74,6 +74,8 @@ en:
   label_page_name:             'ID'
   label_upload_file:           'Upload file'
   label_uploading_file:        'Uploading file...'
+  label_start_publishing:      'Start publishing:'
+  label_end_publishing:        'End publishing:'
 
   notice_invalid_login_or_password: 'Invalid login or/and password'
   notice_logged_in:                 'Successfully logged in.'
@@ -96,5 +98,6 @@ en:
   question_are_you_shure:   'Are you sure?'
 
   tab_page_settings: 'page settings'
-  tab_content: 'content'
-  tab_meta:    'meta'
+  tab_content:       'content'
+  tab_meta:          'meta'
+  tab_publish_info:  'publish info'

@@ -74,6 +74,8 @@ ru:
   label_page_name:             'ID'
   label_upload_file:           'Загрузить файл'
   label_uploading_file:        'Идет загрузка файла...'
+  label_start_publishing:      'Начало публикации:'
+  label_end_publishing:        'Конец публикации:'
 
   notice_invalid_login_or_password: 'Не правильное сочетание логина и пароля'
   notice_logged_in:                 'Добро пожаловать! :)'
@@ -97,8 +99,9 @@ ru:
   question_are_you_shure:   'Вы уверены?'
 
   tab_page_settings: 'настройки страницы'
-  tab_content: 'содержимое'
-  tab_meta:    'мета'
+  tab_content:       'содержимое'
+  tab_meta:          'мета'
+  tab_publish_info:  'настройки публикации'
 
   activerecord:
     models:
