@@ -1,6 +1,6 @@
 class SiteController < ApplicationController
 
-  before_filter :check_uri, :except => [:home_page]
+  before_filter :check_page, :except => [:home_page]
   before_filter :check_node, :only => [:node]
 
   def home_page
@@ -35,26 +35,25 @@ class SiteController < ApplicationController
   private
 
   def render_page
-    @nodes = @page.nodes.paginate :page => params[:page], :per_page => @page.pagination, :order => 'updated_at DESC'
     if @page.page_type=='directory'
       error_404
     else
+      @nodes = @page.get_nodes(params[:page])
       render "/pages/#{@page.page_type}/show", :layout => @page.layout
     end
   end
 
-  # checks uri for exstence
-  def check_uri#:doc:
+  # checks page for exstence and publishing
+  def check_page#:doc:
     # @page => current page
     url = params[:uri].join('/')
     page = Page.find_by_url(url)
     @page = page unless page.nil?
-    error_404 unless defined?(@page)
+    error_404 unless defined?(@page) && @page.published?
   end
 
   def check_node#:doc:
-    @node = @page.nodes.find(params[:id])
-  rescue
-    error_404
+    @node = @page.get_node_by_id(params[:id])
+    error_404 if @node.nil?
   end
 end
