@@ -72,7 +72,6 @@ class Node < ActiveRecord::Base
 
   def ended_publishing_untill?(time)
     if self.end_publishing.nil? 
-      puts 'публикация не окончена'
       false
     else
       self.end_publishing > time ? false : true

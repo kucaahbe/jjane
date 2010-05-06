@@ -38,3 +38,4 @@ function previewNode (html_data) {
   previewWindow = window.open('about:blank', 'Node preview');
   previewWindow.document.write(html_data);
 }
+$(document).ready( function() { $(".jjane_datepicker").datepicker(); } );
