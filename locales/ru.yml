@@ -76,6 +76,8 @@ ru:
   label_uploading_file:        'Идет загрузка файла...'
   label_start_publishing:      'Начало публикации:'
   label_end_publishing:        'Конец публикации:'
+  label_sort_by:               'Сортировка по:'
+  label_sort_order:            'Порядок сортировки:'
 
   notice_invalid_login_or_password: 'Не правильное сочетание логина и пароля'
   notice_logged_in:                 'Добро пожаловать! :)'

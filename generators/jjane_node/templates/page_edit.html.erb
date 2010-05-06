@@ -5,6 +5,14 @@
 <% end %>
 </p>
 <p>
-<%= f.label :pagination, t(:label_pagination) %><br />
+<%= f.label :pagination, t(:label_pagination) %>
 <%= f.select :pagination, options_for_select(%w[1 2 3 4 5 10 15 20 25 30], :selected => @page.pagination.to_s) %>
+</p>
+<p>
+<%= f.label :sort_by, t(:label_sort_by) %>
+<%= f.select :sort_by, options_for_select(Page.sort_by_values, :selected => @page.sort_by) %>
+</p>
+<p>
+<%= f.label :sort_order_asc, t(:label_sort_order) %>
+<%= f.select :sort_order_asc, options_for_select(Page.sort_order_values, :selected => @page.sort_order_asc) %>
 </p>

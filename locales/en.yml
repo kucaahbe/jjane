@@ -76,6 +76,8 @@ en:
   label_uploading_file:        'Uploading file...'
   label_start_publishing:      'Start publishing:'
   label_end_publishing:        'End publishing:'
+  label_sort_by:               'Sort by:'
+  label_sort_order:            'Sort order:'
 
   notice_invalid_login_or_password: 'Invalid login or/and password'
   notice_logged_in:                 'Successfully logged in.'

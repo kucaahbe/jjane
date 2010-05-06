@@ -56,7 +56,7 @@ class Page < ActiveRecord::Base
     time_now = Time.now
     self.nodes.paginate :page => page,
       :per_page => self.pagination,
-      :order => 'start_publishing DESC',
+      :order => "#{self.sort_by} #{sort_order}",
       :conditions => [
 "IFNULL(start_publishing,:time_now+1) <= :time_now AND IFNULL(end_publishing,:time_now+1) > :time_now",
 { :time_now => time_now }
@@ -118,6 +118,14 @@ class Page < ActiveRecord::Base
       Dir.glob(layouts_dir) { |fname| layouts_names << File.basename(fname).sub(/(.html.erb|.erb)$/,'') }
       layouts_names
     end
+
+    def sort_by_values
+      %w[title  created_at updated_at start_publishing end_publishing]
+    end
+
+    def sort_order_values
+      { 'ASC' => true, 'DESC' => false }
+    end
   end
 
   private
@@ -137,5 +145,9 @@ class Page < ActiveRecord::Base
 
   def set_pagination
     self.pagination=5 if self.class.nodes_types.include?(self.page_type)
+  end
+
+  def sort_order
+    sort_order_asc ? 'ASC' : 'DESC'
   end
 end
