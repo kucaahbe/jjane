@@ -102,14 +102,13 @@ class JJane
       # writes tabbar
       def tabbar(html_options={}, &block)
 	raise ArgumentError, "Missing block" unless block_given?
-	options = { :id => 'tabs', :class => 'jjane' }.merge(html_options)
+	options = { :class => 'jjane jjane_tabs' }.merge(html_options)
 
 	result = content_tag(:div, capture(JJane::Helpers::TabbarBuilder.new(self),&block), options)
 
 	content_for :head do
 	  javascript('/jjane/javascripts/jquery.cookie.js')+
-	    stylesheet('/jjane/stylesheets/jquery-ui/style')+
-	    javascript_tag('$(document).ready( function() { $("#tabs").tabs({ cookie: { expires: 30 } }); } );')
+	    javascript_tag('$(document).ready( function() { $(".jjane_tabs").tabs({ cookie: { expires: 30 } }); } );')
 	end
 
 	if block_called_from_erb?(block)

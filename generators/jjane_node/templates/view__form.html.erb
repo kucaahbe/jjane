@@ -38,11 +38,11 @@
   <%% tabs.content do  %>
     <p>
     <%%= f.label :start_publishing, t(:label_start_publishing) %><br />
-    <%%= f.text_field :start_publishing %>
+    <%%= f.text_field :start_publishing, :class => 'jjane_datepicker' %>
     </p>
     <p>
     <%%= f.label :end_publishing, t(:label_end_publishing) %><br />
-    <%%= f.text_field :end_publishing %>
+    <%%= f.text_field :end_publishing, :class => 'jjane_datepicker' %>
     </p>
   <%% end  %>
 <%% end %>
