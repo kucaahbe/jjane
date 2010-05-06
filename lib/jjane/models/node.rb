@@ -9,7 +9,7 @@ class Node < ActiveRecord::Base
 
   # attributes
   accepts_nested_attributes_for :meta
-  attr_accessible :title, :content, :preview, :page_id, :user_id, :meta_attributes
+  attr_accessible :title, :content, :preview, :page_id, :user_id, :meta_attributes, :start_publishing, :end_publishing
 
   # validations
   validates_presence_of :user_id
@@ -35,6 +35,7 @@ class Node < ActiveRecord::Base
       attributes.merge!(:meta_attributes => meta_attrs)
     end
     super
+    self.start_publishing = Time.now
   end
 
   def update_attributes(attributes)#:nodoc:
@@ -50,9 +51,31 @@ class Node < ActiveRecord::Base
     user.name
   end
 
+  def published?
+    time_now = Time.now
+    if started_publishing_since?(time_now) and (not ended_publishing_untill?(time_now))
+      true
+    else
+      false
+    end
+  end
+
   private
 
   def add_meta
     self.create_meta unless self.meta
+  end
+
+  def started_publishing_since?(time)
+    !self.start_publishing.nil? && self.start_publishing < time ? true : false
+  end
+
+  def ended_publishing_untill?(time)
+    if self.end_publishing.nil? 
+      puts 'публикация не окончена'
+      false
+    else
+      self.end_publishing > time ? false : true
+    end
   end
 end

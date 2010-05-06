@@ -48,8 +48,8 @@ class Page < ActiveRecord::Base
     not self.children.empty?
   end
 
-  def published?#TODO
-    true
+  def published?
+    self.node.published?
   end
 
   #-- 
