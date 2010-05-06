@@ -52,11 +52,14 @@ class Page < ActiveRecord::Base
     self.node.published?
   end
 
-  def get_nodes(page = nil)
+  def get_nodes page=nil, sorting_by=nil, sorting_order=nil, limit=nil
     time_now = Time.now
+    sorting_by ||= self.sort_by
+    sorting_order ||= sort_order
+    limit ||= self.pagination
     self.nodes.paginate :page => page,
-      :per_page => self.pagination,
-      :order => "#{self.sort_by} #{sort_order}",
+      :order => "#{sorting_by} #{sorting_order}",
+      :per_page => limit,
       :conditions => [
 "IFNULL(start_publishing,:time_now+1) <= :time_now AND IFNULL(end_publishing,:time_now+1) > :time_now",
 { :time_now => time_now }
