@@ -38,4 +38,12 @@ function previewNode (html_data) {
   previewWindow = window.open('about:blank', 'Node preview');
   previewWindow.document.write(html_data);
 }
-$(document).ready( function() { $(".jjane_datepicker").datepicker(); } );
+$(document).ready( function() { 
+    var calendar = Calendar.setup({
+showTime    : 24,
+animation   : false,
+});
+    $('.jjane-calendar-input').each(function(index,calendar_input) {
+      calendar.manageFields(calendar_input, calendar_input, "%Y-%m-%d %H:%M:%S")
+      });
+    });

@@ -53,11 +53,11 @@
 	<% f.fields_for :node do |node_f| %>
 	  <p>
 	  <%= node_f.label :start_publishing, t(:label_start_publishing) %><br />
-	  <%= node_f.text_field :start_publishing, :class => 'jjane_datepicker' %>
+	  <%= node_f.text_field :start_publishing, :class => 'jjane-calendar-input' %>
 	  </p>
 	  <p>
 	  <%= node_f.label :end_publishing, t(:label_end_publishing) %><br />
-	  <%= node_f.text_field :end_publishing, :class => 'jjane_datepicker' %>
+	  <%= node_f.text_field :end_publishing, :class => 'jjane-calendar-input' %>
 	  </p>
 	<% end %>
       <% end %>

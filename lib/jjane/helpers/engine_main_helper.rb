@@ -39,6 +39,13 @@ class JJane
       def warning(text)
 	%Q(<span class="jjane" style="color:red; text-weight:bold;">#{text}</span>)
       end
+
+      def include_js_calendar
+	stylesheet_link_tag('/jjane/stylesheets/calendar/jscal2')+
+	  "\n"+
+	  javascript_include_tag('/jjane/javascripts/calendar/jscal2.js',
+				 "/jjane/javascripts/calendar/lang/#{Rails.configuration.i18n.default_locale}.js")
+      end
     end
   end
 end
