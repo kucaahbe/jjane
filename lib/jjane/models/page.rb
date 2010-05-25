@@ -30,6 +30,12 @@ class Page < ActiveRecord::Base
     ''
   end
 
+  def preview
+    self.node.preview
+  rescue
+    ''
+  end
+
   def content
     self.node.content
   rescue
@@ -38,6 +44,12 @@ class Page < ActiveRecord::Base
 
   def meta
     self.node.meta
+  end
+
+  def node_class
+    self.page_type.singularize.classify.constantize
+  rescue
+    nil
   end
 
   def visible_in_menu?(name)
