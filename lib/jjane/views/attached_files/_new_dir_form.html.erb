@@ -11,17 +11,10 @@
   <%= f.submit t(:button_create_dir), :id => 'dir_submit', :disabled => true %>
 <% end %>
 
-<br />
-<br />
-<script type="text/javascript">
-  //<![CDATA[
-new Form.Element.Observer('dir_name',0.33,
-    function(el, value){
-    if (!value.blank())
-    { $('dir_submit').disabled=false }
+<%= observe_field :dir_name, :function => %[
+    if ($.trim(value)!='')
+    { $('#dir_submit').attr('disabled','') }
     else
-    { $('dir_submit').disabled=true }
-    }
-    )
-//]]>
-</script>
+    { $('#dir_submit').attr('disabled','disabled') }
+], :frequency => 0.25
+ %>

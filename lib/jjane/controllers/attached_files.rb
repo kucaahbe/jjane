@@ -1,16 +1,15 @@
-class AttachedFilesController < AdminController#:nodoc:
+class AttachedFilesController < ApplicationController#:nodoc:
   before_filter :new_items_init, :only => [:index, :show]
+  before_filter :check_access
 
   def index
-    @files = AttachedFile.roots
-    @files.sort!
+    @files = AttachedFile.roots.sort
   end
 
   def show
     @updir = AttachedFile.find(params[:id])
-    @files = @updir.children
+    @files = @updir.children.sort
     @breadcrumbs = @updir.self_and_ancestors
-    @files.sort!
     render :action => :index
   end
 
