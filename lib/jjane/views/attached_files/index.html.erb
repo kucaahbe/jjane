@@ -1,8 +1,8 @@
 <%= title t(:title_filesystem) %>
 
 <% content_for :head do %>
-  <%= javascript 'tiny_mce/tiny_mce_popup' %>
-  <%= javascript '/jjane/javascripts/file_browser' %>
+  <%= javascript_link_tag 'tiny_mce/tiny_mce_popup' %>
+  <%= javascript_link_tag '/jjane/javascripts/file_browser' %>
 <% end if params[:type] %>
 
 <%= render 'new_dir_form' %>

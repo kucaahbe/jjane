@@ -11,12 +11,10 @@
     <meta name="<%= name %>" content="<%= (@node || @page).meta.content(name) %>" />
   <% end if controller_name=='site' -%>
 <%-# Stylesheets -%>
-<%= stylesheet :notices %>
-<%= stylesheet response.layout[/(?!\/)\w*$/] %>
-<%= stylesheet('/jjane/stylesheets/default',
-'/jjane/stylesheets/form_notices') if logged_in? %>
+<%= stylesheet_link_tag 'notices', response.layout[/(?!\/)\w*$/] %>
+<%= stylesheet_link_tag '/jjane/stylesheets/default', '/jjane/stylesheets/form_notices' if logged_in? %>
 <%-# Javascripts -%>
-<%= javascript :defaults %>
+<%= javascript_include_tag :defaults %>
 <%-# Include JJane UI scripts if need -%>
 <%= include_js_calendar if logged_in? %>
 <%= javascript_include_tag '/jjane/javascripts/ui' if logged_in? %>

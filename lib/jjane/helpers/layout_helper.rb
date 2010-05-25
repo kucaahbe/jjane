@@ -2,20 +2,9 @@ class JJane
   module Helpers
     module LayoutHelper
 
-      # Показывает напоминания типа: "вы успешно авторизировались"
+      # Shows notices in layout
       def notice
 	partial 'engine/notice' if flash
-      end
-
-      # alias for stylesheet_link_tag
-      def stylesheet(*args)
-	stylesheet_link_tag(*args.map(&:to_s))
-      end
-
-      # alias for javascript_include_tag
-      def javascript(*args)
-	args = args.map { |arg| arg == :defaults ? arg : arg.to_s }
-	javascript_include_tag(*args)
       end
 
       # defualt engine head(css's javascripts and other tags)
@@ -23,8 +12,8 @@ class JJane
 	partial 'engine/head'
       end
 
-      def hide_me_if(something)
-	yield unless something
+      def partial(view, params = nil)
+	render :partial => view, :locals => params
       end
 
       # put thin in place where you want admin panel appear

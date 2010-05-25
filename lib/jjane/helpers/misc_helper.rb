@@ -107,7 +107,7 @@ class JJane
 	result = content_tag(:div, capture(JJane::Helpers::TabbarBuilder.new(self),&block), options)
 
 	content_for :head do
-	  javascript('/jjane/javascripts/jquery.cookie.js')+
+	  javascript_include_tag('/jjane/javascripts/jquery.cookie.js')+
 	    javascript_tag('$(document).ready( function() { $(".jjane_tabs").tabs({ cookie: { expires: 30 } }); } );')
 	end
 

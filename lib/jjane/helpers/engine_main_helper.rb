@@ -28,10 +28,6 @@ class JJane
       # engine links end
       #++
 
-      def partial(view, params = nil)
-	render :partial => view, :locals => params
-      end
-
       def engine_image(source,options={})
 	image_tag "/jjane/images/#{source}", options.merge(:style => "#{options[:style]} vertical-align:middle; border:none;")
       end
