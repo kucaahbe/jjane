@@ -48,6 +48,6 @@ class <%= controller_class_name %>Controller < NodesController
   private
 
   def find_<%= node_name %>
-    @<%= node_name %> = <%= class_name %>.find(params[:id])
+    @node = @<%= node_name %> = <%= class_name %>.find(params[:id])
   end
 end
