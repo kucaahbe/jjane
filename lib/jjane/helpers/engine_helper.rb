@@ -1,14 +1,7 @@
 class JJane
   module Helpers
-    module EngineMainHelper#:nodoc:
+    module EngineHelper#:nodoc:
 
-      def title(text)
-	content_tag :h1, text, :class => 'jjane-title jjane'
-      end
-
-      #--
-      # engine links start
-      #++
       def link_to_new(path)
 	link_to engine_image('add.png'), path
       end
@@ -24,9 +17,10 @@ class JJane
       def link_to_destroy(path,msg='')
 	link_to msg.to_s+engine_image('delete.png'), path, :confirm => t(:question_are_you_shure), :method => :delete
       end
-      #--
-      # engine links end
-      #++
+
+      def title(text)
+	content_tag :h1, text, :class => 'jjane-title jjane'
+      end
 
       def engine_image(source,options={})
 	image_tag "/jjane/images/#{source}", options.merge(:style => "#{options[:style]} vertical-align:middle; border:none;")
