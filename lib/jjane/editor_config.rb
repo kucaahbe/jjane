@@ -4,6 +4,7 @@ class TinyMCEconfig
     :relative_urls => false,
     :doctype => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
     :mode => 'specific_textareas',
+    :width => '100%',
     :editor_selector => 'mceEditor'
   }
   def self.load(config='default')
