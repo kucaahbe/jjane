@@ -34,16 +34,21 @@ class JJane
 
       # writes snippet content to page
       #   snippet('name_of_snippet')
+      # or 
+      #   snippet :name_of_snippet
       # options:
       # * :compile - if true content of snippet will be compiled like ERB template
-      def snippet(name='',args={})
-	defaults = { :compile => false }
-	args = defaults.merge(args)
-	content = Snippet.find_by_name(name).content
-	content = render(:inline => content) if args[:compile]
+      def snippet name,options={}
+	name = name.to_s
+	options = { :compile => false }.merge(options)
+
+	content = if Snippet.exists?(:name => name)
+		    Snippet.find_by_name(name).content
+		  else
+		    Snippet.create!(:name => name).content
+		  end
+	content = render(:inline => content) if options[:compile]
 	return content
-      rescue
-	%(<p style='color:red;'>snippet not found</p>)
       end
 
     end
