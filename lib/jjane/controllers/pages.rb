@@ -7,25 +7,12 @@ class PagesController < AdminController#:nodoc:
 
   def index
     @pages = []
-    Page.each_with_level( Page.find(:all, :order => 'lft ASC') ) do |page,level| 
-      @pages << {
-	:page => page,
-	:id => dom_id(page),
-	:class => dom_class(Page),
-	:level => level
-      }
-    end
-    @pages[0..-2].map! { |p| p.update(:have_children => p[:level] < @pages[@pages.index(p)+1][:level]) }
-    @pages[-1].update :have_children => false
-    @menus_columns = Page.menus_columns
+    Page.each_with_level( Page.find(:all, :order => 'lft ASC') ) { |page,level| @pages << { :page => page, :level => level } }
+    @menus = Page.menus
   end
 
   def new
-    if params[:page_id]
-      @page = Page.new(:parent_id => params[:page_id])
-    else
-      @page = Page.new
-    end
+    @page = Page.new(:parent_id => params[:page_id])
     @page.user = current_user
   end
 

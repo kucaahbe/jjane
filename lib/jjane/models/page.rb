@@ -22,34 +22,40 @@ class Page < ActiveRecord::Base
   before_save :calculate_url
   before_create :add_node, :set_pagination
 
+  # Return page title
   def title
     self.node.title
   rescue
     ''
   end
 
+  # Return page preview field
   def preview
     self.node.preview
   rescue
     ''
   end
 
+  # Return page content
   def content
     self.node.content
   rescue
     ''
   end
 
+  # Page meta tags
   def meta
     self.node.meta
   end
 
+  # Return class of page nodes(like Article)
   def node_class
     self.page_type.singularize.classify.constantize
   rescue
     nil
   end
 
+  # Is page visible in menu identified by name
   def visible_in_menu?(name)
     self.send "nav_#{name}".to_sym
   end
@@ -62,6 +68,11 @@ class Page < ActiveRecord::Base
     self.node.published?
   end
 
+  # Returns page's nodes:
+  #
+  #   @page.get_nodes(params[:page], 'created_at', 'ASC', 40).each do |node|
+  #     <h1><%= node.title %></h1>
+  #   end
   def get_nodes page=nil, sorting_by=nil, sorting_order=nil, limit=nil
     time_now = Time.now
     sorting_by ||= self.sort_by
@@ -85,29 +96,25 @@ class Page < ActiveRecord::Base
     end
   end
 
-  #-- 
-  #PUBLIC CLASS METHODS
-  #++
+  class Menu
+    attr_reader :name, :column
+    def initialize(column)
+      @name, @column = column.gsub(/^nav_/,''), column
+    end
+  end
+
   class << self
 
+    # Return home page
     def home_page
       root
     end
 
-    def menus_columns
-      columns = []
-      self.columns.each { |column| columns << column.name if column.name =~ /^nav_/ }
-      return columns.sort
-    end
-
+    # Return menus(Page::Menu objects)
     def menus
       menus = []
-      self.menus_columns.each { |column| menus << column.slice(4,column.length-3) }
+      self.columns.each { |column| menus << Menu.new(column.name) if column.name =~ /^nav_/ }
       return menus
-    end
-
-    def menu_exists?(name)
-      self.menus.include?(name) ? true : false
     end
 
     def static_page_types
@@ -125,6 +132,7 @@ class Page < ActiveRecord::Base
       nodes_types
     end
 
+    # aviable layouts array
     def layouts
       layouts_dir=File.join(RAILS_ROOT,'app','views','layouts','**')
       layouts_names = []

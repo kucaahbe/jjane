@@ -17,8 +17,7 @@ en:
   title_edit_file:    'Edit file'
 
   page_id:           'ID'
-  page_menu:         'menu'
-  page_show:         'go here'
+  page_menu:         'Menu'
 
   page_type_static:  'Static pages'
   page_type_nodes:   'Nodes pages'
@@ -30,7 +29,7 @@ en:
   title:             'Title'
   author:            'Author'
   created_at:        'Created at'
-  actions:           'actions'
+  actions:           'Actions'
   name:              'Name'
   email:             'E-mail'
   group:             'Froup'

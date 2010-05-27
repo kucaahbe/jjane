@@ -1,44 +1,38 @@
 <%= title t(:title_pages) %>
 
-<ul class="jjane" id="pages">
-  <li id="pages_list_header">
-  <div style="float:left;"><%=t :page_id %></div>
-  <div style="float:right; margin-left:17px;"><%=t :actions %></div>
-  <div style="float:right;">
-    <%=t :page_menu %>[
-    <%- Page.menus.each do |menu| -%>
-      <%= menu %>
+<table class="jjane" width="100%">
+  <tr>
+    <th width="40%"><%=t :page_menu %></th>
+    <th width="30%"><%=t :page_id %></th>
+    <th width="5%"><%=t :page_menu %>:</th>
+    <%- @menus.each do |menu| -%>
+      <th align="center"><%= menu.name %></th>
     <%- end -%>
-    ]
-  </div>
-  <div style="clear:both;"></div>
-  </li>
-
-  <% ul_li_for(@pages,:include_framing => false) do |current| %>
-    <% content_tag :div, :style => "padding-left:#{10 * current[:level]}px;", :class => :list_item do %>
-      <div style="float:left">
+    <th width="10%" align="right"><%=t :actions %></th>
+  </tr>
+  <%- @pages.each do |current| -%>
+    <tr>
+      <td width="40%">
+	<span style="display:inline-block;width:<%= 10*current[:level] %>px;"></span>
 	<%= published_img(current[:page]) %>
-	<%= link_to %[#{current[:page].name} | #{current[:page].menu}], root_url+current[:page].url %>
-      </div>
-
-      <div style="float:right; margin-left:20px;">
+	<%= link_to current[:page].menu, root_url+current[:page].url %>
+      </td>
+      <td width="30%"><b><%= current[:page].name %></b></td>
+      <td width="5%">&nbsp;</td>
+      <%- @menus.each do |menu| -%>
+	<td align="center">
+	  <% remote_form_for current[:page], :html => { :style => 'margin:0;', :id => nil } do |f| %>
+	    <%= f.check_box menu.column.to_sym, :id => menu.column+'_'+current[:page].id.to_s, :onclick => "this.form.onsubmit();" %>
+	  <%- end -%>
+	</td>
+      <%- end -%>
+      <td width="10%" align="right">
 	<%= link_to_new new_page_child_path(current[:page]) %>
 	<%= link_to_edit engine_image('pencil.png'), edit_page_path(current[:page]) %>
-	<%= link_to_destroy current[:page] %>
-      </div>
-
-      <div style="float:right;">
-	<% remote_form_for current[:page], :html => { :style => 'margin:0;'} do |f| %>
-	  <% @menus_columns.each do |column| %>
-	    <%= f.check_box column.to_sym, :id => column+'_'+current[:page].id.to_s, :onclick => "this.form.onsubmit();" %>
-	  <% end %>
-	<% end %>
-      </div>
-
-      <div style="clear:both"></div>
-    <% end %>
-
-  <% end %>
-</ul>
+	<%= link_to_destroy page_path(current[:page]) %>
+      </td>
+    </tr>
+  <%- end -%>
+</table>
 <br />
 <%= link_to_new new_page_path %>
