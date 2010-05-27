@@ -6,27 +6,24 @@
   <div style="float:right; margin-left:17px;"><%=t :actions %></div>
   <div style="float:right;">
     <%=t :page_menu %>[
-    <% Page.menus.each do |menu| %>
+    <%- Page.menus.each do |menu| -%>
       <%= menu %>
-    <% end %>
+    <%- end -%>
     ]
   </div>
   <div style="clear:both;"></div>
   </li>
 
   <% ul_li_for(@pages,:include_framing => false) do |current| %>
-    <% content_tag :div, :style => "padding-left:#{10 * current[:level]}px;", :class => :list_item, 
-    :onmouseover => update_page { |page| page.show(%[show_#{current[:page].id}]) },
-      :onmouseout => update_page { |page| page.hide(%[show_#{current[:page].id}]) } do %>
+    <% content_tag :div, :style => "padding-left:#{10 * current[:level]}px;", :class => :list_item, :id => dom_id(current[:page]) do %>
       <div style="float:left">
 	<%= published_img(current[:page]) %>
-	<%= link_to %[#{current[:page].name} | #{current[:page].menu}], edit_page_path(current[:page]) %>
-	&nbsp; &nbsp;
-	<%= link_to "(#{t(:page_show)})", root_url+current[:page].url, :style => 'display:none; color:black;', :id => "show_#{current[:page].id}" unless current[:page].page_type=='directory' %>
+	<%= link_to %[#{current[:page].name} | #{current[:page].menu}], root_url+current[:page].url %>
       </div>
 
       <div style="float:right; margin-left:20px;">
 	<%= link_to_new new_page_child_path(current[:page]) %>
+	<%= link_to_edit engine_image('pencil.png'), edit_page_path(current[:page]) %>
 	<%= link_to_destroy current[:page] %>
       </div>
 
@@ -43,13 +40,5 @@
 
   <% end %>
 </ul>
-
+<br />
 <%= link_to_new new_page_path %>
-
-<%=
-    sortable_element_reporting_target "pages", "moved_page_id",
-    :tree => true,
-    :url => sort_pages_path,
-    :method => :put,
-    :only => :page
-    %>

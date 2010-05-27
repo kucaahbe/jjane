@@ -1,5 +1,4 @@
 class PagesController < AdminController#:nodoc:
-  handles_sorting_of_nested_set
 
   uses_tiny_mce :options => TinyMCEconfig.load, :only => [:new,:edit,:create,:update]
 
@@ -19,27 +18,6 @@ class PagesController < AdminController#:nodoc:
     @pages[0..-2].map! { |p| p.update(:have_children => p[:level] < @pages[@pages.index(p)+1][:level]) }
     @pages[-1].update :have_children => false
     @menus_columns = Page.menus_columns
-  end
-
-  def sort
-    @page = Page.find(params[:moved_page_id])
-    new_position = position_of(:moved_page_id).in_tree(:pages)
-
-    if new_position[:parent]
-      @page.move_to_child_of(new_position[:parent])
-    else
-      @page.move_to_root
-    end unless @page.parent_id === new_position[:parent]
-
-    if new_position[:move_to_right_of]
-      @page.move_to_right_of(new_position[:move_to_right_of])
-    else
-      @page.move_to_left_of(new_position[:move_to_left_of])
-    end
-
-    render :update do |page| 
-      page.reload 
-    end
   end
 
   def new

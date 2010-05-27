@@ -9,7 +9,6 @@ class Page < ActiveRecord::Base
   belongs_to :user
 
   accepts_nested_attributes_for :node
-  #serialize :nav, Hash#TODO or TODEL
 
   # validations
   validates_presence_of :name, :link, :menu, :page_type, :user_id
@@ -18,7 +17,7 @@ class Page < ActiveRecord::Base
   validates_numericality_of :pagination, :allow_nil => true, :only_integer => true, :greater_than => 0
   validates_format_of :link,
     :with => /^[a-zA-Z][\w_]+$/
-  validates_format_of :name, :with => /^[a-z,_]+$/
+  validates_format_of :name, :with => /^[a-z,_\d]+$/
 
   # callbacks
   before_save :calculate_url

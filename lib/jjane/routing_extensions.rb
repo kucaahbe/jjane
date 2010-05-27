@@ -32,7 +32,7 @@ class JJane#:nodoc:
 	page_node      'pages/:page_id/:controller/:id',         :action => :update,  :conditions => { :method => :put }
 	connect        'pages/:page_id/:controller/:id',         :action => :destroy, :conditions => { :method => :delete }
 
-	resources :pages, :except => [:show], :collection => { :sort => :put } do |page|
+	resources :pages, :except => [:show] do |page|
 	  page.resources :child, :controller => :pages, :only => [:new]
 	end
 	resources :snippets, :except => [:show]
