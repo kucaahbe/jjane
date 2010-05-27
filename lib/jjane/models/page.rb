@@ -15,8 +15,7 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :link, :scope => :parent_id
   validates_uniqueness_of :name
   validates_numericality_of :pagination, :allow_nil => true, :only_integer => true, :greater_than => 0
-  validates_format_of :link,
-    :with => /^[a-zA-Z][\w_]+$/
+  validates_format_of :link, :with => /^(\w|_)+$/
   validates_format_of :name, :with => /^[a-z,_\d]+$/
 
   # callbacks
