@@ -10,7 +10,7 @@ class JJane
       end
 
       def page_actions
-	if defined?(@page)
+	if defined?(@page) and !@page.new_record?
 	  content_tag(:span, 
 		      link_to(t(:admin_panel_page)+'['+@page.name+']',root_url+@page.url) +
 		      edit_page_link.to_s +
@@ -23,7 +23,7 @@ class JJane
       end
 
       def node_actions
-	if defined?(@node)
+	if defined?(@node) and !@node.new_record?
 	  content_tag(:span, 
 		      link_to(t(:admin_panel_node)+'['+@node.id.to_s+']',root_url+@node.url) +
 		      edit_node_link.to_s +
