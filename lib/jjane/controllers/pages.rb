@@ -32,8 +32,14 @@ class PagesController < AdminController#:nodoc:
 
   def update
     if @page.update_attributes(params[:page])
-      notice Page, :updated
-      redirect_to edit_page_path(@page)
+      if request.xhr?
+	render :update do |page|
+	  page.reload
+	end
+      else
+	notice Page, :updated
+	redirect_to edit_page_path(@page)
+      end
     else
       notice_error Page, :updated
       render :action => "edit"
