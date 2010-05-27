@@ -1,0 +1,25 @@
+<%= title 'Pages sorting' %>
+
+<% content_for :head do -%>
+  <script type="text/javascript">
+    //<![CDATA[
+  $(function() {
+      $('#sorting_pages').sortable({ 
+axis: 'y',
+cursor: 'move',
+handle:'.mover'
+	 });
+      });
+//]]>
+</script>
+<% end -%>
+
+<ul class="jjane" id="sorting_pages">
+  <%- @pages.each do |current| -%>
+    <li style="border-bottom:1px solid black;padding:5px;">
+    <span style="display:inline-block;width:<%= 20*current[:level] %>px;"></span>
+    <%= engine_image 'arrow_inout.png', :class => 'mover' %>
+    <%= current[:page].menu %>
+    </li>
+  <%- end -%>
+</ul>

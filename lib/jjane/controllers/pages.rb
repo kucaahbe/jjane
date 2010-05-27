@@ -9,6 +9,7 @@ class PagesController < AdminController#:nodoc:
     @pages = []
     Page.each_with_level( Page.find(:all, :order => 'lft ASC') ) { |page,level| @pages << { :page => page, :level => level } }
     @menus = Page.menus
+    render :sorting if params[:sorting]
   end
 
   def new
