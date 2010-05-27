@@ -9,7 +9,6 @@ plugins:
 gems:
 * {authlogic}[http://github.com/binarylogic/authlogic]
 * {will_paginate}[http://github.com/mislav/will_paginate]
-* {robinsp-sortable_element_for_nested_set}[http://github.com/robinsp/sortable_element_for_nested_set]
 * {kete-tiny_mce}[http://github.com/kete/tiny_mce]
 * {paperclip}[http://github.com/thoughtbot/paperclip]
 * {highline}[http://highline.rubyforge.org/]
