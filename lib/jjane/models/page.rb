@@ -88,7 +88,7 @@ class Page < ActiveRecord::Base
   end
 
   def get_node_by_id(id)
-    node = self.nodes.find(id)
+    node = self.node_class.find(id)
     if node.published?
       node
     else
