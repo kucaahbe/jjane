@@ -20,7 +20,14 @@ function set_new_level(e,level_value) {
 };
 function lft(e) {return parseInt(get_class_by_regexp(e,/lft_\d+/).replace(/lft_/,''));};
 function rgt(e) {return parseInt(get_class_by_regexp(e,/rgt_\d+/).replace(/rgt_/,''));};
-function top_neighbor_of(e) {return e.prevUntil('ul').first();};
+function top_neighbor_of(e) {
+  elements = e.prevUntil('ul');
+  if ( elements.length == 0 )
+  { result = null; }
+  else
+  { result = elements.first(); }
+  return result;
+};
   $(function() {
       $('#sortable_pages').sortable({ 
 cursor: 'move',
@@ -28,22 +35,32 @@ handle:'.mover',
 tolerance: 'pointer',
 grid: [l_shift, 31],
 placeholder: 'ui-state-highlight',
+
 // callbacks:
 start: function(event,ui) {
 ui.helper.css('border','1px solid transparent');
-opera.postError(max_level);
 },
+
 beforeStop: function(event,ui) {
 level_shift = Math.round(ui.position.left/l_shift);
 new_level = level(ui.helper) + level_shift;
 if (new_level > max_level) {new_level=max_level + 1;};
 if ( new_level < 0 ) {new_level=0;};
+top_neighbor = top_neighbor_of(ui.helper);
+if (top_neighbor === null)
+{new_level=0;}
+else
+{
+top_neighbor_level = level(top_neighbor);
+if ( (new_level-top_neighbor_level) > 1 ) {new_level=top_neighbor_level+1;};
+}
 
 set_new_level(ui.helper,new_level);
 //--------------------------------------
 ui.helper.css('border','1px solid blue');
 ui.helper.css('padding-left',(27+new_level*l_shift)+'px')
 },
+
 update: function(event,ui){
 //send ajax to server
 }
