@@ -20,13 +20,13 @@ grid: [21, 20]
 <% end -%>
 
 <ul class="jjane" id="sortable_pages">
-  <%- @pages.each do |current| -%>
-    <% content_tag :li, :id => "page_#{current[:page].id}" do %>
+  <%- @pages.each do |p| -%>
+    <% content_tag :li, :id => "page_#{p[:page].id}", :class => %[level_#{p[:level]}] do %>
       <%= content_tag :span, '',
-	:style => "width:#{20*current[:level]}px;",
-      :id => "page_mover_#{current[:page].id}" -%>
+	:style => "width:#{20*p[:level]}px;",
+      :id => "page_mover_#{p[:page].id}" -%>
       <%= engine_image 'arrow_inout.png', :class => 'mover' %>
-      <%= current[:page].menu %>
+      <%= p[:page].menu %>
     <% end %>
   <%- end -%>
 </ul>
