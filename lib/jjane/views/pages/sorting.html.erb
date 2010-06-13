@@ -11,7 +11,10 @@
 	    if ( re.exec(klass)!=null ) { result = klass; }
 	    });
     return result;
-  }
+  };
+function level(e) {return parseInt(get_class_by_regexp(e,/level_\d+/).replace(/level_/,''));};
+function lft(e) {return parseInt(get_class_by_regexp(e,/lft_\d+/).replace(/lft_/,''));};
+function rgt(e) {return parseInt(get_class_by_regexp(e,/rgt_\d+/).replace(/rgt_/,''));};
   $(function() {
       $('#sortable_pages').sortable({ 
 cursor: 'move',
@@ -22,7 +25,6 @@ placeholder: 'ui-state-highlight',
 // callbacks:
 start: function(event,ui) {
 ui.helper.css('border','1px solid transparent');
-get_class_by_regexp(ui.helper,/level_\d+/);
 }
 });
       $("#sortable_pages").disableSelection();
