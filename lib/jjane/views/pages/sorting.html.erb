@@ -3,10 +3,9 @@
 <% content_for :head do -%>
   <script type="text/javascript">
     //<![CDATA[
+  var l_shift = <%= @level_shift %>;
   function get_class_by_regexp(e,reg_exp) {
-    var classList = e.attr('class').split(' ');
-    var result = null;
-    var re = new RegExp(reg_exp);
+    var classList = e.attr('class').split(' ');var result = null;var re = new RegExp(reg_exp);
     $.each(classList, function(index, klass) {
 	    if ( re.exec(klass)!=null ) { result = klass; }
 	    });
@@ -21,7 +20,7 @@ function top_neighbor_of(e) {return e.prevUntil('ul').first();};
 cursor: 'move',
 handle:'.mover',
 tolerance: 'pointer',
-grid: [<%= @level_shift %>, 31],
+grid: [l_shift, 31],
 placeholder: 'ui-state-highlight',
 // callbacks:
 start: function(event,ui) {
