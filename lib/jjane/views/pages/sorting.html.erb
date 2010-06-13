@@ -28,6 +28,16 @@ ui.helper.css('border','1px solid transparent');
 },
 beforeStop: function(event,ui) {
 ui.helper.css('border','1px solid blue');
+},
+change: function(event,ui) {
+opera.postError( ui.position );
+if ( true )
+{}
+else
+{}
+},
+update: function(event,ui){
+//send ajax to server
 }
 });
       $("#sortable_pages").disableSelection();
