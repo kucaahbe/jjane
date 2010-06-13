@@ -6,6 +6,7 @@ class PagesController < AdminController#:nodoc:
   before_filter :calculate_page_types, :only => [:new, :create]
 
   def index
+    @level_shift = 20;
     @pages = []
     Page.each_with_level( Page.find(:all, :order => 'lft ASC') ) { |page,level| @pages << { :page => page, :level => level } }
     @menus = Page.menus

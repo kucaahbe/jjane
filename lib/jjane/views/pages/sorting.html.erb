@@ -21,7 +21,7 @@ function top_neighbor_of(e) {return e.prevUntil('ul').first();};
 cursor: 'move',
 handle:'.mover',
 tolerance: 'pointer',
-grid: [20, 31],
+grid: [<%= @level_shift %>, 31],
 placeholder: 'ui-state-highlight',
 // callbacks:
 start: function(event,ui) {
@@ -53,7 +53,7 @@ ui.helper.css('border','1px solid blue');
 
 <ul class="jjane" id="sortable_pages">
   <%- @pages.each do |p| -%>
-    <% content_tag :li, :id => "page_#{p[:page].id}", :class => %[level_#{p[:level]} lft_#{p[:page].lft} rgt_#{p[:page].rgt}], :style => %[padding-left:#{27+20*p[:level]}px;] do %>
+    <% content_tag :li, :id => "page_#{p[:page].id}", :class => %[level_#{p[:level]} lft_#{p[:page].lft} rgt_#{p[:page].rgt}], :style => %[padding-left:#{27+@level_shift*p[:level]}px;] do %>
       <%= content_tag :span, '', :class => 'mover ui-icon ui-icon-arrow-4' %>
       <%= p[:page].menu %>
     <% end %>
