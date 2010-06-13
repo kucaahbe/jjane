@@ -19,11 +19,15 @@ function rgt(e) {return parseInt(get_class_by_regexp(e,/rgt_\d+/).replace(/rgt_/
       $('#sortable_pages').sortable({ 
 cursor: 'move',
 handle:'.mover',
+tolerance: 'pointer',
 grid: [20, 31],
 placeholder: 'ui-state-highlight',
 // callbacks:
 start: function(event,ui) {
 ui.helper.css('border','1px solid transparent');
+},
+beforeStop: function(event,ui) {
+ui.helper.css('border','1px solid blue');
 }
 });
       $("#sortable_pages").disableSelection();
