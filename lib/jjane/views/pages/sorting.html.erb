@@ -19,8 +19,7 @@ function rgt(e) {return parseInt(get_class_by_regexp(e,/rgt_\d+/).replace(/rgt_/
       $('#sortable_pages').sortable({ 
 cursor: 'move',
 handle:'.mover',
-helper: 'clone',
-grid: [20, 29],
+grid: [20, 31],
 placeholder: 'ui-state-highlight',
 // callbacks:
 start: function(event,ui) {
@@ -36,7 +35,7 @@ ui.helper.css('border','1px solid transparent');
   #sortable_pages li {
     margin:3px;
     padding:3px;
-    font-size:14px;
+    font-size:15px;
     border:1px solid blue;
   }
   #sortable_pages li span {
