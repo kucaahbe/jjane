@@ -33,13 +33,12 @@ start: function(event,ui) {
 ui.helper.css('border','1px solid transparent');
 },
 beforeStop: function(event,ui) {
-ui.helper.css('border','1px solid blue');
-ui.helper.css('padding-left',(27+level(ui.helper)*l_shift)+'px')
-},
-change: function(event,ui) {
 level_shift = Math.round(ui.position.left/l_shift);
 if (level_shift > max_level) {level_shift=max_level+1;};
 new_level(ui.helper,level(ui.helper)+level_shift);
+//--------------------------------------
+ui.helper.css('border','1px solid blue');
+ui.helper.css('padding-left',(27+level(ui.helper)*l_shift)+'px')
 },
 update: function(event,ui){
 //send ajax to server
