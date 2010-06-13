@@ -4,7 +4,7 @@
   <script type="text/javascript">
     //<![CDATA[
   var l_shift = <%= @level_shift %>;
-  var max_level = <%= @max_level %>;
+  var max_level = <%= @max_level %> - 1;
   function get_class_by_regexp(e,reg_exp) {
     classList = e.attr('class').split(' ');result = null;re = new RegExp(reg_exp);
     $.each(classList, function(index, klass) {
@@ -13,7 +13,7 @@
     return result;
   };
 function level(e) {return parseInt(get_class_by_regexp(e,/level_\d+/).replace(/level_/,''));};
-function new_level(e,level_value) {
+function set_new_level(e,level_value) {
   old_class = get_class_by_regexp(e,/level_\d+/);
   e.removeClass(old_class);
   e.addClass('level_'+level_value);
@@ -31,14 +31,18 @@ placeholder: 'ui-state-highlight',
 // callbacks:
 start: function(event,ui) {
 ui.helper.css('border','1px solid transparent');
+opera.postError(max_level);
 },
 beforeStop: function(event,ui) {
 level_shift = Math.round(ui.position.left/l_shift);
-if (level_shift > max_level) {level_shift=max_level+1;};
-new_level(ui.helper,level(ui.helper)+level_shift);
+new_level = level(ui.helper) + level_shift;
+if (new_level > max_level) {new_level=max_level + 1;};
+if ( new_level < 0 ) {new_level=0;};
+
+set_new_level(ui.helper,new_level);
 //--------------------------------------
 ui.helper.css('border','1px solid blue');
-ui.helper.css('padding-left',(27+level(ui.helper)*l_shift)+'px')
+ui.helper.css('padding-left',(27+new_level*l_shift)+'px')
 },
 update: function(event,ui){
 //send ajax to server
