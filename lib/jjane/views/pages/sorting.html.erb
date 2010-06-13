@@ -8,8 +8,8 @@
   function get_class_by_regexp(e,reg_exp) {
     classList = e.attr('class').split(' ');result = null;re = new RegExp(reg_exp);
     $.each(classList, function(index, klass) {
-	    if ( re.exec(klass)!=null ) { result = klass; }
-	    });
+	if ( re.exec(klass)!=null ) { result = klass; }
+	});
     return result;
   };
 function level(e) {return parseInt(get_class_by_regexp(e,/level_\d+/).replace(/level_/,''));};
@@ -28,8 +28,8 @@ function top_neighbor_of(e) {
   { result = elements.first(); }
   return result;
 };
-  $(function() {
-      $('#sortable_pages').sortable({ 
+$(function() {
+    $('#sortable_pages').sortable({ 
 cursor: 'move',
 handle:'.mover',
 tolerance: 'pointer',
@@ -48,11 +48,13 @@ if (new_level > max_level) {new_level=max_level + 1;};
 if ( new_level < 0 ) {new_level=0;};
 top_neighbor = top_neighbor_of(ui.helper);
 if (top_neighbor === null)
-{new_level=0;}
+{
+  new_level=0;
+}
 else
 {
-top_neighbor_level = level(top_neighbor);
-if ( (new_level-top_neighbor_level) > 1 ) {new_level=top_neighbor_level+1;};
+  top_neighbor_level = level(top_neighbor);
+  if ( (new_level-top_neighbor_level) > 1 ) {new_level=top_neighbor_level+1;};
 }
 
 set_new_level(ui.helper,new_level);
@@ -61,12 +63,12 @@ ui.helper.css('border','1px solid blue');
 ui.helper.css('padding-left',(27+new_level*l_shift)+'px')
 },
 
-update: function(event,ui){
-//send ajax to server
-}
+update: function(event,ui) {
+	  <%= remote_function :url => sort_pages_path %>
+	}
 });
-      $("#sortable_pages").disableSelection();
-      });
+$("#sortable_pages").disableSelection();
+});
 //]]>
 </script>
 <style type="text/css">

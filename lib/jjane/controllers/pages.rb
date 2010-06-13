@@ -5,6 +5,13 @@ class PagesController < AdminController#:nodoc:
   before_filter :find_page, :only => [:edit, :update, :destroy]
   before_filter :calculate_page_types, :only => [:new, :create]
 
+  def sort
+    log 'sort'
+    render :update do |page|
+      page.reload
+    end
+  end
+
   def index
     @pages = []
     levels = []
