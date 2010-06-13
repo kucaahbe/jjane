@@ -8,13 +8,18 @@
 cursor: 'move',
 handle:'.mover',
 helper: 'clone',
-grid: [20, 20]
-	 });
+grid: [20, 36],
+// callbacks:
+start: function(event,ui) {
+ui.helper.css('outline','none');
+}
+});
       });
 //]]>
 </script>
 <style type="text/css">
-  #sortable_pages li {border-bottom:1px solid black;padding:5px;}
+  #sortable_pages {width:60%;}
+  #sortable_pages > li {outline:1px solid green;padding:5px;margin:5px 0;}
   #sortable_pages li span {display:inline-block;}
 </style>
 <% end -%>
@@ -25,7 +30,7 @@ grid: [20, 20]
       <%= content_tag :span, '',
 	:style => "width:#{20*p[:level]}px;",
       :id => "page_mover_#{p[:page].id}" -%>
-      <%= engine_image 'arrow_inout.png', :class => 'mover' %>
+      <%= engine_image 'sortable.png', :class => 'mover' %>
       <%= p[:page].menu %>
     <% end %>
   <%- end -%>
