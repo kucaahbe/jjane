@@ -4,14 +4,20 @@
   <script type="text/javascript">
     //<![CDATA[
   var l_shift = <%= @level_shift %>;
+  var max_level = <%= @max_level %>;
   function get_class_by_regexp(e,reg_exp) {
-    var classList = e.attr('class').split(' ');var result = null;var re = new RegExp(reg_exp);
+    classList = e.attr('class').split(' ');result = null;re = new RegExp(reg_exp);
     $.each(classList, function(index, klass) {
 	    if ( re.exec(klass)!=null ) { result = klass; }
 	    });
     return result;
   };
 function level(e) {return parseInt(get_class_by_regexp(e,/level_\d+/).replace(/level_/,''));};
+function new_level(e,level_value) {
+  old_class = get_class_by_regexp(e,/level_\d+/);
+  e.removeClass(old_class);
+  e.addClass('level_'+level_value);
+};
 function lft(e) {return parseInt(get_class_by_regexp(e,/lft_\d+/).replace(/lft_/,''));};
 function rgt(e) {return parseInt(get_class_by_regexp(e,/rgt_\d+/).replace(/rgt_/,''));};
 function top_neighbor_of(e) {return e.prevUntil('ul').first();};
@@ -28,13 +34,12 @@ ui.helper.css('border','1px solid transparent');
 },
 beforeStop: function(event,ui) {
 ui.helper.css('border','1px solid blue');
+ui.helper.css('padding-left',(27+level(ui.helper)*l_shift)+'px')
 },
 change: function(event,ui) {
-opera.postError( ui.position );
-if ( true )
-{}
-else
-{}
+level_shift = Math.round(ui.position.left/l_shift);
+if (level_shift > max_level) {level_shift=max_level+1;};
+new_level(ui.helper,level(ui.helper)+level_shift);
 },
 update: function(event,ui){
 //send ajax to server

@@ -6,9 +6,11 @@ class PagesController < AdminController#:nodoc:
   before_filter :calculate_page_types, :only => [:new, :create]
 
   def index
-    @level_shift = 20;
     @pages = []
-    Page.each_with_level( Page.find(:all, :order => 'lft ASC') ) { |page,level| @pages << { :page => page, :level => level } }
+    levels = []
+    Page.each_with_level( Page.find(:all, :order => 'lft ASC') ) { |page,level| @pages << { :page => page, :level => level }; levels<<level }
+    @level_shift = 20
+    @max_level = levels.uniq.sort.last
     @menus = Page.menus
     render :sorting if params[:sorting]
   end
