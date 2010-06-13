@@ -3,6 +3,15 @@
 <% content_for :head do -%>
   <script type="text/javascript">
     //<![CDATA[
+  function get_class_by_regexp(e,reg_exp) {
+    var classList = e.attr('class').split(' ');
+    var result = null;
+    var re = new RegExp(reg_exp);
+    $.each(classList, function(index, klass) {
+	    if ( re.exec(klass)!=null ) { result = klass; }
+	    });
+    return result;
+  }
   $(function() {
       $('#sortable_pages').sortable({ 
 cursor: 'move',
@@ -13,6 +22,7 @@ placeholder: 'ui-state-highlight',
 // callbacks:
 start: function(event,ui) {
 ui.helper.css('border','1px solid transparent');
+get_class_by_regexp(ui.helper,/level_\d+/);
 }
 });
       $("#sortable_pages").disableSelection();
