@@ -7,10 +7,14 @@ class PagesController < AdminController#:nodoc:
 
   def sort
     @page = Page.find(params[:id])
-    if params[:args]===''
-      @page.send params[:mover].to_sym
-    else
-      @page.send params[:mover].to_sym, params[:args].to_i
+    begin
+      if params[:args]===''
+	@page.send params[:mover].to_sym
+      else
+	@page.send params[:mover].to_sym, params[:args].to_i
+      end
+    rescue
+      @flash[:error] = $!
     end
     render :update do |page|
       page.reload
