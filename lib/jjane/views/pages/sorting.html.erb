@@ -12,6 +12,7 @@
 	});
     return result;
   };
+function id(e) {return parseInt(get_class_by_regexp(e,/id_\d+/).replace(/id_/,''));};
 function level(e) {return parseInt(get_class_by_regexp(e,/level_\d+/).replace(/level_/,''));};
 function set_new_level(e,level_value) {
   old_class = get_class_by_regexp(e,/level_\d+/);
@@ -58,13 +59,18 @@ else
 }
 
 set_new_level(ui.helper,new_level);
-//--------------------------------------
 ui.helper.css('border','1px solid blue');
 ui.helper.css('padding-left',(27+new_level*l_shift)+'px')
 },
 
 update: function(event,ui) {
-	  <%= remote_function :url => sort_pages_path %>
+	  var action = null;
+	  if (level(ui.item)==0 && top_neighbor_of(ui.item)==null) {action = 'move_to_root'}
+	  params = {
+	    id: id(ui.item),
+	    mover: action
+	  };
+	  <%= remote_function :url => sort_pages_path, :with => %[params] %>
 	}
 });
 $("#sortable_pages").disableSelection();
@@ -89,7 +95,7 @@ $("#sortable_pages").disableSelection();
 
 <ul class="jjane" id="sortable_pages">
   <%- @pages.each do |p| -%>
-    <% content_tag :li, :id => "page_#{p[:page].id}", :class => %[level_#{p[:level]} lft_#{p[:page].lft} rgt_#{p[:page].rgt}], :style => %[padding-left:#{27+@level_shift*p[:level]}px;] do %>
+    <% content_tag :li, :id => "page_#{p[:page].id}", :class => %[level_#{p[:level]} lft_#{p[:page].lft} rgt_#{p[:page].rgt} id_#{p[:page].id}], :style => %[padding-left:#{27+@level_shift*p[:level]}px;] do %>
       <%= content_tag :span, '', :class => 'mover ui-icon ui-icon-arrow-4' %>
       <%= p[:page].menu %>
     <% end %>

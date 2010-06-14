@@ -6,7 +6,8 @@ class PagesController < AdminController#:nodoc:
   before_filter :calculate_page_types, :only => [:new, :create]
 
   def sort
-    log 'sort'
+    @page = Page.find(params[:id])
+    @page.send params[:mover].to_sym
     render :update do |page|
       page.reload
     end
