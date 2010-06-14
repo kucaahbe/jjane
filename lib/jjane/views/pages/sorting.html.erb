@@ -110,6 +110,7 @@ $("#sortable_pages").disableSelection();
 </style>
 <% end -%>
 
+<%= link_to "back to pages", pages_path %>
 <ul class="jjane" id="sortable_pages">
   <%- @pages.each do |p| -%>
     <% content_tag :li, :id => "page_#{p[:page].id}", :class => %[level_#{p[:level]} lft_#{p[:page].lft} rgt_#{p[:page].rgt} id_#{p[:page].id}], :style => %[padding-left:#{27+@level_shift*p[:level]}px;] do %>
