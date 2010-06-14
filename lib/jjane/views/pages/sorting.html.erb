@@ -5,6 +5,8 @@
     //<![CDATA[
   var l_shift = <%= @level_shift %>;
   var max_level = <%= @max_level %> - 1;
+  var action = '';
+  var args = '';
   function get_class_by_regexp(e,reg_exp) {
     classList = e.attr('class').split(' ');result = null;re = new RegExp(reg_exp);
     $.each(classList, function(index, klass) {
@@ -63,12 +65,17 @@ ui.helper.css('border','1px solid blue');
 ui.helper.css('padding-left',(27+new_level*l_shift)+'px')
 },
 
-update: function(event,ui) {
-	  var action = null;
-	  if (level(ui.item)==0 && top_neighbor_of(ui.item)==null) {action = 'move_to_root'}
+stop: function(event,ui) {
+	if ( top_neighbor===null )
+	{action='move_to_root';}
+	else
+	{
+	  if ( level(ui.item) > level(top_neighbor_of(ui.item)) ) { action='move_to_child_of';args=id(top_neighbor_of(ui.item)); }
+	}
 	  params = {
-	    id: id(ui.item),
-	    mover: action
+id: id(ui.item),
+mover: action,
+args:args
 	  };
 	  <%= remote_function :url => sort_pages_path, :with => %[params] %>
 	}
