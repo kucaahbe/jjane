@@ -53,13 +53,27 @@ stop: function(event,ui) {
 	  switch ( level(ui.item) - level(top_neighbor_of(ui.item)) )
 	  { 
 	    case 1:
-	      action='move_to_child_of';args=id(top_neighbor_of(ui.item));
+	      if ( bottom_neighbor_of(ui.item)===null )
+	      {
+		action='move_to_child_of';args=id(top_neighbor_of(ui.item));
+	      }
+	      else
+	      {
+		if ( level(ui.item)==level(bottom_neighbor_of(ui.item)) )
+		{
+		  action='move_to_left_of';args=id(bottom_neighbor_of(ui.item));
+		}
+		else
+		{
+  		  action='move_to_child_of';args=id(top_neighbor_of(ui.item));
+		}
+	      }
 	      break;
 	    case 0:
 	      action='move_to_right_of';args=id(top_neighbor_of(ui.item));
 	      break;
 	    default:
-	      alert('dont know');
+	      alert('you can\'t do this!');
 	  }
 	}
 	params = { id:id(ui.item),mover:action,args:args };
