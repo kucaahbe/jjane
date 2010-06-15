@@ -76,7 +76,7 @@ stop: function(event,ui) {
 	      alert('you can\'t do this!');
 	  }
 	}
-	params = { id:id(ui.item),mover:action,args:args };
+	params = $.param( { id:id(ui.item),mover:action,args:args } );
 	<%= remote_function :url => sort_pages_path, :with => %[params] %>
       }
 });
