@@ -20,19 +20,24 @@ placeholder: 'ui-state-highlight',
 start: function(event,ui) { ui.helper.css('border','1px solid transparent'); },
 
 beforeStop: function(event,ui) {
-level_shift = Math.round(ui.position.left/l_shift);
-new_level = level(ui.helper) + level_shift;
-if (new_level > max_level) {new_level=max_level + 1;};
-if ( new_level < 0 ) {new_level=0;};
+level_shift  = Math.round(ui.position.left/l_shift);
+new_level    = level(ui.helper) + level_shift;
 top_neighbor = top_neighbor_of(ui.helper);
-if (top_neighbor === null)
+if ( new_level < 0 )
 {
   new_level=0;
 }
 else
 {
-  top_neighbor_level = level(top_neighbor);
-  if ( (new_level-top_neighbor_level) > 1 ) {new_level=top_neighbor_level+1;};
+  if (top_neighbor === null)
+  {
+    new_level=0;
+  }
+  else
+  {
+    top_neighbor_level = level(top_neighbor);
+    if ( (new_level-top_neighbor_level) > 1 ) {new_level=top_neighbor_level+1;};
+  }
 }
 
 set_new_level(ui.helper,new_level);
@@ -57,9 +62,9 @@ stop: function(event,ui) {
 	      alert('dont know');
 	  }
 	}
-	  params = { id:id(ui.item),mover:action,args:args };
-	  <%= remote_function :url => sort_pages_path, :with => %[params] %>
-	}
+	params = { id:id(ui.item),mover:action,args:args };
+	<%= remote_function :url => sort_pages_path, :with => %[params] %>
+      }
 });
 $("#sortable_pages").disableSelection();
 });
