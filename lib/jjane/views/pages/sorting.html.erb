@@ -17,9 +17,7 @@ grid: [l_shift, 31],
 placeholder: 'ui-state-highlight',
 
 // callbacks:
-start: function(event,ui) {
-ui.helper.css('border','1px solid transparent');
-},
+start: function(event,ui) { ui.helper.css('border','1px solid transparent'); },
 
 beforeStop: function(event,ui) {
 level_shift = Math.round(ui.position.left/l_shift);
@@ -59,11 +57,7 @@ stop: function(event,ui) {
 	      alert('dont know');
 	  }
 	}
-	  params = {
-id: id(ui.item),
-mover: action,
-args:args
-	  };
+	  params = { id:id(ui.item),mover:action,args:args };
 	  <%= remote_function :url => sort_pages_path, :with => %[params] %>
 	}
 });
