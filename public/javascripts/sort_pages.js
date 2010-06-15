@@ -6,29 +6,14 @@ function get_class_by_regexp(e,reg_exp)
   $.each(classList, function(index, klass) { if ( re.exec(klass)!=null ) {result=klass;return false;} });
   return result;
 }
-function id(e)
-{
-  return parseInt(e.attr('id').replace(/page_/,''))
-}
-function level(e)
-{
-  return parseInt(get_class_by_regexp(e,/level_\d+/).replace(/level_/,''))
-}
+function id(e){return parseInt(e.attr('id').replace(/page_/,''))}
+function level(e){return parseInt(get_class_by_regexp(e,/level_\d+/).replace(/level_/,''))}
 function set_new_level(e,level_value)
 {
   old_class = get_class_by_regexp(e,/level_\d+/);
   e.removeClass(old_class);
   e.addClass('level_'+level_value);
 }
-function lft(e)
-{
-  return parseInt(get_class_by_regexp(e,/lft_\d+/).replace(/lft_/,''))
-}
-function rgt(e)
-{
-  return parseInt(get_class_by_regexp(e,/rgt_\d+/).replace(/rgt_/,''));
-}
-
 function top_neighbor_of(e)
 {
   elements = e.prevUntil('ul');
