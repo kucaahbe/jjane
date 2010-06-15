@@ -1,36 +1,13 @@
 <%= title 'Sorting pages' %>
 
 <% content_for :head do -%>
+  <%= javascript_include_tag "/jjane/javascripts/sort_pages" %>
   <script type="text/javascript">
     //<![CDATA[
   var l_shift = <%= @level_shift %>;
   var max_level = <%= @max_level %> - 1;
   var action = '';
   var args = '';
-  function get_class_by_regexp(e,reg_exp) {
-    classList = e.attr('class').split(' ');result = null;re = new RegExp(reg_exp);
-    $.each(classList, function(index, klass) {
-	if ( re.exec(klass)!=null ) { result = klass; }
-	});
-    return result;
-  };
-function id(e) {return parseInt(get_class_by_regexp(e,/id_\d+/).replace(/id_/,''));};
-function level(e) {return parseInt(get_class_by_regexp(e,/level_\d+/).replace(/level_/,''));};
-function set_new_level(e,level_value) {
-  old_class = get_class_by_regexp(e,/level_\d+/);
-  e.removeClass(old_class);
-  e.addClass('level_'+level_value);
-};
-function lft(e) {return parseInt(get_class_by_regexp(e,/lft_\d+/).replace(/lft_/,''));};
-function rgt(e) {return parseInt(get_class_by_regexp(e,/rgt_\d+/).replace(/rgt_/,''));};
-function top_neighbor_of(e) {
-  elements = e.prevUntil('ul');
-  if ( elements.length == 0 )
-  { result = null; }
-  else
-  { result = elements.first(); }
-  return result;
-};
 $(function() {
     $('#sortable_pages').sortable({ 
 cursor: 'move',
