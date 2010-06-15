@@ -14,12 +14,5 @@ function set_new_level(e,level_value)
   e.removeClass(old_class);
   e.addClass('level_'+level_value);
 }
-function top_neighbor_of(e)
-{
-  elements = e.prevUntil('ul');
-  if ( elements.length == 0 )
-  { result = null; }
-  else
-  { result = elements.first(); }
-  return result;
-}
+function top_neighbor_of(e){o=e.prev();if (o.length){return o;}else{return null};}
+function bottom_neighbor_of(e){o=e.next();if (o.length){return o;}else{return null};}
