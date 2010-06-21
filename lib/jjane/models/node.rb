@@ -14,12 +14,18 @@ class Node < ActiveRecord::Base
   # validations
   validates_presence_of :user_id
 
-  # callbacks
-  before_create :add_meta
-
   class <<self
+    # adds meta feature
+    #
     def has_meta
+      before_create :add_meta
       @@has_meta = true
+    end
+
+    # checks if node has meta tags
+    #
+    def has_meta?
+      @@has_meta
     end
   end
 
