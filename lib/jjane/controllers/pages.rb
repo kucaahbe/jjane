@@ -25,7 +25,6 @@ class PagesController < AdminController#:nodoc:
     @pages = []
     levels = []
     Page.each_with_level( Page.find(:all, :order => 'lft ASC') ) { |page,level| @pages << { :page => page, :level => level }; levels<<level }
-    @level_shift = 20
     @max_level = levels.uniq.sort.last
     @menus = Page.menus
     render :sorting if params[:sorting]

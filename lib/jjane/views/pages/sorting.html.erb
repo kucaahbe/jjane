@@ -4,7 +4,8 @@
   <%= javascript_include_tag "/jjane/javascripts/sort_pages" %>
   <script type="text/javascript">
     //<![CDATA[
-  var l_shift = <%= @level_shift %>;
+  <%- @level_shift = 20 -%>
+  var l_shift = <%= @level_shift %>;//when changing this don't forget change padding if each li
   var max_level = <%= @max_level %> - 1;
   var action = '';
   var args = '';
@@ -20,7 +21,7 @@ placeholder: 'ui-state-highlight',
 start: function(event,ui) { ui.helper.css('border','1px solid transparent'); },
 
 beforeStop: function(event,ui) {
-level_shift  = Math.round(ui.position.left/l_shift);
+level_shift  = Math.round((ui.position.left-ui.helper.position().left)/l_shift);
 new_level    = level(ui.helper) + level_shift;
 top_neighbor = top_neighbor_of(ui.helper);
 if ( new_level < 0 )
@@ -74,6 +75,7 @@ stop: function(event,ui) {
 	      break;
 	    default:
 	      alert('you can\'t do this!');
+              window.location.reload();
 	  }
 	}
 	params = $.param( { id:id(ui.item),mover:action,args:args } );
