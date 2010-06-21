@@ -24,7 +24,7 @@ class <%= migration_class_name %> < ActiveRecord::Migration
       t.string   :url
       t.string   :page_type
       t.string   :layout,         :null => false, :default => 'application'
-      t.integer  :pagination,     :null => true
+      t.integer  :pagination
       t.integer  :node_id
       t.integer  :user_id
       t.integer  :view_group_id
@@ -33,10 +33,16 @@ class <%= migration_class_name %> < ActiveRecord::Migration
       t.integer  :lft
       t.integer  :rgt
       t.boolean  :nav_main
+      t.string   :sort_by,        :default => 'start_publishing'
+      t.boolean  :sort_order_asc, :default => false
+      t.boolean  :nav_top,        :default => false
+      t.boolean  :nav_left,       :default => false
+      t.boolean  :nav_down,       :default => false
 
       t.timestamps
     end
-    add_index(:pages, [:lft, :rgt])
+
+    add_index :pages, [:lft, :rgt]
 
     create_table :snippets do |t|
       t.string   :name
@@ -53,6 +59,8 @@ class <%= migration_class_name %> < ActiveRecord::Migration
       t.integer  :user_id
       t.integer  :page_id
       t.integer  :meta_id
+      t.datetime :start_publishing
+      t.datetime :end_publishing
 
       t.timestamps
     end
@@ -75,8 +83,8 @@ class <%= migration_class_name %> < ActiveRecord::Migration
       t.string   :email
       t.integer  :group_id
       t.string   :crypted_password
-      t.string	 :password_salt
-      t.string	 :persistence_token
+      t.string   :password_salt
+      t.string   :persistence_token
 
       t.timestamps
     end
