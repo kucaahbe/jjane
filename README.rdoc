@@ -23,7 +23,7 @@ gems:
 * install {jQueryUi}[http://jqueryui.com] with "Tabs" and "Sortable" components
 * run commands:
  
-   rake jjane:copy_files
+   rake jjane:files:install
    sudo rake gems:install
    ./script/generate jjane_base install
 * Generate node with NodeName(for example Article):
@@ -34,7 +34,7 @@ gems:
    rake db:migrate
 * Setup migrated db:
 
-   rake jjane:setup
+   rake jjane:db:init
 * add to end of config/routes.rb lines
 
    map.jjane_admin
